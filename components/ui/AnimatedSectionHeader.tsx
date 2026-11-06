@@ -18,27 +18,28 @@ export default function AnimatedSectionHeader({
   className = '',
 }: AnimatedSectionHeaderProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px',
-      }
-    );
+    // Trigger subtle entrance
+    setIsVisible(true);
 
-    observer.observe(el);
-    return () => observer.disconnect();
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        },
+        { threshold: 0.05 }
+      );
+
+      observer.observe(el);
+      return () => observer.disconnect();
+    }
   }, []);
 
   const alignClasses = align === 'center' ? 'text-center mx-auto' : 'text-left';
@@ -46,41 +47,23 @@ export default function AnimatedSectionHeader({
   return (
     <div
       ref={ref}
-      className={`space-y-2.5 transition-all duration-700 ease-out ${alignClasses} ${className}`}
+      className={`space-y-2.5 transition-all duration-500 ease-out ${alignClasses} ${className}`}
     >
-      {/* Badge with Entrance Slide */}
+      {/* Badge */}
       {badge && (
-        <div
-          className={`transition-all duration-700 ease-out ${
-            isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <div className="transition-all duration-500 ease-out opacity-100 translate-y-0">
           {badge}
         </div>
       )}
 
-      {/* Main Heading with Staggered Entrance Slide */}
-      <div
-        className={`transition-all duration-800 delay-100 ease-out ${
-          isVisible
-            ? 'opacity-100 translate-y-0 scale-100'
-            : 'opacity-0 translate-y-6 scale-98'
-        }`}
-      >
+      {/* Main Heading */}
+      <div className="transition-all duration-500 ease-out opacity-100 translate-y-0">
         {title}
       </div>
 
-      {/* Subtitle with Final Entrance Slide */}
+      {/* Subtitle */}
       {subtitle && (
-        <div
-          className={`transition-all duration-700 delay-200 ease-out ${
-            isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
-          }`}
-        >
+        <div className="transition-all duration-500 ease-out opacity-100 translate-y-0">
           {subtitle}
         </div>
       )}

@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Bell, Pin, Calendar, ArrowRight, Sparkles } from 'lucide-react';
+import { Bell, Pin, Calendar, ArrowRight } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import AnimatedSectionHeader from '@/components/ui/AnimatedSectionHeader';
 
 export interface NoticeItem {
   id: number;
@@ -20,27 +21,35 @@ export default function NoticesSection({ notices = [] }: NoticesSectionProps) {
   if (notices.length === 0) return null;
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-10 sm:py-14 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-          <div className="space-y-3 max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold text-amber-900 bg-amber-100 uppercase tracking-wider">
-              <Bell className="w-3.5 h-3.5 text-amber-700" />
-              Notice Board
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              Latest Notifications & <span className="text-blue-700">Exam Updates</span>
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
-              Stay ahead with batch schedules, exam test dates, and scholarship announcements.
-            </p>
-          </div>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
+          <AnimatedSectionHeader
+            align="left"
+            className="max-w-2xl"
+            badge={
+              <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-amber-900 bg-amber-100 uppercase tracking-wider">
+                <Bell className="w-3.5 h-3.5 text-amber-700" />
+                Notice Board • Announcements
+              </span>
+            }
+            title={
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                Latest Notifications &amp; <span className="text-blue-700">Exam Updates</span>
+              </h2>
+            }
+            subtitle={
+              <p className="text-slate-600 text-xs sm:text-sm font-medium">
+                Stay informed with upcoming batch schedules, Sunday open mock test dates, and scholarship announcements in Lalitpur.
+              </p>
+            }
+          />
 
           <Link
             href="/notices"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-600/20 hover:shadow-lg transition-all uppercase tracking-wider shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-600/20 hover:shadow-lg transition-all uppercase tracking-wider shrink-0"
           >
             <span>All Notifications</span>
             <ArrowRight className="w-4 h-4" />
@@ -48,11 +57,11 @@ export default function NoticesSection({ notices = [] }: NoticesSectionProps) {
         </div>
 
         {/* Notices Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           {notices.slice(0, 4).map((notice) => (
             <div
               key={notice.id}
-              className={`p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg flex flex-col justify-between ${
+              className={`p-5 sm:p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg flex flex-col justify-between ${
                 notice.isPinned
                   ? 'bg-amber-50/40 border-amber-300/80 shadow-xs'
                   : 'bg-white border-slate-200 shadow-xs'

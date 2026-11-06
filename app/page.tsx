@@ -1,10 +1,12 @@
 import React from 'react';
 import db from '@/lib/db';
 import HeroSection from '@/components/home/HeroSection';
+import NoticeTicker from '@/components/home/NoticeTicker';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import PopularCourses from '@/components/home/PopularCourses';
 import AchievementsSection from '@/components/home/AchievementsSection';
 import FacultySection from '@/components/home/FacultySection';
+import NoticesSection from '@/components/home/NoticesSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import GalleryPreview from '@/components/home/GalleryPreview';
 import FaqSection from '@/components/home/FaqSection';
@@ -85,7 +87,10 @@ export default async function HomePage() {
         primaryPhone={settings?.primaryPhone || '9450067223'}
       />
 
-      {/* 2. Institute Introduction & Why Choose Us */}
+      {/* 2. Breaking Updates & Ticker */}
+      <NoticeTicker notices={notices} />
+
+      {/* 3. Institute Introduction & Why Choose Us */}
       <WhyChooseUs
         features={whyChoosePoints.length > 0 ? whyChoosePoints : undefined}
         aboutContent={pageContent?.aboutContent || undefined}
@@ -100,7 +105,10 @@ export default async function HomePage() {
       {/* 6. Top Faculty Mentors */}
       <FacultySection faculty={faculty} />
 
-      {/* 7. Quick Admission Enquiry Section */}
+      {/* 7. Notice Board & Official Exam Updates */}
+      <NoticesSection notices={notices} />
+
+      {/* 8. Quick Admission Enquiry Section */}
       <section className="py-8 sm:py-10 bg-gradient-to-br from-[#0B2545] via-[#134074] to-[#1E3A8A] text-white relative overflow-hidden">
         {/* Glow circles */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none" />
