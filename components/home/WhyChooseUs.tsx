@@ -22,25 +22,25 @@ interface WhyChooseUsProps {
 export default function WhyChooseUs({
   aboutContent,
 }: WhyChooseUsProps) {
-  // 3 Core Points - natural, grounded Indian coaching language
+  // 3 Core Points - 100% clear professional English
   const threeCoreFeatures = [
     {
       icon: Users,
-      badge: '10+ वर्ष अनुभवी फैकल्टी',
-      title: 'अनुभवी विषय विशेषज्ञ शिक्षक',
-      description: 'मैथ्स शॉर्टकट, रीजनिंग ट्रिक्स, सामान्य अध्ययन (UP स्पेशल) और हिंदी व्याकरण की व्यवस्थित तैयारी।',
+      badge: '10+ Years Faculty',
+      title: 'Expert Subject Specialist Mentors',
+      description: 'Dedicated faculty for Maths calculation shortcuts, Reasoning tricks, General Studies (UP Special), and Hindi grammar.',
     },
     {
       icon: FileCheck2,
-      badge: 'साप्ताहिक OMR टेस्ट',
-      title: 'प्रत्येक रविवार ऑफलाइन मॉक टेस्ट',
-      description: 'नवीनतम परीक्षा पैटर्न पर आधारित टेस्ट, नेगेटिव मार्किंग विश्लेषण एवं जिला-स्तरीय रैंक कार्ड।',
+      badge: 'Real Simulation',
+      title: 'Weekly Sunday OMR Mock Tests',
+      description: 'Simulated examination papers with negative marking analysis, time management drills, and district-level merit ranks.',
     },
     {
       icon: BookMarked,
-      badge: 'ललितपुर में 2 शाखाएं',
-      title: 'प्रिंटेड नोट्स एवं लाइब्रेरी सुविधा',
-      description: 'अद्यतन फॉर्मूला बुकलेट, 10 वर्षों के हल प्रश्न पत्र तथा स्टेशन रोड और घंटाघर स्थित शांत अध्ययन कक्ष।',
+      badge: '2 Lalitpur Branches',
+      title: 'Printed Modules & Quiet Study Hall',
+      description: 'High-yield formula booklets, 10-year solved question banks & peaceful study centers at Station Road and Ghantaghar.',
     },
   ];
 
@@ -54,17 +54,17 @@ export default function WhyChooseUs({
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
               <Award className="w-3.5 h-3.5 text-blue-700" />
-              हमारी विशेषताएं • Key Features
+              Key Features • The Bright Future Edge
             </span>
           }
           title={
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-              ललितपुर के छात्र <span className="text-blue-700">ब्राइट फ्यूचर</span> ही क्यों चुनते हैं?
+              Why Hundreds of Lalitpur’s <span className="text-blue-700">Top Aspirants</span> Choose Us
             </h2>
           }
           subtitle={
             <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed max-w-2xl mx-auto">
-              कंसेप्ट क्लैरिटी, स्पीड कैलकुलेशन ट्रिक्स और प्रत्येक रविवार OMR टेस्ट — ललितपुर में सर्वाधिक सिलेक्शन्स का विश्वसनीय रिकॉर्ड।
+              Concept mastery, speed calculation hacks &amp; weekly OMR mock tests — Lalitpur’s most trusted competitive selection record.
             </p>
           }
         />

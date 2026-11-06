@@ -98,7 +98,7 @@ export default async function AdmissionPage({
             <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl space-y-6">
               <div className="border-b border-slate-100 pb-4">
                 <span className="text-[11px] font-extrabold text-blue-800 uppercase tracking-widest block mb-1">
-                  प्रवेश के मुख्य लाभ • Student Benefits
+                  Enrolment Benefits • Student Privileges
                 </span>
                 <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
                   What You Receive Upon Enrollment
@@ -234,7 +234,7 @@ export default async function AdmissionPage({
           <div className="lg:col-span-7 bg-white p-4 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-2xl space-y-6">
             <div className="border-b border-slate-100 pb-4">
               <span className="inline-block px-3 py-1 rounded-full text-[11px] font-black text-blue-900 bg-blue-100 uppercase tracking-widest mb-1.5">
-                ऑनलाइन आवेदन • Direct Registration
+                Online Registration • Direct Submission
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                 Candidate Admission Enquiry Form

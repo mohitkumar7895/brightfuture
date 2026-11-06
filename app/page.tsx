@@ -112,27 +112,27 @@ export default async function HomePage() {
             <div className="lg:col-span-5 space-y-6">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-amber-300 bg-white/10 border border-white/20 uppercase tracking-wider backdrop-blur-md">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                निःशुल्क परामर्श एवं डेमो क्लास
+                Free Counseling &amp; Demo Classes
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-                सरकारी नौकरी की पक्की तैयारी, आज ही शुरू करें
+                Start Your Government Service Preparation Today
               </h2>
               <p className="text-blue-100/90 text-sm sm:text-base leading-relaxed">
-                2 दिन का फ्री क्लास अटेंड करके पढ़ाई का स्तर खुद देखें। हमारे विशेषज्ञ शिक्षकों से मिलकर अपनी तैयारी की सही रणनीति समझें।
+                Attend 2 days of classroom lectures completely free to experience our teaching standards before submitting fees. Meet senior educators for personalized syllabus guidance.
               </p>
 
               <div className="space-y-3 pt-2 text-xs sm:text-sm text-blue-100">
                 <div className="flex items-center gap-2.5">
                   <div className="w-5 h-5 rounded-full bg-emerald-400/20 text-emerald-300 flex items-center justify-center font-bold">✓</div>
-                  <span>फीस जमा करने से पहले 2 दिन का फ्री डेमो क्लास</span>
+                  <span>2 Days Free Classroom Demo before fee submission</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <div className="w-5 h-5 rounded-full bg-emerald-400/20 text-emerald-300 flex items-center justify-center font-bold">✓</div>
-                  <span>पूरा प्रिंटेड स्टडी मटेरियल और 10 वर्षों के हल प्रश्न पत्र</span>
+                  <span>Complete printed question banks &amp; formula booklets</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <div className="w-5 h-5 rounded-full bg-emerald-400/20 text-emerald-300 flex items-center justify-center font-bold">✓</div>
-                  <span>स्टेशन रोड एवं घंटाघर स्थित दोनों ब्रांच में क्लास की सुविधा</span>
+                  <span>Classes available at both Station Road &amp; Ghantaghar branches</span>
                 </div>
               </div>
 
@@ -142,7 +142,7 @@ export default async function HomePage() {
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider border border-white/25 backdrop-blur-md transition-colors shadow-md"
                 >
                   <PhoneCall className="w-4 h-4 text-amber-300" />
-                  <span>हेल्पलाइन: +91 {settings?.primaryPhone || '9450067223'}</span>
+                  <span>Helpline: +91 {settings?.primaryPhone || '9450067223'}</span>
                 </a>
               </div>
             </div>

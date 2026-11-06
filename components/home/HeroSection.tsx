@@ -23,36 +23,36 @@ interface HeroSectionProps {
 export default function HeroSection({
   primaryPhone = '9450067223',
 }: HeroSectionProps) {
-  // Realistic, authentic coaching slides with clear local focus & natural language
+  // Realistic, authentic coaching slides - 100% in clear professional English
   const slides = [
     {
       id: 1,
       image: '/images/hero-classroom.jpg',
       alt: 'Bright Future Competition Institute smart classroom in Lalitpur',
-      badge: '🎯 नया टारगेट बैच 2026 • प्रवेश प्रारंभ',
-      title: 'UP Police, SSC & Railway की सर्वश्रेष्ठ तैयारी,',
-      titleHighlight: 'ललितपुर में',
-      subtitle: 'अनुभवी शिक्षकों द्वारा प्रतिदिन 3 घंटे क्लास, शॉर्टकट मैथ्स ट्रिक्स और प्रत्येक रविवार ऑफलाइन OMR टेस्ट सीरीज़।',
+      badge: 'Target Batch 2026 • Admissions Open',
+      title: 'Comprehensive Preparation for UP Police, SSC & Railway Exams in',
+      titleHighlight: 'Lalitpur',
+      subtitle: 'Daily concept lectures, speed calculation shortcuts, printed study modules, and weekly Sunday OMR mock tests.',
       tag: 'Target Batches 2026',
     },
     {
       id: 2,
       image: '/images/police-exam-prep.jpg',
       alt: 'UP Police Constable and SI exam preparation in Lalitpur',
-      badge: '👮 UP Police Constable & SI Special',
-      title: 'उत्तर प्रदेश पुलिस भर्ती परीक्षा हेतु समर्पित',
-      titleHighlight: 'मिशन वर्दी 2026',
-      subtitle: 'सामान्य ज्ञान (UP स्पेशल), हिंदी व्याकरण, गणित ट्रिक्स और रीजनिंग की संपूर्ण चैप्टर-वाइज़ तैयारी।',
+      badge: 'UP Police Constable & SI Special',
+      title: 'Dedicated Target Preparation for UP Police Recruitment',
+      titleHighlight: 'Mission 2026',
+      subtitle: 'Complete coverage of General Knowledge, Hindi grammar, Numerical & Mental Ability, and Reasoning speed hacks.',
       tag: 'Police Special',
     },
     {
       id: 3,
       image: '/images/student-toppers.jpg',
       alt: 'Selected toppers and alumni of Bright Future Institute',
-      badge: '🏆 1,250+ सरकारी सेवा में चयनित',
-      title: '12+ वर्षों का अटूट विश्वास और ललितपुर में',
-      titleHighlight: 'सर्वाधिक सिलेक्शन्स',
-      subtitle: 'स्टेशन रोड (कृष्णा सिनेमा के पीछे) एवं घंटाघर (रिछारिया मार्केट) स्थित शाखाओं में 2 दिन की निःशुल्क डेमो क्लास।',
+      badge: '1,250+ Government Exam Selections',
+      title: 'Over 12 Years of Academic Trust with Lalitpur’s',
+      titleHighlight: 'Highest Selections',
+      subtitle: 'Classroom batches available at Station Road (Behind Krishna Cinema) and Ghantaghar branches.',
       tag: '1,250+ Selections',
     },
   ];
@@ -137,17 +137,17 @@ export default function HeroSection({
           <div className="pt-0.5 flex flex-wrap gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-slate-300">
             <span className="flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>2 दिन की फ्री क्लास</span>
+              <span>2 Days Free Demo</span>
             </span>
             <span className="text-slate-500">•</span>
             <span className="flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>प्रत्येक रविवार OMR टेस्ट</span>
+              <span>Sunday OMR Mock Tests</span>
             </span>
             <span className="text-slate-500">•</span>
             <span className="flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span>ललितपुर में 2 शाखाएं</span>
+              <span>2 Branches in Lalitpur</span>
             </span>
           </div>
 
@@ -157,7 +157,7 @@ export default function HeroSection({
               href="/admission"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-lg shadow-amber-400/25 hover:scale-102 active:scale-98 transition-all uppercase tracking-wider text-center min-h-[44px]"
             >
-              <span>फ्री डेमो क्लास बुक करें</span>
+              <span>Book Free Demo Class</span>
               <ArrowRight className="w-4 h-4 text-slate-950 shrink-0" />
             </Link>
 
@@ -166,7 +166,7 @@ export default function HeroSection({
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-white/15 hover:bg-white/25 border border-white/25 backdrop-blur-md transition-all shadow-md text-center min-h-[44px]"
             >
               <PhoneCall className="w-4 h-4 text-amber-300 shrink-0" />
-              <span>कॉल: +91 {primaryPhone}</span>
+              <span>Call: +91 {primaryPhone}</span>
             </a>
           </div>
 
@@ -174,7 +174,7 @@ export default function HeroSection({
           <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-1.5 text-amber-300 text-[11px] font-semibold">
               <Star className="w-3.5 h-3.5 fill-amber-400" />
-              <span>4.9/5 रेटिंग (1,500+ छात्र)</span>
+              <span>4.9/5 Rating (1,500+ Aspirants)</span>
             </div>
 
             {/* Slide Selector Indicators */}

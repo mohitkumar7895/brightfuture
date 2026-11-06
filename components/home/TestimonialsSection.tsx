@@ -33,17 +33,17 @@ export default function TestimonialsSection({
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 uppercase tracking-wider">
               <Star className="w-3.5 h-3.5 fill-amber-400" />
-              सफल छात्रों की जुबानी • Student Reviews
+              Student Reviews • Verified Feedback
             </span>
           }
           title={
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
-              चयनित छात्रों के अनुभव • <span className="text-amber-400">Testimonials</span>
+              What Our Selected <span className="text-amber-400">Aspirants Say</span>
             </h2>
           }
           subtitle={
             <p className="text-slate-300 text-xs sm:text-sm font-medium">
-              ब्राइट फ्यूचर कॉम्पिटिशन इंस्टीट्यूट ललितपुर से तैयारी कर सरकारी पदों पर चयनित छात्र-छात्राओं के अनुभव।
+              Read authentic feedback from successful candidates who prepared at Bright Future Competition Institute in Lalitpur.
             </p>
           }
         />

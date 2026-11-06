@@ -45,17 +45,17 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
             badge={
               <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                नए टारगेट बैच • Admissions Open 2026
+                Target &amp; Foundation Batches • Admissions 2026
               </span>
             }
             title={
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                प्रमुख प्रतियोगी परीक्षा कोर्स • <span className="text-blue-700">Target Batches</span>
+                Our Premier <span className="text-blue-700">Competitive Exam</span> Batches
               </h2>
             }
             subtitle={
               <p className="text-slate-600 text-xs sm:text-sm font-medium">
-                UP Police, SSC, रेलवे और UPSSSC की नवीनतम परीक्षा पैटर्न पर आधारित नियमित कक्षाएं।
+                Structured syllabus coverage, shortcut calculation hacks, and time-bound test series for state and central exams.
               </p>
             }
           />
@@ -64,7 +64,7 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
             href="/courses"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all uppercase tracking-wider shrink-0"
           >
-            <span>सभी कोर्स देखें</span>
+            <span>View All Courses</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -145,13 +145,13 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
                       href={`/courses/${course.slug}`}
                       className="w-full text-center py-2 px-3 rounded-xl text-xs font-bold text-blue-900 bg-blue-50 hover:bg-blue-100 border border-blue-200/60 transition-colors"
                     >
-                      पाठ्यक्रम देखें
+                      View Syllabus
                     </Link>
                     <Link
                       href={`/admission?course=${course.id}`}
                       className="w-full text-center py-2 px-3 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-xs transition-all uppercase tracking-wider"
                     >
-                      डेमो / एडमिशन
+                      Enquire &amp; Demo
                     </Link>
                   </div>
                 </div>

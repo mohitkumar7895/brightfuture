@@ -36,17 +36,17 @@ export default function FacultySection({ faculty = [] }: FacultySectionProps) {
             badge={
               <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
                 <GraduationCap className="w-3.5 h-3.5 text-blue-700" />
-                विशेषज्ञ शिक्षक • Faculty Panel
+                Expert Faculty • Specialist Mentors
               </span>
             }
             title={
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                अनुभवी शिक्षकों से सीखें • <span className="text-blue-700">Top Mentors</span>
+                Learn from Experienced <span className="text-blue-700">Subject Mentors</span>
               </h2>
             }
             subtitle={
               <p className="text-slate-600 text-xs sm:text-sm font-medium">
-                10 से 14+ वर्षों के अनुभवी शिक्षक, जो परीक्षा में समय प्रबंधन और शॉर्टकट ट्रिक्स सिखाते हैं।
+                Mentors with 10 to 14+ years of coaching experience, teaching time management and exam shortcut techniques.
               </p>
             }
           />
@@ -55,7 +55,7 @@ export default function FacultySection({ faculty = [] }: FacultySectionProps) {
             href="/faculty"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all uppercase tracking-wider shrink-0"
           >
-            <span>सभी शिक्षक देखें</span>
+            <span>View All Faculty</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

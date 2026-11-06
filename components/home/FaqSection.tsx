@@ -34,17 +34,17 @@ export default function FaqSection({ faqs = [] }: FaqSectionProps) {
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
               <HelpCircle className="w-3.5 h-3.5 text-blue-700" />
-              सामान्य प्रश्न • FAQ
+              Help &amp; Support • FAQ
             </span>
           }
           title={
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-              अक्सर पूछे जाने वाले सवाल • <span className="text-blue-700">FAQ</span>
+              Frequently Asked <span className="text-blue-700">Questions</span>
             </h2>
           }
           subtitle={
             <p className="text-slate-600 text-xs sm:text-sm font-medium">
-              बैच टाइमिंग, 2 दिन की फ्री डेमो क्लास, स्टडी नोट्स और OMR टेस्ट से जुड़े मुख्य सवाल-जवाब।
+              Key information regarding batch timings, 2-day free demo classes, study notes, and Sunday OMR test series in Lalitpur.
             </p>
           }
         />

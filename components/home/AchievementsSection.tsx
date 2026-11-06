@@ -35,17 +35,17 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
             badge={
               <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-amber-900 bg-amber-100 border border-amber-300 uppercase tracking-wider shadow-xs">
                 <Trophy className="w-3.5 h-3.5 text-amber-600" />
-                चयनित छात्र • Recent Selections
+                Hall of Fame • Verified Selections
               </span>
             }
             title={
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                हमारे गौरव • <span className="text-blue-700">Hall of Fame</span>
+                Proud Selections &amp; <span className="text-blue-700">Top Rank Holders</span>
               </h2>
             }
             subtitle={
               <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed">
-                ब्राइट फ्यूचर से पढ़कर उत्तर प्रदेश पुलिस, SSC एवं रेलवे में चयनित ललितपुर के सफल अभ्यर्थी।
+                Dedicated aspirants from Lalitpur who achieved selections across UP Police, SSC, and Railway examinations.
               </p>
             }
           />
@@ -54,7 +54,7 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
             href="/results"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 transition-all uppercase tracking-wider shrink-0 shadow-md shadow-blue-600/20"
           >
-            <span>सभी चयन सूची देखें</span>
+            <span>View All Selections</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
