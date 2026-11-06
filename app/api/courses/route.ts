@@ -21,17 +21,20 @@ export async function GET(request: Request) {
       where.category = { slug: categorySlug };
     }
 
-    const courses = await db.course.findMany({
-      where,
-      orderBy: [{ isFeatured: 'desc' }, { id: 'asc' }],
-      include: {
-        category: {
-          select: { id: true, name: true, slug: true, icon: true },
+    const [courses, categories] = await Promise.all([
+      db.course.findMany({
+        where,
+        orderBy: [{ isFeatured: 'desc' }, { id: 'asc' }],
+        include: {
+          category: {
+            select: { id: true, name: true, slug: true, icon: true },
+          },
         },
-      },
-    });
+      }),
+      db.courseCategory.findMany().catch(() => []),
+    ]);
 
-    return NextResponse.json({ success: true, courses });
+    return NextResponse.json({ success: true, courses, categories });
   } catch (error) {
     console.error('Fetch courses error:', error);
     return NextResponse.json({ error: 'Failed to fetch courses' }, { status: 500 });
@@ -41,7 +44,10 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

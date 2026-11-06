@@ -14,8 +14,9 @@ const fallbackStore = {
   settings: { ...initialFallbackData.settings },
   homePageContent: { ...initialFallbackData.homePageContent },
   admins: [...initialFallbackData.admins],
-  enquiries: [] as any[],
-  students: [] as any[],
+  enquiries: [...(initialFallbackData.enquiries || [])],
+  students: [...(initialFallbackData.students || [])],
+  logs: [...((initialFallbackData as any).logs || [])],
 };
 
 // Create a connection pool for MySQL
@@ -106,14 +107,31 @@ function getFallbackRows(sql: string, values?: any[]): any[] {
   }
 
   if (s.includes('from enquiries')) {
-    return fallbackStore.enquiries;
+    return fallbackStore.enquiries.map((e: any) => {
+      const course = fallbackStore.courses.find((c: any) => c.id === e.courseId);
+      return {
+        ...e,
+        course_title: course?.title || e.courseName || null,
+        course_fee: course?.fee || null,
+      };
+    });
   }
 
   if (s.includes('from students')) {
     return fallbackStore.students;
   }
 
+  if (s.includes('from admin_activity_logs')) {
+    return fallbackStore.logs;
+  }
+
   if (s.includes('count(*)')) {
+    if (s.includes('from courses')) return [{ count: fallbackStore.courses.length }];
+    if (s.includes('from enquiries')) return [{ count: fallbackStore.enquiries.length }];
+    if (s.includes('from students')) return [{ count: fallbackStore.students.length }];
+    if (s.includes('from faculty')) return [{ count: fallbackStore.faculty.length }];
+    if (s.includes('from notices')) return [{ count: fallbackStore.notices.length }];
+    if (s.includes('from gallery')) return [{ count: fallbackStore.gallery.length }];
     return [{ count: 6 }];
   }
 

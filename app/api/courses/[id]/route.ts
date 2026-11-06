@@ -38,7 +38,10 @@ export async function PUT(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

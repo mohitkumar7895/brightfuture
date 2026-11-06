@@ -57,6 +57,9 @@ export default function AdminCoursesPage() {
       const data = await res.json();
       if (res.ok) {
         setCourses(data.courses || []);
+        if (data.categories && data.categories.length > 0) {
+          setCategories(data.categories);
+        }
       }
     } catch {
       toast.error('Failed to load courses');
@@ -69,7 +72,7 @@ export default function AdminCoursesPage() {
     setEditingCourse(null);
     setTitle('');
     setSlug('');
-    setCategoryId('');
+    setCategoryId(categories.length > 0 ? String(categories[0].id) : '1');
     setShortDescription('');
     setDescription('');
     setEligibility('');

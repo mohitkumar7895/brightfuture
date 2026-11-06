@@ -648,5 +648,201 @@ export const initialFallbackData = {
       "createdAt": "2026-11-05T11:10:13.000Z",
       "updatedAt": "2026-11-05T11:10:13.000Z"
     }
+  ],
+  "enquiries": [
+    {
+      "id": 1,
+      "studentName": "Rohan Sharma",
+      "fatherName": "Rajesh Sharma",
+      "mobile": "9876543210",
+      "email": "rohan.sharma@example.com",
+      "courseId": 1,
+      "courseName": "UP Police Constable & SI Special Target Batch",
+      "address": "Civil Lines, Lalitpur",
+      "qualification": "12th Pass (Science)",
+      "message": "Interested in joining the morning batch. When can I come for a demo class?",
+      "status": "PENDING",
+      "adminNotes": "Called on phone, invited for demo on Monday.",
+      "createdAt": "2026-11-05T11:10:13.000Z",
+      "updatedAt": "2026-11-05T11:10:13.000Z"
+    },
+    {
+      "id": 2,
+      "studentName": "Priyanka Patel",
+      "fatherName": "Mahesh Patel",
+      "mobile": "9123456789",
+      "email": "priyanka.patel@example.com",
+      "courseId": 2,
+      "courseName": "SSC CGL & CHSL Comprehensive Course",
+      "address": "Talbehat, Lalitpur",
+      "qualification": "B.Sc. Completed",
+      "message": "Please send fee details and syllabus for SSC CGL Tier 1 and Tier 2.",
+      "status": "CONTACTED",
+      "adminNotes": "Fee structure shared on WhatsApp.",
+      "createdAt": "2026-11-05T11:10:13.000Z",
+      "updatedAt": "2026-11-05T11:10:13.000Z"
+    },
+    {
+      "id": 3,
+      "studentName": "Suresh Patel",
+      "fatherName": "Shri R. K. Patel",
+      "mobile": "9451122334",
+      "email": "suresh.patel@gmail.com",
+      "courseId": 1,
+      "courseName": "UP Police Constable & SI Special Target Batch",
+      "address": "Near Ghantaghar, Lalitpur",
+      "qualification": "Graduate (B.Sc.)",
+      "message": "Please confirm the timing of the morning UP Police batch.",
+      "status": "PENDING",
+      "adminNotes": null,
+      "createdAt": "2026-11-05T06:05:43.279Z",
+      "updatedAt": "2026-11-05T06:05:43.279Z"
+    },
+    {
+      "id": 4,
+      "studentName": "Pooja Sharma",
+      "fatherName": "R. K. Sharma",
+      "mobile": "9450011223",
+      "email": "pooja@example.com",
+      "courseId": 1,
+      "courseName": "UP Police Constable & SI Special Target Batch",
+      "address": "Station Road, Lalitpur",
+      "qualification": "12th Pass",
+      "message": "Interested in UP Police morning batch",
+      "status": "CONTACTED",
+      "adminNotes": "Called candidate, sent fee structure and morning batch timings over WhatsApp.",
+      "createdAt": "2026-11-05T06:25:13.856Z",
+      "updatedAt": "2026-11-05T06:27:43.620Z"
+    },
+    {
+      "id": 5,
+      "studentName": "Amit Verma",
+      "fatherName": "S. K. Verma",
+      "mobile": "9876501234",
+      "email": "amit.verma@example.com",
+      "courseId": 2,
+      "courseName": "SSC CGL & CHSL (Tier 1 + Tier 2) Comprehensive Course",
+      "address": "Civil Lines, Lalitpur",
+      "qualification": "Graduate",
+      "message": "Enquiry for SSC CGL 2026 batch",
+      "status": "PENDING",
+      "adminNotes": null,
+      "createdAt": "2026-11-05T12:10:22.083Z",
+      "updatedAt": "2026-11-05T12:10:22.083Z"
+    },
+    {
+      "id": 6,
+      "studentName": "Amit Verma",
+      "fatherName": "Shri Ramesh Verma",
+      "mobile": "9451935450",
+      "email": "amit.verma@test.com",
+      "courseId": 1,
+      "courseName": "UP Police Constable & SI Special Target Batch",
+      "address": "Mahaveerpura, Lalitpur",
+      "qualification": "Graduate",
+      "message": "Targeting UP Police 2026, Morning batch preferred.",
+      "status": "PENDING",
+      "adminNotes": null,
+      "createdAt": "2026-11-06T05:08:51.931Z",
+      "updatedAt": "2026-11-06T05:08:51.931Z"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "rollNumber": "BFCI-2026-001",
+      "name": "Vikas Kushwaha",
+      "fatherName": "Ramdas Kushwaha",
+      "email": "vikas.k@example.com",
+      "phone": "9838000000",
+      "address": "Mahaveerpura, Lalitpur",
+      "qualification": "12th (Arts)",
+      "photo": null,
+      "status": "ACTIVE",
+      "createdAt": "2026-11-05T11:10:13.000Z",
+      "updatedAt": "2026-11-05T11:10:13.000Z"
+    }
+  ],
+  "logs": [
+    {
+      "id": 1,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:06:44.806Z"
+    },
+    {
+      "id": 2,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:10:51.310Z"
+    },
+    {
+      "id": 3,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:21:14.241Z"
+    },
+    {
+      "id": 4,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:25:30.914Z"
+    },
+    {
+      "id": 5,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:26:37.709Z"
+    },
+    {
+      "id": 6,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:26:47.334Z"
+    },
+    {
+      "id": 7,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:27:08.170Z"
+    },
+    {
+      "id": 8,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:27:17.548Z"
+    },
+    {
+      "id": 9,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:27:43.562Z"
+    },
+    {
+      "id": 10,
+      "adminId": 1,
+      "action": "LOGIN",
+      "details": "Admin logged in successfully",
+      "ipAddress": null,
+      "createdAt": "2026-11-05T06:27:53.664Z"
+    }
   ]
 };
