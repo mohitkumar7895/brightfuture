@@ -110,23 +110,23 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         {statCards.map((card) => {
           const Icon = card.icon;
           return (
             <Link
               key={card.title}
               href={card.link}
-              className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow group flex flex-col justify-between"
+              className="bg-white p-3.5 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow group flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className={`w-9 h-9 rounded-xl ${card.color} text-white flex items-center justify-center shadow-xs`}>
+              <div className="flex items-center justify-between mb-2.5 sm:mb-3">
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl ${card.color} text-white flex items-center justify-center shadow-xs shrink-0`}>
                   <Icon className="w-4 h-4" />
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-800 transition-colors" />
+                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400 group-hover:text-blue-800 transition-colors shrink-0" />
               </div>
-              <div>
-                <span className="text-2xl font-black text-slate-900 block">
+              <div className="min-w-0">
+                <span className="text-xl sm:text-2xl font-black text-slate-900 block truncate">
                   {card.value}
                 </span>
                 <span className="text-xs font-bold text-slate-700 block truncate mt-0.5">
@@ -142,28 +142,28 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Analytics Chart & Popular Batches */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
         
         {/* Monthly Enquiry Chart (8 cols) */}
-        <div className="lg:col-span-8 bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="lg:col-span-8 bg-white p-4 sm:p-7 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4 min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <span className="text-xs font-bold text-blue-800 uppercase tracking-wider block">
                 Growth Insights
               </span>
-              <h3 className="text-lg font-bold text-slate-900">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900">
                 Monthly Enquiry & Conversion Trends
               </h3>
             </div>
-            <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1">
+            <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1 self-start sm:self-auto">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>+32% This Quarter</span>
             </span>
           </div>
 
-          <div className="h-72 w-full pt-4">
+          <div className="h-64 sm:h-72 w-full pt-4 min-w-0">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={trends} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+              <AreaChart data={trends} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorEnquiries" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#2563eb" stopOpacity={0.4}/>
@@ -175,8 +175,8 @@ export default function AdminDashboardPage() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} />
+                <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#0f172a',
@@ -210,7 +210,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Popular Courses (4 cols) */}
-        <div className="lg:col-span-4 bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white p-4 sm:p-7 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4 flex flex-col justify-between min-w-0">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-base font-bold text-slate-900">
@@ -242,7 +242,7 @@ export default function AdminDashboardPage() {
 
           <Link
             href="/admin/courses"
-            className="w-full text-center py-2.5 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors border border-slate-200"
+            className="w-full text-center py-2.5 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors border border-slate-200 mt-2"
           >
             View All Courses & Fees
           </Link>
@@ -251,8 +251,8 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Recent Enquiries Table */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
-        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+      <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
+        <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <h3 className="text-base font-bold text-slate-900">
               Recent Admission Enquiries
@@ -263,7 +263,7 @@ export default function AdminDashboardPage() {
           </div>
           <Link
             href="/admin/enquiries"
-            className="text-xs font-bold text-blue-800 hover:text-blue-900 flex items-center gap-1"
+            className="text-xs font-bold text-blue-800 hover:text-blue-900 flex items-center gap-1 self-start sm:self-auto"
           >
             <span>View All Enquiries</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -271,7 +271,7 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full text-left text-xs whitespace-nowrap">
             <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[10px] border-b border-slate-100">
               <tr>
                 <th className="py-3 px-6">Student Name</th>

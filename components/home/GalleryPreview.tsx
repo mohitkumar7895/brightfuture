@@ -25,11 +25,11 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
   if (items.length === 0) return null;
 
   return (
-    <section className="py-12 sm:py-16 bg-slate-50/90 border-b border-slate-200">
+    <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/90 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Animated Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <AnimatedSectionHeader
             align="left"
             className="max-w-2xl"
@@ -53,7 +53,7 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
 
           <Link
             href="/gallery"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-extrabold text-blue-900 hover:text-white bg-blue-50 hover:bg-blue-900 border border-blue-200 shadow-xs hover:shadow-md transition-all uppercase tracking-wider shrink-0"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-extrabold text-blue-900 hover:text-white bg-blue-50 hover:bg-blue-900 border border-blue-200 shadow-xs hover:shadow-md transition-all uppercase tracking-wider shrink-0"
           >
             <span>View All Photos</span>
             <ArrowRight className="w-4 h-4" />
@@ -61,7 +61,7 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
         </div>
 
         {/* Gallery Grid: 2 cols on mobile, 3 cols on tablet/desktop for generous photo size */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {items.slice(0, 6).map((item) => (
             <div
               key={item.id}
@@ -115,22 +115,22 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4"
           onClick={() => setSelectedImage(null)}
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-700"
+            className="relative max-w-4xl w-full max-h-[90dvh] bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors shadow-lg cursor-pointer"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2 sm:p-2.5 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors shadow-lg cursor-pointer"
               aria-label="Close image modal"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
-            <div className="relative aspect-[16/10] w-full bg-black">
+            <div className="relative aspect-[16/10] w-full bg-black shrink-0 max-h-[60dvh]">
               <Image
                 src={selectedImage.url}
                 alt={selectedImage.title}
@@ -140,7 +140,7 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
               />
             </div>
 
-            <div className="p-6 bg-slate-900 text-white space-y-1.5">
+            <div className="p-4 sm:p-6 bg-slate-900 text-white space-y-1.5 overflow-y-auto">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
                   {selectedImage.category?.name || 'Campus Infrastructure'}

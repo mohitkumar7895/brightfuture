@@ -23,17 +23,17 @@ export default function TopBar({
   return (
     <aside 
       aria-label="Institute announcement and contact bar" 
-      className="bg-[#07132B] text-slate-200 text-xs py-2 px-4 border-b border-blue-950/80 tracking-wide"
+      className="bg-[#07132B] text-slate-200 text-xs py-2 px-3 sm:px-4 border-b border-blue-950/80 tracking-wide"
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 sm:gap-2.5">
         
         {/* Left: Announcement with Amber Badge */}
-        <div className="flex items-center gap-2.5 overflow-hidden w-full md:w-auto justify-center md:justify-start">
-          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-black px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] uppercase tracking-wider shrink-0 shadow-xs">
+        <div className="flex items-center gap-2 sm:gap-2.5 overflow-hidden w-full md:w-auto justify-center md:justify-start min-w-0">
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] uppercase tracking-wider shrink-0 shadow-xs">
             <Sparkles className="w-3 h-3 fill-slate-950" />
             <span>Admission Alert</span>
           </span>
-          <p className="truncate text-blue-100 text-xs font-medium">
+          <p className="truncate text-blue-100 text-xs font-medium min-w-0 flex-1">
             {cleanAnnouncement}
           </p>
         </div>

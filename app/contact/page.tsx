@@ -123,7 +123,7 @@ export default async function ContactPage() {
             </div>
 
             {/* Direct WhatsApp Callout */}
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-3xl shadow-md flex items-center justify-between gap-4">
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-5 sm:p-6 rounded-3xl shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-100">
                   Instant Response
@@ -135,7 +135,7 @@ export default async function ContactPage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 px-4 py-2.5 bg-white text-emerald-800 font-bold text-xs rounded-xl shadow-sm uppercase tracking-wider hover:bg-emerald-50 transition-colors"
+                className="w-full sm:w-auto text-center shrink-0 px-4 py-2.5 bg-white text-emerald-800 font-bold text-xs rounded-xl shadow-sm uppercase tracking-wider hover:bg-emerald-50 transition-colors"
               >
                 Open WhatsApp
               </a>
@@ -144,12 +144,12 @@ export default async function ContactPage() {
           </div>
 
           {/* Contact / Admission Enquiry Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-lg space-y-6">
+          <div className="lg:col-span-7 bg-white p-4 sm:p-8 rounded-3xl border border-slate-200 shadow-lg space-y-6">
             <div>
               <span className="text-xs font-bold text-blue-800 uppercase tracking-wider block mb-1">
                 Drop Us a Message
               </span>
-              <h3 className="text-2xl font-black text-slate-900">
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900">
                 Send an Enquiry / Request a Call Back
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -164,16 +164,16 @@ export default async function ContactPage() {
 
         {/* Full-width Map Card */}
         <div className="mt-12 bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-md">
-          <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+          <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h3 className="text-lg font-bold text-slate-900">Google Maps Location</h3>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900">Google Maps Location</h3>
               <p className="text-xs text-slate-500">Easily find us behind Krishna Cinema, Station Road, Lalitpur</p>
             </div>
             <a
               href="https://maps.google.com/?q=Station+Road+Lalitpur+Uttar+Pradesh"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-blue-50 text-blue-900 text-xs font-bold rounded-xl border border-blue-200 hover:bg-blue-900 hover:text-white transition-colors"
+              className="w-full sm:w-auto text-center px-4 py-2 bg-blue-50 text-blue-900 text-xs font-bold rounded-xl border border-blue-200 hover:bg-blue-900 hover:text-white transition-colors"
             >
               Open in Google Maps App
             </a>

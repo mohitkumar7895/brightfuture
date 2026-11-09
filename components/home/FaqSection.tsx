@@ -25,12 +25,12 @@ export default function FaqSection({ faqs = [] }: FaqSectionProps) {
   };
 
   return (
-    <section className="py-8 sm:py-10 bg-white">
+    <section className="py-8 sm:py-12 lg:py-16 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Animated Header */}
         <AnimatedSectionHeader
-          className="mb-8 sm:mb-9"
+          className="mb-8 sm:mb-12"
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
               <HelpCircle className="w-3.5 h-3.5 text-blue-700" />
@@ -64,7 +64,7 @@ export default function FaqSection({ faqs = [] }: FaqSectionProps) {
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between p-4 sm:p-5 text-left gap-4"
+                  className="w-full flex items-center justify-between p-3.5 sm:p-5 text-left gap-3 sm:gap-4"
                   aria-expanded={isOpen}
                 >
                   <span className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
@@ -80,7 +80,7 @@ export default function FaqSection({ faqs = [] }: FaqSectionProps) {
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-blue-100/50 mt-1">
+                  <div className="px-3.5 pb-3.5 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-blue-100/50 mt-1">
                     <p className="pt-3">{faq.answer}</p>
                   </div>
                 )}

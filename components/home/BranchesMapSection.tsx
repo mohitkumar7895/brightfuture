@@ -25,12 +25,12 @@ export default function BranchesMapSection({
   )}`;
 
   return (
-    <section className="py-8 sm:py-10 bg-slate-50/80 border-b border-slate-200">
+    <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/80 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Animated Header */}
         <AnimatedSectionHeader
-          className="max-w-3xl mb-8 sm:mb-9"
+          className="max-w-3xl mb-8 sm:mb-12"
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
               <MapPin className="w-3.5 h-3.5 text-blue-700" />
@@ -56,7 +56,7 @@ export default function BranchesMapSection({
           <div className="lg:col-span-5 space-y-4">
             
             {/* Branch 1: Head Office */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
+            <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
                 <span className="text-[10px] font-black uppercase text-amber-700 tracking-wider">
@@ -84,7 +84,7 @@ export default function BranchesMapSection({
             </div>
 
             {/* Branch 2: Market Branch */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
+            <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
                 <span className="text-[10px] font-black uppercase text-blue-700 tracking-wider">
@@ -110,9 +110,9 @@ export default function BranchesMapSection({
             </div>
 
             {/* WhatsApp Quick Link */}
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-4 rounded-2xl flex items-center justify-between gap-3 shadow-md">
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -124,7 +124,7 @@ export default function BranchesMapSection({
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 px-3.5 py-1.5 bg-white text-emerald-800 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-emerald-50 transition-colors shadow-xs"
+                className="w-full sm:w-auto text-center px-3.5 py-2.5 bg-white text-emerald-800 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-emerald-50 transition-colors shadow-xs shrink-0"
               >
                 Send Location
               </a>
@@ -133,7 +133,7 @@ export default function BranchesMapSection({
           </div>
 
           {/* Google Maps Column (7 cols) */}
-          <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs aspect-[4/3] sm:aspect-[16/11] relative">
+          <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs h-[300px] sm:h-[380px] lg:h-full min-h-[300px] sm:min-h-[380px] relative">
             <iframe
               src={mapEmbedUrl}
               width="100%"

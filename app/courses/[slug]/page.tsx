@@ -91,12 +91,12 @@ export default async function CourseDetailPage({
       />
 
       {/* Header Banner */}
-      <section className="bg-gradient-to-br from-[#0B2545] via-[#134074] to-[#1E3A8A] text-white py-14 sm:py-16 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[#0B2545] via-[#134074] to-[#1E3A8A] text-white py-10 sm:py-16 relative overflow-hidden">
         {/* Glow circles */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3 sm:space-y-4 relative z-10">
           <div className="flex items-center gap-2 text-xs text-blue-200">
             <Link href="/" className="hover:text-white">Home</Link>
             <span>/</span>
@@ -105,7 +105,7 @@ export default async function CourseDetailPage({
             <span className="text-amber-300 font-semibold truncate">{course.title}</span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 pt-2">
+          <div className="flex flex-wrap items-center gap-2 pt-1 sm:pt-2">
             <span className="px-3 py-1 rounded-full text-xs font-bold text-white bg-white/15 border border-white/20 uppercase tracking-wider backdrop-blur-md">
               {course.category?.name || 'Target Course'}
             </span>
@@ -116,11 +116,11 @@ export default async function CourseDetailPage({
             )}
           </div>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight max-w-4xl">
+          <h1 className="text-xl sm:text-3xl lg:text-5xl font-black text-white tracking-tight leading-tight max-w-4xl">
             {course.title}
           </h1>
 
-          <p className="text-blue-100/90 text-sm sm:text-base max-w-3xl leading-relaxed">
+          <p className="text-blue-100/90 text-xs sm:text-sm md:text-base max-w-3xl leading-relaxed">
             {course.shortDescription}
           </p>
         </div>
@@ -146,11 +146,11 @@ export default async function CourseDetailPage({
               </div>
 
               {/* Course Highlights Quick Bar */}
-              <div className="p-6 grid grid-cols-2 sm:grid-cols-3 gap-4 border-b border-slate-100 bg-slate-50/50">
+              <div className="p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 border-b border-slate-100 bg-slate-50/50">
                 <div className="space-y-1">
                   <span className="text-[11px] font-bold text-slate-400 uppercase">Duration</span>
                   <div className="flex items-center gap-1.5 font-bold text-sm text-slate-900">
-                    <Clock className="w-4 h-4 text-blue-700" />
+                    <Clock className="w-4 h-4 text-blue-700 shrink-0" />
                     <span>{course.duration}</span>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default async function CourseDetailPage({
                 <div className="space-y-1">
                   <span className="text-[11px] font-bold text-slate-400 uppercase">Batch Schedule</span>
                   <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900 truncate">
-                    <Users className="w-4 h-4 text-amber-600" />
+                    <Users className="w-4 h-4 text-amber-600 shrink-0" />
                     <span className="truncate">{course.batchInfo || 'Morning & Evening'}</span>
                   </div>
                 </div>
@@ -166,17 +166,17 @@ export default async function CourseDetailPage({
                 <div className="space-y-1 col-span-2 sm:col-span-1">
                   <span className="text-[11px] font-bold text-slate-400 uppercase">Study Material</span>
                   <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900">
-                    <BookOpen className="w-4 h-4 text-emerald-600" />
+                    <BookOpen className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>Printed Modules & OMR</span>
                   </div>
                 </div>
               </div>
 
               {/* Course Long Description */}
-              <div className="p-6 sm:p-8 space-y-6">
-                <h2 className="text-2xl font-black text-slate-900">Detailed Course Overview</h2>
+              <div className="p-4 sm:p-6 md:p-8 space-y-6">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900">Detailed Course Overview</h2>
                 <div
-                  className="prose prose-slate max-w-none text-sm text-slate-600 leading-relaxed"
+                  className="prose prose-slate max-w-none text-xs sm:text-sm text-slate-600 leading-relaxed break-words"
                   dangerouslySetInnerHTML={{ __html: course.description }}
                 />
 
@@ -209,8 +209,8 @@ export default async function CourseDetailPage({
             </div>
 
             {/* Why study this batch at Bright Future */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
-              <h3 className="text-xl font-bold text-slate-900">What You Receive With This Batch</h3>
+            <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-sm space-y-4">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900">What You Receive With This Batch</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700">
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -230,7 +230,7 @@ export default async function CourseDetailPage({
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Printed theory booklets & formula sheets</span>
+                  <span>Printed theory booklets &amp; formula sheets</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -244,13 +244,13 @@ export default async function CourseDetailPage({
           <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
             
             {/* Fee & Enrollment Card */}
-            <div className="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-lg space-y-5">
+            <div className="bg-white p-4 sm:p-7 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-lg space-y-5">
               <div>
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
                   Course Fee
                 </span>
                 <div className="flex items-baseline gap-3 mt-1">
-                  <span className="text-3xl font-black text-slate-900">
+                  <span className="text-2xl sm:text-3xl font-black text-slate-900">
                     {formatCurrency(course.discountFee || course.fee)}
                   </span>
                   {hasDiscount && (
@@ -283,7 +283,7 @@ export default async function CourseDetailPage({
 
               <a
                 href={`tel:${settings?.primaryPhone || '9450067223'}`}
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold text-slate-900 bg-slate-100 hover:bg-slate-200 transition-colors uppercase tracking-wider"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold text-slate-900 bg-slate-100 hover:bg-slate-200 transition-colors uppercase tracking-wider min-h-[44px]"
               >
                 <PhoneCall className="w-4 h-4 text-blue-800" />
                 <span>Call Helpline: {settings?.primaryPhone || '9450067223'}</span>
@@ -291,7 +291,7 @@ export default async function CourseDetailPage({
             </div>
 
             {/* Quick Enquiry Form for this Course */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-4">
+            <div className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-md space-y-4">
               <h3 className="text-lg font-bold text-slate-900">
                 Book Free Demo for this Batch
               </h3>

@@ -17,7 +17,7 @@ export default function FloatingWhatsApp({
   const whatsappUrl = `https://wa.me/91${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center group">
+    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 sm:bottom-6 sm:right-6 z-40 flex items-center group">
       {/* Tooltip on hover */}
       <span className="hidden sm:inline-block mr-3 px-3 py-1.5 bg-slate-900/90 text-white text-xs font-semibold rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
         Chat with Counselors on WhatsApp

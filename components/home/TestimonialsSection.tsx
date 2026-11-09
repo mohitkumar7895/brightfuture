@@ -24,12 +24,12 @@ export default function TestimonialsSection({
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="py-8 sm:py-10 bg-[#07132B] text-white relative overflow-hidden">
+    <section className="py-8 sm:py-12 lg:py-16 bg-[#07132B] text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Animated Header */}
         <AnimatedSectionHeader
-          className="max-w-3xl mb-8 sm:mb-9"
+          className="max-w-3xl mb-8 sm:mb-12"
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 uppercase tracking-wider">
               <Star className="w-3.5 h-3.5 fill-amber-400" />
@@ -49,11 +49,11 @@ export default function TestimonialsSection({
         />
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-5 flex flex-col justify-between hover:border-amber-400/50 transition-all duration-300 shadow-md group hover:-translate-y-1"
+              className="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:border-amber-400/50 transition-all duration-300 shadow-md group hover:-translate-y-1"
             >
               <div className="space-y-3">
                 {/* Quote Icon & Rating */}

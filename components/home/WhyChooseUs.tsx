@@ -79,12 +79,12 @@ export default function WhyChooseUs({
   ];
 
   return (
-    <section className="py-10 sm:py-14 bg-slate-50/90 border-b border-slate-200">
+    <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/90 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Animated Section Header */}
         <AnimatedSectionHeader
-          className="max-w-3xl mb-10 sm:mb-12"
+          className="max-w-3xl mb-8 sm:mb-12"
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
               <Award className="w-3.5 h-3.5 text-blue-700" />
@@ -104,13 +104,13 @@ export default function WhyChooseUs({
         />
 
         {/* 6 Core Edge Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {edgeFeatures.map((item, index) => {
             const IconComponent = item.icon;
             return (
               <div
                 key={index}
-                className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs hover:shadow-lg hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-xs hover:shadow-lg hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3.5">

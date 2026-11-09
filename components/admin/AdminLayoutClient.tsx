@@ -34,7 +34,7 @@ export default function AdminLayoutClient({
             className="fixed inset-0 bg-black/60 backdrop-blur-xs"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="relative z-10 w-64 max-w-xs h-full">
+          <div className="relative z-10 w-64 max-w-[80vw] h-full">
             <AdminSidebar onCloseMobile={() => setMobileOpen(false)} />
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function AdminLayoutClient({
           adminName={adminUser?.name}
           adminRole={adminUser?.role}
         />
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-6 lg:p-8">
           {children}
         </main>
       </div>

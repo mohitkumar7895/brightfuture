@@ -38,20 +38,20 @@ export default async function CoursesPage({
   return (
     <div className="bg-slate-50 min-h-screen pb-24">
       {/* Banner */}
-      <section className="bg-gradient-to-br from-[#0B2545] via-[#134074] to-[#1E3A8A] text-white py-16 text-center relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[#0B2545] via-[#134074] to-[#1E3A8A] text-white py-12 sm:py-16 text-center relative overflow-hidden">
         {/* Glow circles */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3 sm:space-y-4 relative z-10">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold text-amber-300 bg-white/10 border border-white/20 uppercase tracking-wider backdrop-blur-md">
             <BookOpen className="w-3.5 h-3.5" />
-            Curriculum & Batches
+            Curriculum &amp; Batches
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
             Our Competitive Exam Courses
           </h1>
-          <p className="text-blue-100/90 text-sm sm:text-base max-w-2xl mx-auto">
+          <p className="text-blue-100/90 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Choose your target government examination and prepare with structured syllabus planning, expert mentorship, and daily test practice.
           </p>
         </div>
@@ -59,10 +59,10 @@ export default async function CoursesPage({
 
       {/* Filter Tabs */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
-        <div className="bg-white p-2.5 rounded-2xl border border-slate-200 shadow-md flex items-center gap-2 overflow-x-auto">
+        <div className="bg-white p-2 sm:p-2.5 rounded-2xl border border-slate-200 shadow-md flex items-center gap-2 overflow-x-auto scrollbar-none pb-2 sm:pb-2.5">
           <Link
             href="/courses"
-            className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors ${
+            className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors shrink-0 ${
               !category
                 ? 'bg-blue-600 text-white shadow-sm'
                 : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
@@ -76,7 +76,7 @@ export default async function CoursesPage({
               <Link
                 key={cat.id}
                 href={`/courses?category=${cat.slug}`}
-                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors ${
+                className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors shrink-0 ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-sm'
                     : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
@@ -90,16 +90,16 @@ export default async function CoursesPage({
       </section>
 
       {/* Course List Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
         {courses.length === 0 ? (
-          <div className="bg-white p-12 text-center rounded-2xl border border-slate-200">
+          <div className="bg-white p-8 sm:p-12 text-center rounded-2xl border border-slate-200">
             <p className="text-slate-600 text-sm">No courses found in this category.</p>
             <Link href="/courses" className="mt-4 inline-block text-xs font-bold text-blue-800 underline">
               View All Courses
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {courses.map((course) => {
               const hasDiscount = course.discountFee && course.discountFee < course.fee;
               return (

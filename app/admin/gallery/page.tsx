@@ -137,7 +137,7 @@ export default function AdminGalleryPage() {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
         {items.map((item) => (
           <div
             key={item.id}
@@ -187,7 +187,7 @@ export default function AdminGalleryPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+          <div className="bg-white rounded-3xl max-w-md w-full p-4 sm:p-8 space-y-6 shadow-2xl my-8 max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-lg font-bold text-slate-900">Upload Media Item</h3>
               <button type="button" onClick={() => setModalOpen(false)}>
@@ -204,7 +204,7 @@ export default function AdminGalleryPage() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Smart Classroom Session"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 
@@ -213,7 +213,7 @@ export default function AdminGalleryPage() {
                 <select
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 >
                   <option value="">-- General Album --</option>
                   {categories.map((cat) => (
@@ -250,7 +250,7 @@ export default function AdminGalleryPage() {
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
                   placeholder="Brief note about this photograph or event..."
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 

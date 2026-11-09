@@ -60,7 +60,7 @@ export default async function NoticesPage({
 
       {/* Category Tabs */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
-        <div className="bg-white p-2.5 rounded-2xl border border-slate-200 shadow-md flex items-center gap-2 overflow-x-auto">
+        <div className="bg-white p-2.5 rounded-2xl border border-slate-200 shadow-md flex items-center gap-2 overflow-x-auto scrollbar-none pb-2.5">
           {categories.map((cat) => {
             const isActive = (!category && cat.value === '') || category === cat.value;
             return (
@@ -86,15 +86,15 @@ export default async function NoticesPage({
           {notices.map((notice) => (
             <div
               key={notice.id}
-              className={`p-6 sm:p-7 rounded-3xl border transition-all duration-300 hover:shadow-lg flex flex-col justify-between ${
+              className={`p-5 sm:p-7 rounded-3xl border transition-all duration-300 hover:shadow-lg flex flex-col justify-between ${
                 notice.isPinned
                   ? 'bg-amber-50/50 border-amber-300 shadow-xs'
                   : 'bg-white border-slate-200 shadow-xs'
               }`}
             >
               <div className="space-y-4">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="px-2.5 py-0.5 rounded-md text-[11px] font-black uppercase bg-blue-100 text-blue-900">
                       {notice.category}
                     </span>

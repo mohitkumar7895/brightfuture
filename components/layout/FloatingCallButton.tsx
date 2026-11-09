@@ -11,7 +11,7 @@ export default function FloatingCallButton({
   primaryPhone = '9450067223',
 }: FloatingCallButtonProps) {
   return (
-    <div className="fixed bottom-4 left-4 z-40 sm:hidden">
+    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-40 sm:hidden">
       <a
         href={`tel:${primaryPhone}`}
         aria-label="Call Bright Future Competition Institute Lalitpur"

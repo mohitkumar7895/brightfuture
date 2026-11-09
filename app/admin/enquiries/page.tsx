@@ -169,7 +169,7 @@ export default function AdminEnquiriesPage() {
             placeholder="Search name, phone, father name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </form>
 
@@ -178,7 +178,7 @@ export default function AdminEnquiriesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden text-slate-700 font-semibold"
+            className="px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none text-slate-700 font-semibold"
           >
             <option value="">All Statuses</option>
             <option value="PENDING">Pending</option>
@@ -191,7 +191,7 @@ export default function AdminEnquiriesPage() {
           <select
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
-            className="px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden text-slate-700 font-semibold max-w-xs truncate"
+            className="px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none text-slate-700 font-semibold max-w-xs truncate"
           >
             <option value="">All Target Batches</option>
             {courses.map((c) => (
@@ -216,7 +216,7 @@ export default function AdminEnquiriesPage() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs whitespace-nowrap">
               <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[10px] border-b border-slate-100">
                 <tr>
                   <th className="py-3.5 px-6">Candidate</th>
@@ -328,9 +328,9 @@ export default function AdminEnquiriesPage() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 space-y-5 shadow-2xl">
+          <div className="bg-white rounded-3xl max-w-md w-full p-4 sm:p-7 space-y-5 shadow-2xl my-8 max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
                 <h3 className="text-base font-bold text-slate-900">
@@ -357,7 +357,7 @@ export default function AdminEnquiriesPage() {
                 <select
                   value={editStatus}
                   onChange={(e) => setEditStatus(e.target.value)}
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600 font-semibold"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-semibold"
                 >
                   <option value="PENDING">PENDING (New)</option>
                   <option value="CONTACTED">CONTACTED (Follow-up)</option>
@@ -375,7 +375,7 @@ export default function AdminEnquiriesPage() {
                   value={adminNotes}
                   onChange={(e) => setAdminNotes(e.target.value)}
                   placeholder="e.g. Called candidate. Invited for demo class on Monday. Mother attended call..."
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
             </div>

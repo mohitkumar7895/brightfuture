@@ -132,16 +132,16 @@ export default function AdminNoticesPage() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {notices.map((n) => (
           <div
             key={n.id}
-            className={`p-6 rounded-3xl border shadow-xs flex flex-col justify-between ${
+            className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl border shadow-xs flex flex-col justify-between ${
               n.isPinned ? 'bg-amber-50/50 border-amber-300' : 'bg-white border-slate-200'
             }`}
           >
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase bg-blue-100 text-blue-900">
                     {n.category}
@@ -196,7 +196,7 @@ export default function AdminNoticesPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-8 space-y-6 shadow-2xl my-8 max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-lg font-bold text-slate-900">
                 {editingNotice ? 'Edit Notice' : 'Publish Notice'}
@@ -215,7 +215,7 @@ export default function AdminNoticesPage() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. New Batch Starting from Next Monday"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 
@@ -224,7 +224,7 @@ export default function AdminNoticesPage() {
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 >
                   <option value="ADMISSION">ADMISSION (Batches & Registration)</option>
                   <option value="EXAM">EXAM (Mock Tests & Results)</option>
@@ -241,7 +241,7 @@ export default function AdminNoticesPage() {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Enter notice announcement details..."
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 

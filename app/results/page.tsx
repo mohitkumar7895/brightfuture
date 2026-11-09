@@ -53,7 +53,7 @@ export default async function ResultsPage({
 
       {/* Year Filter Tabs */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
-        <div className="bg-white p-2.5 rounded-2xl border border-slate-200 shadow-md flex items-center gap-2 overflow-x-auto">
+        <div className="bg-white p-2.5 rounded-2xl border border-slate-200 shadow-md flex items-center gap-2 overflow-x-auto scrollbar-none pb-2.5">
           <Link
             href="/results"
             className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors ${

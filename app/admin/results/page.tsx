@@ -159,7 +159,7 @@ export default function AdminResultsPage() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {results.map((r) => (
           <div
             key={r.id}
@@ -230,7 +230,7 @@ export default function AdminResultsPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-8 space-y-6 shadow-2xl my-8 max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-lg font-bold text-slate-900">
                 {editingResult ? 'Edit Achievement' : 'Add Student Achievement'}
@@ -249,11 +249,11 @@ export default function AdminResultsPage() {
                   value={studentName}
                   onChange={(e) => setStudentName(e.target.value)}
                   placeholder="e.g. Amit Yadav"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block font-bold text-slate-700 mb-1">Exam Name *</label>
                   <input
@@ -262,7 +262,7 @@ export default function AdminResultsPage() {
                     value={examName}
                     onChange={(e) => setExamName(e.target.value)}
                     placeholder="e.g. UP Police Constable"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
 
@@ -274,7 +274,7 @@ export default function AdminResultsPage() {
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
                     placeholder="2024"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
               </div>
@@ -286,7 +286,7 @@ export default function AdminResultsPage() {
                   value={rank}
                   onChange={(e) => setRank(e.target.value)}
                   placeholder="e.g. Inspector of Central Excise / Selected"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 
@@ -297,7 +297,7 @@ export default function AdminResultsPage() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="e.g. Credited regular mock test series and speed mathematics at Bright Future..."
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 

@@ -129,7 +129,7 @@ export default function AdminSettingsPage() {
 
       <form onSubmit={handleSave} className="space-y-8">
         {/* Core Identity */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
+        <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
           <h2 className="text-base font-bold text-slate-900 pb-2 border-b border-slate-100">
             Institute Identity
           </h2>
@@ -142,7 +142,7 @@ export default function AdminSettingsPage() {
                 required
                 value={instituteName}
                 onChange={(e) => setInstituteName(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
 
@@ -152,14 +152,14 @@ export default function AdminSettingsPage() {
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
           </div>
         </div>
 
         {/* Addresses & Branches */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
+        <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
           <h2 className="text-base font-bold text-slate-900 pb-2 border-b border-slate-100">
             Lalitpur Branch Addresses
           </h2>
@@ -174,7 +174,7 @@ export default function AdminSettingsPage() {
                 required
                 value={headOfficeAddress}
                 onChange={(e) => setHeadOfficeAddress(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
 
@@ -187,7 +187,7 @@ export default function AdminSettingsPage() {
                 required
                 value={marketBranchAddress}
                 onChange={(e) => setMarketBranchAddress(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
           </div>
@@ -200,7 +200,7 @@ export default function AdminSettingsPage() {
                 required
                 value={pinCode}
                 onChange={(e) => setPinCode(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
 
@@ -211,14 +211,14 @@ export default function AdminSettingsPage() {
                 value={openingHours}
                 onChange={(e) => setOpeningHours(e.target.value)}
                 placeholder="Monday - Saturday: 7:00 AM - 7:30 PM"
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
           </div>
         </div>
 
         {/* Contact Numbers */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
+        <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
           <h2 className="text-base font-bold text-slate-900 pb-2 border-b border-slate-100">
             Contact Numbers & WhatsApp
           </h2>
@@ -231,7 +231,7 @@ export default function AdminSettingsPage() {
                 required
                 value={primaryPhone}
                 onChange={(e) => setPrimaryPhone(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
 
@@ -242,7 +242,7 @@ export default function AdminSettingsPage() {
                 required
                 value={whatsappNumber}
                 onChange={(e) => setWhatsappNumber(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
 
@@ -253,7 +253,7 @@ export default function AdminSettingsPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
           </div>
@@ -265,13 +265,13 @@ export default function AdminSettingsPage() {
               value={alternatePhones}
               onChange={(e) => setAlternatePhones(e.target.value)}
               placeholder="9451935450, 8726343417"
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
         </div>
 
         {/* Announcement Bar & Social */}
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
+        <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
           <h2 className="text-base font-bold text-slate-900 pb-2 border-b border-slate-100">
             Top Announcement Bar & Social Links
           </h2>
@@ -293,7 +293,7 @@ export default function AdminSettingsPage() {
               type="text"
               value={announcementBarText}
               onChange={(e) => setAnnouncementBarText(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -305,7 +305,7 @@ export default function AdminSettingsPage() {
                 value={youtubeUrl}
                 onChange={(e) => setYoutubeUrl(e.target.value)}
                 placeholder="https://youtube.com/@brightfuture"
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
 
@@ -316,7 +316,7 @@ export default function AdminSettingsPage() {
                 value={telegramUrl}
                 onChange={(e) => setTelegramUrl(e.target.value)}
                 placeholder="https://t.me/brightfuture"
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>
           </div>
@@ -327,7 +327,7 @@ export default function AdminSettingsPage() {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-bold text-white bg-blue-800 hover:bg-blue-900 transition-colors uppercase tracking-wider shadow-lg shadow-blue-800/25 disabled:opacity-70"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl text-xs font-bold text-white bg-blue-800 hover:bg-blue-900 transition-colors uppercase tracking-wider shadow-lg shadow-blue-800/25 disabled:opacity-70 w-full sm:w-auto"
           >
             <Save className="w-4 h-4" />
             <span>{saving ? 'Saving...' : 'Save All Settings'}</span>

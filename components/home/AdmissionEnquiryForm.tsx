@@ -178,7 +178,7 @@ export default function AdmissionEnquiryForm({
             autoComplete="name"
             placeholder="e.g. Rahul Sharma"
             {...register('studentName')}
-            className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all ${
+            className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all ${
               errors.studentName ? 'border-rose-400 bg-rose-50/40 text-rose-900' : 'border-slate-300'
             }`}
           />
@@ -201,7 +201,7 @@ export default function AdmissionEnquiryForm({
             type="text"
             placeholder="e.g. Shri Rajesh Sharma"
             {...register('fatherName')}
-            className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all"
+            className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all"
           />
         </div>
       </div>
@@ -222,7 +222,7 @@ export default function AdmissionEnquiryForm({
             maxLength={10}
             placeholder="e.g. 9450067223"
             {...register('mobile')}
-            className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all ${
+            className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all ${
               errors.mobile ? 'border-rose-400 bg-rose-50/40 text-rose-900' : 'border-slate-300'
             }`}
           />
@@ -249,7 +249,7 @@ export default function AdmissionEnquiryForm({
             spellCheck="false"
             placeholder="e.g. student@gmail.com"
             {...register('email')}
-            className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all ${
+            className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all ${
               errors.email ? 'border-rose-400 bg-rose-50/40 text-rose-900' : 'border-slate-300'
             }`}
           />
@@ -272,7 +272,7 @@ export default function AdmissionEnquiryForm({
           <select
             id="courseId"
             {...register('courseId')}
-            className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all cursor-pointer font-medium text-slate-800"
+            className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all cursor-pointer font-medium text-slate-800"
           >
             <option value="">-- Choose Target Batch --</option>
             {courses.length > 0 ? (
@@ -303,7 +303,7 @@ export default function AdmissionEnquiryForm({
           <select
             id="qualification"
             {...register('qualification')}
-            className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all cursor-pointer font-medium text-slate-800"
+            className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all cursor-pointer font-medium text-slate-800"
           >
             <option value="">-- Select Highest Education --</option>
             <option value="10th Pass">High School (10th Pass)</option>
@@ -330,7 +330,7 @@ export default function AdmissionEnquiryForm({
               autoComplete="street-address"
               placeholder="e.g. Mahaveerpura, Lalitpur / Talbehat / Mehroni"
               {...register('address')}
-              className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all"
+              className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all"
             />
           </div>
 
@@ -345,7 +345,7 @@ export default function AdmissionEnquiryForm({
               rows={3}
               placeholder="Tell us about your target examination year or preferred batch timing (Morning/Evening)..."
               {...register('message')}
-              className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-hidden focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all resize-y"
+              className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm bg-slate-50 hover:bg-white focus:bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all resize-y"
             />
           </div>
         </>
@@ -360,13 +360,14 @@ export default function AdmissionEnquiryForm({
         >
           {isSubmitting ? (
             <>
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <Loader2 className="w-5 h-5 animate-spin shrink-0" />
               <span>Submitting Admission Enquiry...</span>
             </>
           ) : (
             <>
-              <Send className="w-4 h-4 text-amber-300" />
-              <span>Submit Admission Enquiry & Book Demo Class</span>
+              <Send className="w-4 h-4 text-amber-300 shrink-0" />
+              <span className="hidden sm:inline">Submit Admission Enquiry &amp; Book Demo Class</span>
+              <span className="sm:hidden">Submit Enquiry &amp; Book Demo</span>
             </>
           )}
         </button>

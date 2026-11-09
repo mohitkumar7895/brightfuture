@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-slate-950 via-blue-950 to-slate-900 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl p-8 sm:p-10 space-y-6">
+      <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl p-5 sm:p-8 md:p-10 space-y-6">
         
         {/* Brand Header */}
         <div className="text-center space-y-3">
@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@brightfuture.com"
-                className="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
               />
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
               />
             </div>
           </div>

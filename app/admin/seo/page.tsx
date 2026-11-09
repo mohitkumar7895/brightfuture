@@ -97,7 +97,7 @@ export default function AdminSeoPage() {
           <div className="p-16 text-center text-slate-400">Loading SEO records...</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs whitespace-nowrap">
               <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[10px] border-b border-slate-100">
                 <tr>
                   <th className="py-3.5 px-6">Page Route</th>
@@ -148,7 +148,7 @@ export default function AdminSeoPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+          <div className="bg-white rounded-3xl max-w-xl w-full p-4 sm:p-8 space-y-6 shadow-2xl my-8 max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-lg font-bold text-slate-900">
                 Edit SEO for {pageSlug}
@@ -168,7 +168,7 @@ export default function AdminSeoPage() {
                   required
                   value={metaTitle}
                   onChange={(e) => setMetaTitle(e.target.value)}
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
                 <span className="text-[10px] text-slate-400 block mt-1">
                   Recommended: 50-60 characters ({metaTitle.length} chars)
@@ -184,7 +184,7 @@ export default function AdminSeoPage() {
                   required
                   value={metaDescription}
                   onChange={(e) => setMetaDescription(e.target.value)}
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
                 <span className="text-[10px] text-slate-400 block mt-1">
                   Recommended: 140-160 characters ({metaDescription.length} chars)
@@ -200,7 +200,7 @@ export default function AdminSeoPage() {
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
                   placeholder="coaching in Lalitpur, UP Police batch, best coaching..."
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 
@@ -212,7 +212,7 @@ export default function AdminSeoPage() {
                     value={canonicalUrl}
                     onChange={(e) => setCanonicalUrl(e.target.value)}
                     placeholder="https://brightfutureinstitute.com/about"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
 
@@ -222,7 +222,7 @@ export default function AdminSeoPage() {
                     type="text"
                     value={robots}
                     onChange={(e) => setRobots(e.target.value)}
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
               </div>

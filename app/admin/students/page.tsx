@@ -207,7 +207,7 @@ export default function AdminStudentsPage() {
             placeholder="Search by student name, roll, phone..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </form>
       </div>
@@ -229,7 +229,7 @@ export default function AdminStudentsPage() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs whitespace-nowrap">
               <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[10px] border-b border-slate-100">
                 <tr>
                   <th className="py-3.5 px-6">Roll No / Student</th>
@@ -314,7 +314,7 @@ export default function AdminStudentsPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+          <div className="bg-white rounded-3xl max-w-xl w-full p-4 sm:p-8 space-y-6 shadow-2xl my-8 max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-lg font-bold text-slate-900">
                 {editingStudent ? 'Edit Student Record' : 'Enroll New Student'}
@@ -340,7 +340,7 @@ export default function AdminStudentsPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Vikas Kushwaha"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
 
@@ -354,7 +354,7 @@ export default function AdminStudentsPage() {
                     value={rollNumber}
                     onChange={(e) => setRollNumber(e.target.value)}
                     placeholder="BFCI-2026-001"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden font-mono"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none font-mono"
                   />
                 </div>
               </div>
@@ -369,7 +369,7 @@ export default function AdminStudentsPage() {
                     value={fatherName}
                     onChange={(e) => setFatherName(e.target.value)}
                     placeholder="e.g. Shri Ramdas Kushwaha"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
 
@@ -384,7 +384,7 @@ export default function AdminStudentsPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="9838000000"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
               </div>
@@ -398,7 +398,7 @@ export default function AdminStudentsPage() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="e.g. Mahaveerpura, Lalitpur"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 
@@ -415,7 +415,7 @@ export default function AdminStudentsPage() {
                     <select
                       value={courseId}
                       onChange={(e) => setCourseId(e.target.value)}
-                      className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-hidden"
+                      className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none"
                     >
                       <option value="">-- Choose Batch --</option>
                       {courses.map((c) => (
@@ -436,7 +436,7 @@ export default function AdminStudentsPage() {
                         value={feePaid}
                         onChange={(e) => setFeePaid(e.target.value)}
                         placeholder="5000"
-                        className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-hidden"
+                        className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none"
                       />
                     </div>
                     <div>
@@ -448,7 +448,7 @@ export default function AdminStudentsPage() {
                         value={totalFee}
                         onChange={(e) => setTotalFee(e.target.value)}
                         placeholder="5999"
-                        className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-hidden"
+                        className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none"
                       />
                     </div>
                   </div>

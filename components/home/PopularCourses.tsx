@@ -34,11 +34,11 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
   if (courses.length === 0) return null;
 
   return (
-    <section className="py-8 sm:py-10 bg-white">
+    <section className="py-8 sm:py-12 lg:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Animated Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-9">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <AnimatedSectionHeader
             align="left"
             className="max-w-2xl"
@@ -62,7 +62,7 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
 
           <Link
             href="/courses"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all uppercase tracking-wider shrink-0"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-600/20 transition-all uppercase tracking-wider shrink-0"
           >
             <span>View All Courses</span>
             <ArrowRight className="w-4 h-4" />
@@ -70,7 +70,7 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
         </div>
 
         {/* Course Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {courses.slice(0, 6).map((course) => {
             return (
               <div
@@ -143,13 +143,13 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
                   <div className="grid grid-cols-2 gap-2">
                     <Link
                       href={`/courses/${course.slug}`}
-                      className="w-full text-center py-2 px-3 rounded-xl text-xs font-bold text-blue-900 bg-blue-50 hover:bg-blue-100 border border-blue-200/60 transition-colors"
+                      className="w-full text-center py-2 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold text-blue-900 bg-blue-50 hover:bg-blue-100 border border-blue-200/60 transition-colors truncate"
                     >
                       View Syllabus
                     </Link>
                     <Link
                       href={`/admission?course=${course.id}`}
-                      className="w-full text-center py-2 px-3 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-xs transition-all uppercase tracking-wider"
+                      className="w-full text-center py-2 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-xs transition-all uppercase tracking-wider truncate"
                     >
                       Enquire &amp; Demo
                     </Link>

@@ -172,7 +172,7 @@ export default function AdminFacultyPage() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {faculty.map((f) => (
           <div
             key={f.id}
@@ -243,7 +243,7 @@ export default function AdminFacultyPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+          <div className="bg-white rounded-3xl max-w-xl w-full p-4 sm:p-8 space-y-6 shadow-2xl my-8 max-h-[90dvh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-lg font-bold text-slate-900">
                 {editingFaculty ? 'Edit Faculty Member' : 'Add New Faculty Member'}
@@ -267,7 +267,7 @@ export default function AdminFacultyPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Er. A. K. Sharma"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
 
@@ -279,7 +279,7 @@ export default function AdminFacultyPage() {
                     value={designation}
                     onChange={(e) => setDesignation(e.target.value)}
                     placeholder="e.g. Senior Faculty (Mathematics)"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function AdminFacultyPage() {
                     value={qualification}
                     onChange={(e) => setQualification(e.target.value)}
                     placeholder="e.g. M.Sc. Mathematics, B.Ed"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
 
@@ -305,7 +305,7 @@ export default function AdminFacultyPage() {
                     value={experience}
                     onChange={(e) => setExperience(e.target.value)}
                     placeholder="e.g. 12+ Years Experience"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
               </div>
@@ -318,7 +318,7 @@ export default function AdminFacultyPage() {
                   value={subjects}
                   onChange={(e) => setSubjects(e.target.value)}
                   placeholder="Quantitative Aptitude, Advanced Maths, Reasoning"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 
@@ -329,7 +329,7 @@ export default function AdminFacultyPage() {
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                   placeholder="Notable teaching accomplishments, background, etc."
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
 

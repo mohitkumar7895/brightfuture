@@ -177,19 +177,19 @@ export default async function AdmissionPage({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <a
                     href={`tel:${primaryPhone}`}
-                    className="flex items-center justify-center gap-2 p-3.5 bg-blue-900 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-blue-950 shadow-md transition-all"
+                    className="flex items-center justify-center gap-2 p-3 sm:p-3.5 bg-blue-900 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-blue-950 shadow-md transition-all text-center"
                   >
-                    <PhoneCall className="w-4 h-4 text-amber-300" />
-                    <span>Call Admission Desk: +91 {primaryPhone}</span>
+                    <PhoneCall className="w-4 h-4 text-amber-300 shrink-0" />
+                    <span>Call Helpline: +91 {primaryPhone}</span>
                   </a>
 
                   <a
                     href={`https://wa.me/91${whatsappNumber}?text=Hello%20Bright%20Future%20Institute,%20I%20want%20to%20enquire%20about%202026%20admissions.`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 p-3.5 bg-emerald-600 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-emerald-700 shadow-md transition-all"
+                    className="flex items-center justify-center gap-2 p-3 sm:p-3.5 bg-emerald-600 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-emerald-700 shadow-md transition-all text-center"
                   >
-                    <MessageCircle className="w-4 h-4 text-white" />
+                    <MessageCircle className="w-4 h-4 text-white shrink-0" />
                     <span>WhatsApp Desk</span>
                   </a>
                 </div>

@@ -102,7 +102,7 @@ export default function HeroSection({
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative overflow-hidden text-white min-h-[500px] sm:min-h-[540px] md:min-h-[580px] lg:min-h-[620px] flex items-center"
+      className="relative overflow-hidden text-white min-h-[480px] sm:min-h-[520px] md:min-h-[560px] lg:min-h-[620px] flex items-center"
       aria-label="Hero Banner Carousel"
     >
       {/* Background Images */}
@@ -131,16 +131,16 @@ export default function HeroSection({
       </div>
 
       {/* Main Hero Card Container - Visible on ALL screen sizes */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-8 sm:py-10 lg:py-14">
-        <div className="max-w-xl bg-slate-900/90 md:bg-slate-900/85 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-slate-700/80 shadow-2xl space-y-3.5 sm:space-y-5 text-left">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-20 w-full py-6 sm:py-10 lg:py-14">
+        <div className="max-w-xl bg-slate-900/90 md:bg-slate-900/85 backdrop-blur-md p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-slate-700/80 shadow-2xl space-y-3 sm:space-y-4 text-left">
           
           {/* Top Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-[11px] sm:text-xs font-black uppercase tracking-wider shadow-sm max-w-full">
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-sm max-w-full">
             <span className="truncate">{activeSlide.badge}</span>
           </div>
 
           {/* Heading */}
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight leading-snug drop-shadow-sm">
+          <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight leading-snug drop-shadow-sm">
             {activeSlide.title}{' '}
             <span className="text-amber-400">
               {activeSlide.titleHighlight}
@@ -153,18 +153,18 @@ export default function HeroSection({
           </p>
 
           {/* Quick verification points */}
-          <div className="pt-0.5 flex flex-wrap gap-2 text-[11px] sm:text-xs font-semibold text-slate-300">
-            <span className="flex items-center gap-1">
+          <div className="pt-0.5 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[11px] sm:text-xs font-semibold text-slate-300">
+            <span className="inline-flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
               <span>2 Days Free Demo</span>
             </span>
-            <span className="text-slate-500">•</span>
-            <span className="flex items-center gap-1">
+            <span className="text-slate-500 hidden xs:inline">•</span>
+            <span className="inline-flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>Sunday OMR Mock Tests</span>
+              <span>Weekly Mock Tests</span>
             </span>
-            <span className="text-slate-500">•</span>
-            <span className="flex items-center gap-1">
+            <span className="text-slate-500 hidden xs:inline">•</span>
+            <span className="inline-flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
               <span>2 Branches in Lalitpur</span>
             </span>
@@ -190,9 +190,9 @@ export default function HeroSection({
           </div>
 
           {/* Quick Info & Slide Indicators */}
-          <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-2 text-xs">
-            <div className="flex items-center gap-1.5 text-amber-300 text-[11px] font-semibold">
-              <Star className="w-3.5 h-3.5 fill-amber-400" />
+          <div className="pt-2 border-t border-white/15 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-1.5 text-amber-300 text-[10px] sm:text-[11px] font-semibold">
+              <Star className="w-3.5 h-3.5 fill-amber-400 shrink-0" />
               <span>4.9/5 Rating (1,500+ Aspirants)</span>
             </div>
 
@@ -217,11 +217,11 @@ export default function HeroSection({
         </div>
       </div>
 
-      {/* Prev / Next Arrows */}
+      {/* Prev / Next Arrows - Visible on sm screens and up, touch swipe on mobile */}
       <button
         type="button"
         onClick={prevSlide}
-        className="flex absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 hover:bg-black/80 border border-white/30 text-white items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+        className="hidden sm:flex absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-black/50 hover:bg-black/80 border border-white/30 text-white items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
@@ -230,7 +230,7 @@ export default function HeroSection({
       <button
         type="button"
         onClick={nextSlide}
-        className="flex absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 hover:bg-black/80 border border-white/30 text-white items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+        className="hidden sm:flex absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-black/50 hover:bg-black/80 border border-white/30 text-white items-center justify-center backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
         aria-label="Next slide"
       >
         <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />

@@ -149,11 +149,11 @@ export default function AdminCmsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto scrollbar-none pb-0.5">
         <button
           type="button"
           onClick={() => setActiveTab('home')}
-          className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors uppercase tracking-wider ${
+          className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors uppercase tracking-wider shrink-0 whitespace-nowrap ${
             activeTab === 'home'
               ? 'border-blue-800 text-blue-900'
               : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -165,7 +165,7 @@ export default function AdminCmsPage() {
         <button
           type="button"
           onClick={() => setActiveTab('about')}
-          className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors uppercase tracking-wider ${
+          className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors uppercase tracking-wider shrink-0 whitespace-nowrap ${
             activeTab === 'about'
               ? 'border-blue-800 text-blue-900'
               : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -177,15 +177,15 @@ export default function AdminCmsPage() {
 
       {/* Home Tab */}
       {activeTab === 'home' && (
-        <form onSubmit={handleSaveHome} className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5 text-xs font-medium">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <form onSubmit={handleSaveHome} className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-5 text-xs font-medium">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
             <h2 className="text-base font-bold text-slate-900">
               Homepage Hero & Core Sections
             </h2>
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-800 hover:bg-blue-900 transition-colors uppercase tracking-wider disabled:opacity-70"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-800 hover:bg-blue-900 transition-colors uppercase tracking-wider disabled:opacity-70"
             >
               <Save className="w-3.5 h-3.5" />
               <span>{saving ? 'Saving...' : 'Save Homepage Content'}</span>
@@ -198,7 +198,7 @@ export default function AdminCmsPage() {
               type="text"
               value={heroBadge}
               onChange={(e) => setHeroBadge(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -208,7 +208,7 @@ export default function AdminCmsPage() {
               type="text"
               value={heroTitle}
               onChange={(e) => setHeroTitle(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -218,7 +218,7 @@ export default function AdminCmsPage() {
               rows={3}
               value={heroSubtitle}
               onChange={(e) => setHeroSubtitle(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -228,7 +228,7 @@ export default function AdminCmsPage() {
               type="text"
               value={aboutTitle}
               onChange={(e) => setAboutTitle(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -238,7 +238,7 @@ export default function AdminCmsPage() {
               rows={4}
               value={aboutContent}
               onChange={(e) => setAboutContent(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -257,15 +257,15 @@ export default function AdminCmsPage() {
 
       {/* About Tab */}
       {activeTab === 'about' && (
-        <form onSubmit={handleSaveAbout} className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-5 text-xs font-medium">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <form onSubmit={handleSaveAbout} className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-5 text-xs font-medium">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-3">
             <h2 className="text-base font-bold text-slate-900">
               About Us Page Content
             </h2>
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-800 hover:bg-blue-900 transition-colors uppercase tracking-wider disabled:opacity-70"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-800 hover:bg-blue-900 transition-colors uppercase tracking-wider disabled:opacity-70 w-full sm:w-auto"
             >
               <Save className="w-3.5 h-3.5" />
               <span>{saving ? 'Saving...' : 'Save About Page'}</span>
@@ -278,7 +278,7 @@ export default function AdminCmsPage() {
               type="text"
               value={aboutHeroTitle}
               onChange={(e) => setAboutHeroTitle(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -288,7 +288,7 @@ export default function AdminCmsPage() {
               type="text"
               value={aboutHeroSubtitle}
               onChange={(e) => setAboutHeroSubtitle(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -298,7 +298,7 @@ export default function AdminCmsPage() {
               rows={3}
               value={mission}
               onChange={(e) => setMission(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -308,7 +308,7 @@ export default function AdminCmsPage() {
               rows={3}
               value={vision}
               onChange={(e) => setVision(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -318,7 +318,7 @@ export default function AdminCmsPage() {
               rows={4}
               value={history}
               onChange={(e) => setHistory(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -328,7 +328,7 @@ export default function AdminCmsPage() {
               rows={4}
               value={methodology}
               onChange={(e) => setMethodology(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 
@@ -338,7 +338,7 @@ export default function AdminCmsPage() {
               rows={3}
               value={infrastructure}
               onChange={(e) => setInfrastructure(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+              className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
             />
           </div>
 

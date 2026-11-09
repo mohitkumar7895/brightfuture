@@ -24,11 +24,11 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
   if (results.length === 0) return null;
 
   return (
-    <section className="py-8 sm:py-10 bg-slate-50/80 border-b border-slate-200">
+    <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/80 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Animated Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-9">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <AnimatedSectionHeader
             align="left"
             className="max-w-2xl"
@@ -52,7 +52,7 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
 
           <Link
             href="/results"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 transition-all uppercase tracking-wider shrink-0 shadow-md shadow-blue-600/20"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 transition-all uppercase tracking-wider shrink-0 shadow-md shadow-blue-600/20"
           >
             <span>View All Selections</span>
             <ArrowRight className="w-4 h-4" />
@@ -60,7 +60,7 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
         </div>
 
         {/* Toppers Cards Grid - Text directly ON TOP of Image */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {results.slice(0, 6).map((item) => (
             <div
               key={item.id}
@@ -83,17 +83,17 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
               </div>
 
               {/* Bottom Gradient Overlay with Main Info Written Directly On The Image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent flex flex-col justify-end p-3 sm:p-3.5 z-10 text-left">
-                <h3 className="text-sm sm:text-base font-black text-white leading-tight group-hover:text-amber-300 transition-colors truncate drop-shadow-sm">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent flex flex-col justify-end p-2.5 sm:p-3.5 z-10 text-left">
+                <h3 className="text-xs sm:text-sm md:text-base font-black text-white leading-tight group-hover:text-amber-300 transition-colors truncate drop-shadow-sm">
                   {item.studentName}
                 </h3>
 
-                <p className="text-[11px] sm:text-xs font-bold text-amber-300 leading-tight truncate mt-0.5">
+                <p className="text-[10px] sm:text-xs font-bold text-amber-300 leading-tight truncate mt-0.5">
                   {item.examName}
                 </p>
 
                 {item.rank && (
-                  <p className="text-[10px] sm:text-[11px] text-blue-200 font-medium leading-tight truncate mt-1">
+                  <p className="text-[9px] sm:text-[11px] text-blue-200 font-medium leading-tight truncate mt-1">
                     {item.rank}
                   </p>
                 )}

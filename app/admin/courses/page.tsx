@@ -247,7 +247,7 @@ export default function AdminCoursesPage() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs whitespace-nowrap">
               <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[10px] border-b border-slate-100">
                 <tr>
                   <th className="py-3.5 px-6">Course Name</th>
@@ -364,7 +364,7 @@ export default function AdminCoursesPage() {
                     value={title}
                     onChange={(e) => handleTitleChange(e.target.value)}
                     placeholder="e.g. UP Police Constable Target Batch"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
 
@@ -378,7 +378,7 @@ export default function AdminCoursesPage() {
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
                     placeholder="up-police-constable-target-batch"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600 font-mono"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono"
                   />
                 </div>
               </div>
@@ -394,7 +394,7 @@ export default function AdminCoursesPage() {
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
                     placeholder="e.g. 6 Months"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
 
@@ -409,7 +409,7 @@ export default function AdminCoursesPage() {
                     value={fee}
                     onChange={(e) => setFee(e.target.value)}
                     placeholder="7500"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
 
@@ -423,7 +423,7 @@ export default function AdminCoursesPage() {
                     value={discountFee}
                     onChange={(e) => setDiscountFee(e.target.value)}
                     placeholder="5999"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
               </div>
@@ -437,7 +437,7 @@ export default function AdminCoursesPage() {
                   value={batchInfo}
                   onChange={(e) => setBatchInfo(e.target.value)}
                   placeholder="Morning: 7:30 AM - 10:30 AM | Evening: 3:30 PM - 6:30 PM"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -450,7 +450,7 @@ export default function AdminCoursesPage() {
                   value={shortDescription}
                   onChange={(e) => setShortDescription(e.target.value)}
                   placeholder="One sentence description shown on course cards..."
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -463,7 +463,7 @@ export default function AdminCoursesPage() {
                   value={subjects}
                   onChange={(e) => setSubjects(e.target.value)}
                   placeholder="General Hindi, Maths, Reasoning, General Studies (UP Special)"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -476,7 +476,7 @@ export default function AdminCoursesPage() {
                   value={eligibility}
                   onChange={(e) => setEligibility(e.target.value)}
                   placeholder="12th Pass (Intermediate) or Graduation depending on post"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
@@ -490,7 +490,7 @@ export default function AdminCoursesPage() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="<p>Full details about lectures, weekly tests, and printed modules...</p>"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-blue-600 font-mono"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono"
                 />
               </div>
 
@@ -504,7 +504,7 @@ export default function AdminCoursesPage() {
                     value={image}
                     onChange={(e) => setImage(e.target.value)}
                     placeholder="/images/hero-classroom.jpg"
-                    className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-hidden"
+                    className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                   <label className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl cursor-pointer flex items-center gap-1.5">
                     <Upload className="w-3.5 h-3.5" />

@@ -234,7 +234,7 @@ export default function GalleryViewer({
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-3 sm:p-6 animate-in fade-in duration-200 select-none"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-3 sm:p-6 animate-in fade-in duration-200 select-none overflow-y-auto"
           onClick={() => setActivePhotoIndex(null)}
         >
           {/* Lightbox Topbar */}
@@ -273,7 +273,7 @@ export default function GalleryViewer({
 
           {/* Lightbox Center Image Stage */}
           <div 
-            className="relative flex-1 flex items-center justify-center w-full max-h-[72vh] my-auto"
+            className="relative flex-1 flex items-center justify-center w-full min-h-[250px] max-h-[70dvh] my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Prev Button */}
@@ -298,7 +298,7 @@ export default function GalleryViewer({
 
             {/* Active Image */}
             <div className="relative w-full h-full max-w-5xl flex items-center justify-center p-2">
-              <div className="relative w-full h-full max-h-[68vh] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <div className="relative w-full h-full min-h-[240px] max-h-[66dvh] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
                 <Image
                   src={activePhoto.url}
                   alt={activePhoto.title}
@@ -313,7 +313,7 @@ export default function GalleryViewer({
 
           {/* Lightbox Bottom Details Bar */}
           <div 
-            className="bg-slate-900/90 border border-white/10 rounded-2xl p-4 sm:p-5 max-w-4xl mx-auto w-full text-white z-20 space-y-2 backdrop-blur-md"
+            className="bg-slate-900/90 border border-white/10 rounded-2xl p-3.5 sm:p-5 max-w-4xl mx-auto w-full text-white z-20 space-y-2 backdrop-blur-md shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Toaster } from 'sonner';
 import db from '@/lib/db';
@@ -10,6 +10,13 @@ import FloatingCallButton from '@/components/layout/FloatingCallButton';
 import SiteLayoutWrapper from '@/components/layout/SiteLayoutWrapper';
 
 export const dynamic = 'force-dynamic';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#0b1b3d',
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   try {

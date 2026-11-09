@@ -74,29 +74,35 @@ export default function Header({
           <div className="flex items-center justify-between gap-2">
             
             {/* Logo & Institute Identity */}
-            <Link href="/" className="flex items-center gap-2 sm:gap-3 group shrink-0 min-w-0">
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-blue-900 via-blue-800 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-blue-900/20 group-hover:scale-105 transition-transform duration-200 shrink-0">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-blue-900 via-blue-800 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-blue-900/20 group-hover:scale-105 transition-transform duration-200 shrink-0">
                 <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-amber-300" />
               </div>
-              <div className="truncate">
-                <span className="block font-black text-slate-900 tracking-tight text-sm sm:text-base md:text-lg leading-tight group-hover:text-blue-900 transition-colors truncate">
-                  BRIGHT FUTURE
-                </span>
-                <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-blue-800 leading-tight truncate">
-                  Competition Institute • Lalitpur
+              <div className="flex flex-col justify-center min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-black text-slate-950 tracking-tight text-sm sm:text-base md:text-lg lg:text-xl leading-none group-hover:text-blue-900 transition-colors whitespace-nowrap">
+                    BRIGHT FUTURE
+                  </span>
+                  <span className="xs:hidden inline-block text-[9px] font-black uppercase tracking-wider bg-blue-50 text-blue-900 border border-blue-200 px-1.5 py-0.5 rounded leading-none shrink-0">
+                    Lalitpur
+                  </span>
+                </div>
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-blue-700 leading-none mt-1 whitespace-nowrap">
+                  <span className="hidden xs:inline">Competition Institute • Lalitpur</span>
+                  <span className="xs:hidden">Competition Institute</span>
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+            <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1.5">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`px-2 xl:px-3 py-2 rounded-lg text-xs xl:text-sm font-semibold transition-colors whitespace-nowrap ${
                       isActive
                         ? 'text-blue-900 bg-blue-50 font-bold'
                         : 'text-slate-700 hover:text-blue-900 hover:bg-slate-50'
@@ -112,7 +118,7 @@ export default function Header({
             <div className="hidden sm:flex items-center gap-2 md:gap-3 shrink-0">
               <a
                 href={`tel:${primaryPhone}`}
-                className="hidden md:inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-blue-900 bg-blue-50/80 hover:bg-blue-100 border border-blue-200/80 rounded-xl transition-all shadow-xs"
+                className="hidden md:inline-flex items-center gap-2 px-3 py-2 text-xs font-bold text-blue-900 bg-blue-50/80 hover:bg-blue-100 border border-blue-200/80 rounded-xl transition-all shadow-xs"
               >
                 <Phone className="w-3.5 h-3.5 text-blue-700" />
                 <span>{primaryPhone}</span>
@@ -120,25 +126,25 @@ export default function Header({
 
               <Link
                 href="/admission"
-                className="inline-flex items-center justify-center px-4 py-2 sm:py-2.5 rounded-xl text-xs font-black text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-md shadow-amber-400/25 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 uppercase tracking-wider whitespace-nowrap"
+                className="inline-flex items-center justify-center px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-black text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-md shadow-amber-400/25 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 uppercase tracking-wider whitespace-nowrap"
               >
                 Enquire Now
               </Link>
             </div>
 
-            {/* Mobile Header Actions (Call icon + Enquire button + Hamburger) */}
+            {/* Mobile Header Actions (Call icon on >= xs + Enquire button + Hamburger) */}
             <div className="flex sm:hidden items-center gap-1.5 shrink-0">
               <a
                 href={`tel:${primaryPhone}`}
                 aria-label={`Call ${primaryPhone}`}
-                className="w-9 h-9 rounded-lg bg-blue-50 text-blue-900 flex items-center justify-center border border-blue-200"
+                className="hidden xs:flex w-8 h-8 rounded-lg bg-blue-50 text-blue-900 items-center justify-center border border-blue-200"
               >
-                <Phone className="w-4 h-4 text-blue-700" />
+                <Phone className="w-3.5 h-3.5 text-blue-700" />
               </a>
 
               <Link
                 href="/admission"
-                className="px-2.5 py-1.5 rounded-lg text-[11px] font-black text-slate-950 bg-amber-400 uppercase tracking-wider shadow-xs"
+                className="px-2.5 py-1.5 rounded-lg text-[10px] font-black text-slate-950 bg-amber-400 uppercase tracking-wider shadow-xs whitespace-nowrap"
               >
                 Enquire
               </Link>
@@ -146,7 +152,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="w-9 h-9 flex items-center justify-center rounded-lg text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -181,13 +187,13 @@ export default function Header({
             {/* Drawer Header */}
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-blue-900 text-white flex items-center justify-center font-bold">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-900 to-indigo-700 text-white flex items-center justify-center font-bold shadow-md shrink-0">
                     <GraduationCap className="w-5 h-5 text-amber-300" />
                   </div>
-                  <div>
-                    <span className="block font-black text-slate-900 text-sm leading-tight">BRIGHT FUTURE</span>
-                    <span className="block text-[10px] font-semibold text-blue-800 uppercase">Lalitpur Campus</span>
+                  <div className="flex flex-col justify-center min-w-0">
+                    <span className="font-black text-slate-950 text-base leading-none">BRIGHT FUTURE</span>
+                    <span className="text-[10px] font-bold text-blue-800 uppercase tracking-wider mt-1">Competition Institute • Lalitpur</span>
                   </div>
                 </div>
                 <button
