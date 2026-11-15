@@ -174,6 +174,7 @@ export default function HeroSection({
           <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
             <Link
               href="/admission"
+              prefetch={true}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-lg shadow-amber-400/25 hover:scale-102 active:scale-98 transition-all uppercase tracking-wider text-center min-h-[44px]"
             >
               <span>Book Free Demo Class</span>

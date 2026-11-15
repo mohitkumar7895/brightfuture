@@ -53,6 +53,7 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
 
           <Link
             href="/gallery"
+            prefetch={true}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-extrabold text-blue-900 hover:text-white bg-blue-50 hover:bg-blue-900 border border-blue-200 shadow-xs hover:shadow-md transition-all uppercase tracking-wider shrink-0"
           >
             <span>View All Photos</span>

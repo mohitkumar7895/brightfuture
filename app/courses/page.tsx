@@ -192,12 +192,14 @@ export default async function CoursesPage({
                     <div className="grid grid-cols-2 gap-2">
                       <Link
                         href={`/courses/${course.slug}`}
+                        prefetch={true}
                         className="w-full text-center py-2 px-3 rounded-xl text-xs font-bold text-blue-900 bg-blue-50 hover:bg-blue-100 border border-blue-200/60 transition-colors"
                       >
                         Details
                       </Link>
                       <Link
                         href={`/admission?course=${course.id}`}
+                        prefetch={true}
                         className="w-full text-center py-2 px-3 rounded-xl text-xs font-black text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-sm transition-all uppercase tracking-wider"
                       >
                         Enquire

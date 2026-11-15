@@ -182,43 +182,43 @@ export default function Footer({
             </h4>
             <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2 text-xs">
               <li>
-                <Link href="/courses" className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
+                <Link href="/courses" prefetch={true} className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
                   <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
                   <span className="truncate">UP Police &amp; SI</span>
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
+                <Link href="/courses" prefetch={true} className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
                   <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
                   <span className="truncate">SSC CGL &amp; CHSL</span>
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
+                <Link href="/courses" prefetch={true} className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
                   <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
                   <span className="truncate">Railway NTPC</span>
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
+                <Link href="/courses" prefetch={true} className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
                   <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
                   <span className="truncate">UPSSSC PET</span>
                 </Link>
               </li>
               <li>
-                <Link href="/results" className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
+                <Link href="/results" prefetch={true} className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
                   <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
                   <span className="truncate">Toppers Results</span>
                 </Link>
               </li>
               <li>
-                <Link href="/faculty" className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
+                <Link href="/faculty" prefetch={true} className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition-colors">
                   <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
                   <span className="truncate">Faculty Team</span>
                 </Link>
               </li>
               <li className="col-span-2 sm:col-span-1">
-                <Link href="/admission" className="flex items-center gap-1.5 text-amber-400 font-semibold hover:underline">
+                <Link href="/admission" prefetch={true} className="flex items-center gap-1.5 text-amber-400 font-semibold hover:underline">
                   <ChevronRight className="w-3 h-3 text-amber-400 shrink-0" />
                   <span>Book Free Demo Class</span>
                 </Link>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { Suspense } from 'react';
 import { Toaster } from 'sonner';
 import db from '@/lib/db';
 import TopBar from '@/components/layout/TopBar';
@@ -8,8 +9,11 @@ import Footer from '@/components/layout/Footer';
 import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp';
 import FloatingCallButton from '@/components/layout/FloatingCallButton';
 import SiteLayoutWrapper from '@/components/layout/SiteLayoutWrapper';
+import RouteProgressBar from '@/components/layout/RouteProgressBar';
 
-export const dynamic = 'force-dynamic';
+// Revalidate public pages every 60 seconds (or immediately on admin save via revalidatePath)
+// This enables instant pre-rendering, static caching, and instant navigation clicks
+export const revalidate = 60;
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -131,6 +135,9 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased min-h-screen flex flex-col selection:bg-blue-900 selection:text-white">
+        <Suspense fallback={null}>
+          <RouteProgressBar />
+        </Suspense>
         <Toaster position="top-right" richColors />
         
         <SiteLayoutWrapper

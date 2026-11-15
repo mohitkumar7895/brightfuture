@@ -134,6 +134,7 @@ export default function WhyChooseUs({
                 <div className="pt-3 border-t border-slate-100">
                   <Link
                     href={item.link}
+                    prefetch={true}
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-amber-600 transition-colors group"
                   >
                     <span>{item.linkLabel}</span>

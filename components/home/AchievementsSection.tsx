@@ -52,6 +52,7 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
 
           <Link
             href="/results"
+            prefetch={true}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 transition-all uppercase tracking-wider shrink-0 shadow-md shadow-blue-600/20"
           >
             <span>View All Selections</span>

@@ -74,7 +74,7 @@ export default function Header({
           <div className="flex items-center justify-between gap-2">
             
             {/* Logo & Institute Identity */}
-            <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+            <Link href="/" prefetch={true} className="flex items-center gap-2 sm:gap-3 group min-w-0">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-blue-900 via-blue-800 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-blue-900/20 group-hover:scale-105 transition-transform duration-200 shrink-0">
                 <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-amber-300" />
               </div>
@@ -102,6 +102,7 @@ export default function Header({
                   <Link
                     key={link.name}
                     href={link.href}
+                    prefetch={true}
                     className={`px-2 xl:px-3 py-2 rounded-lg text-xs xl:text-sm font-semibold transition-colors whitespace-nowrap ${
                       isActive
                         ? 'text-blue-900 bg-blue-50 font-bold'
@@ -126,6 +127,7 @@ export default function Header({
 
               <Link
                 href="/admission"
+                prefetch={true}
                 className="inline-flex items-center justify-center px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-black text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-md shadow-amber-400/25 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 uppercase tracking-wider whitespace-nowrap"
               >
                 Enquire Now
@@ -144,6 +146,7 @@ export default function Header({
 
               <Link
                 href="/admission"
+                prefetch={true}
                 className="px-2.5 py-1.5 rounded-lg text-[10px] font-black text-slate-950 bg-amber-400 uppercase tracking-wider shadow-xs whitespace-nowrap"
               >
                 Enquire
@@ -214,6 +217,7 @@ export default function Header({
                     <Link
                       key={link.name}
                       href={link.href}
+                      prefetch={true}
                       onClick={() => setMobileMenuOpen(false)}
                       className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-colors min-h-[44px] ${
                         isActive
@@ -233,6 +237,7 @@ export default function Header({
             <div className="pt-6 border-t border-slate-100 space-y-3">
               <Link
                 href="/admission"
+                prefetch={true}
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-black text-slate-950 bg-gradient-to-r from-amber-400 to-amber-300 shadow-md uppercase tracking-wider min-h-[44px]"
               >
