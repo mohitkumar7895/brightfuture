@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { noticeSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -9,7 +10,10 @@ export async function PUT(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -29,10 +33,17 @@ export async function PUT(
       },
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/notices');
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json({ success: true, notice: updated });
   } catch (error: any) {
     console.error('Update notice error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to update notice' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Failed to update notice' }, { status: 400 });
   }
 }
 
@@ -42,7 +53,10 @@ export async function DELETE(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -51,10 +65,16 @@ export async function DELETE(
       where: { id: Number(id) },
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/notices');
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json({ success: true, message: 'Notice deleted successfully' });
   } catch (error) {
     console.error('Delete notice error:', error);
     return NextResponse.json({ error: 'Failed to delete notice' }, { status: 500 });
   }
 }
-

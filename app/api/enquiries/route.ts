@@ -36,10 +36,27 @@ export async function POST(request: Request) {
       },
     });
 
+    // Formatted WhatsApp payload to 8726343417 so enquiry reaches counselor directly
+    const whatsAppText = encodeURIComponent(
+      `*Admission Enquiry - Bright Future Competition Institute Lalitpur*\n\n` +
+      `👤 *Student Name:* ${validated.studentName}\n` +
+      `📞 *Mobile Number:* ${validated.mobile}\n` +
+      `📚 *Course Applied:* ${courseName || 'General Competitive Batch'}\n` +
+      (validated.qualification ? `🎓 *Qualification:* ${validated.qualification}\n` : '') +
+      (validated.fatherName ? `👨 *Father Name:* ${validated.fatherName}\n` : '') +
+      (validated.address ? `📍 *Address:* ${validated.address}\n` : '') +
+      (validated.message ? `💬 *Message:* ${validated.message}\n` : '') +
+      `\n_Sent via Online Admission Portal_`
+    );
+
+    const whatsappUrl = `https://wa.me/918726343417?text=${whatsAppText}`;
+
     return NextResponse.json({
       success: true,
-      message: 'Your admission enquiry has been submitted successfully! Our counseling team will contact you shortly.',
+      message: 'Your admission enquiry has been submitted successfully! Our counseling team (+91 8726343417) will contact you shortly.',
       enquiryId: enquiry.id,
+      whatsappUrl,
+      helpline: '8726343417',
     });
   } catch (error: any) {
     console.error('Enquiry submission error:', error);
@@ -50,7 +67,7 @@ export async function POST(request: Request) {
       );
     }
     return NextResponse.json(
-      { error: 'Failed to submit enquiry. Please try calling us directly at 9450067223.' },
+      { error: 'Failed to submit enquiry. Please call Counselor directly at 8726343417.' },
       { status: 500 }
     );
   }

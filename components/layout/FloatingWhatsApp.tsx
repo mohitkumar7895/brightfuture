@@ -9,7 +9,7 @@ interface FloatingWhatsAppProps {
 }
 
 export default function FloatingWhatsApp({
-  whatsappNumber = '9450067223',
+  whatsappNumber = '8726343417',
   instituteName = 'Bright Future Competition Institute',
 }: FloatingWhatsAppProps) {
   // Format message for WhatsApp

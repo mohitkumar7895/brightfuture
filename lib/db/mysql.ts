@@ -20,7 +20,7 @@ const fallbackStore = {
   logs: [...((initialFallbackData as any).logs || [])],
 };
 
-// Create a connection pool for MySQL
+// Create an optimized connection pool for MySQL with persistent keepalive
 const globalForMysql = global as unknown as { mysqlPool: mysql.Pool | undefined };
 
 export const pool =
@@ -32,16 +32,16 @@ export const pool =
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'coaching',
     waitForConnections: true,
-    connectionLimit: 15,
+    connectionLimit: 25,
     queueLimit: 0,
     decimalNumbers: true,
     dateStrings: false,
-    connectTimeout: 4000,
+    connectTimeout: 2000,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0,
   });
 
-if (process.env.NODE_ENV !== 'production') {
-  globalForMysql.mysqlPool = pool;
-}
+globalForMysql.mysqlPool = pool;
 
 function getFallbackRows(sql: string, values?: any[]): any[] {
   const s = sql.toLowerCase();
@@ -374,8 +374,11 @@ export const db = {
         updatedAt: new Date().toISOString(),
       };
       fallbackStore.courses.unshift(newCourse as any);
-      const found = await this.findUnique({ where: { id: insertedId } });
-      return found || newCourse;
+      const cat = fallbackStore.categories.find((c: any) => c.id === catId);
+      return {
+        ...newCourse,
+        category: cat ? { id: cat.id, name: cat.name, slug: cat.slug, icon: cat.icon } : null,
+      };
     },
 
     async update(data: any) {
@@ -401,12 +404,18 @@ export const db = {
       const sql = `UPDATE courses SET ${updates.join(', ')} WHERE id = ?`;
       await execute(sql, params);
 
+      let updatedItem: any = null;
       const idx = fallbackStore.courses.findIndex((c: any) => c.id === Number(id));
       if (idx !== -1) {
         fallbackStore.courses[idx] = { ...fallbackStore.courses[idx], ...d };
+        updatedItem = fallbackStore.courses[idx];
       }
-
-      return this.findUnique({ where: { id } });
+      const cat = fallbackStore.categories.find((c: any) => c.id === (d.categoryId || updatedItem?.categoryId));
+      return {
+        ...(updatedItem || d),
+        id: Number(id),
+        category: cat ? { id: cat.id, name: cat.name, slug: cat.slug, icon: cat.icon } : null,
+      };
     },
 
     async delete(data: any) {
@@ -539,11 +548,14 @@ export const db = {
         updates.push(`${k} = ?`);
         params.push(v === undefined ? null : v);
       }
-      updates.push(`updatedAt = NOW(3)`);
-      params.push(id);
-
-      await execute(`UPDATE enquiries SET ${updates.join(', ')} WHERE id = ?`, params);
-      return this.findUnique({ where: { id } });
+      if (updates.length > 0) {
+        updates.push(`updatedAt = NOW(3)`);
+        params.push(id);
+        await execute(`UPDATE enquiries SET ${updates.join(', ')} WHERE id = ?`, params).catch((err) => {
+          console.warn('MySQL enquiry.update warn:', err.message);
+        });
+      }
+      return { id: Number(id), ...d };
     },
 
     async delete(data: any) {
@@ -691,13 +703,12 @@ export const db = {
         year: d.year,
         photo: d.photo || null,
         description: d.description || null,
-        isFeatured: d.isFeatured !== false ? 1 : 0,
+        isFeatured: d.isFeatured !== false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
       fallbackStore.results.unshift(newResult as any);
-      const found = await this.findUnique({ where: { id: insertedId } });
-      return found || newResult;
+      return newResult;
     },
 
     async update(data: any) {
@@ -715,17 +726,26 @@ export const db = {
           params.push(v === undefined ? null : v);
         }
       }
-      updates.push(`updatedAt = NOW(3)`);
-      params.push(id);
-
-      await execute(`UPDATE results SET ${updates.join(', ')} WHERE id = ?`, params);
+      if (updates.length > 0) {
+        updates.push(`updatedAt = NOW(3)`);
+        params.push(id);
+        await execute(`UPDATE results SET ${updates.join(', ')} WHERE id = ?`, params).catch((err) => {
+          console.warn('MySQL result.update warn:', err.message);
+        });
+      }
 
       const idx = fallbackStore.results.findIndex((r: any) => r.id === Number(id));
       if (idx !== -1) {
-        fallbackStore.results[idx] = { ...fallbackStore.results[idx], ...d };
+        fallbackStore.results[idx] = {
+          ...fallbackStore.results[idx],
+          ...d,
+          id: Number(id),
+          isFeatured: d.isFeatured !== undefined ? Boolean(d.isFeatured) : fallbackStore.results[idx].isFeatured,
+        };
+        return fallbackStore.results[idx];
       }
 
-      return this.findUnique({ where: { id } });
+      return { id: Number(id), ...d };
     },
 
     async delete(data: any) {
@@ -790,7 +810,22 @@ export const db = {
         d.expiryDate ? new Date(String(d.expiryDate)) : null,
       ];
       const res = await execute(sql, params);
-      return this.findUnique({ where: { id: res.insertId } });
+      const insertedId = res.insertId || Date.now();
+      const newNotice = {
+        id: insertedId,
+        title: d.title,
+        content: d.content,
+        fileUrl: d.fileUrl || null,
+        category: d.category || 'GENERAL',
+        isPinned: Boolean(d.isPinned),
+        isPublished: d.isPublished !== false,
+        publishDate: d.publishDate || new Date().toISOString(),
+        expiryDate: d.expiryDate || null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      fallbackStore.notices.unshift(newNotice as any);
+      return newNotice;
     },
 
     async update(data: any) {
@@ -810,11 +845,27 @@ export const db = {
           params.push(v === undefined ? null : v);
         }
       }
-      updates.push(`updatedAt = NOW(3)`);
-      params.push(id);
+      if (updates.length > 0) {
+        updates.push(`updatedAt = NOW(3)`);
+        params.push(id);
+        await execute(`UPDATE notices SET ${updates.join(', ')} WHERE id = ?`, params).catch((err) => {
+          console.warn('MySQL notice.update warn:', err.message);
+        });
+      }
 
-      await execute(`UPDATE notices SET ${updates.join(', ')} WHERE id = ?`, params);
-      return this.findUnique({ where: { id } });
+      const idx = fallbackStore.notices.findIndex((n: any) => n.id === Number(id));
+      if (idx !== -1) {
+        fallbackStore.notices[idx] = {
+          ...fallbackStore.notices[idx],
+          ...d,
+          id: Number(id),
+          isPinned: d.isPinned !== undefined ? Boolean(d.isPinned) : fallbackStore.notices[idx].isPinned,
+          isPublished: d.isPublished !== undefined ? Boolean(d.isPublished) : fallbackStore.notices[idx].isPublished,
+        };
+        return fallbackStore.notices[idx];
+      }
+
+      return { id: Number(id), ...d };
     },
 
     async delete(data: any) {
@@ -902,6 +953,7 @@ export const db = {
       ];
       const res = await execute(sql, params);
       const insertedId = res.insertId || Date.now();
+      const cat = d.categoryId ? fallbackStore.categories.find((c: any) => c.id === Number(d.categoryId)) : null;
       const newItem = {
         id: insertedId,
         title: d.title || null,
@@ -910,13 +962,13 @@ export const db = {
         url: d.url,
         thumbnailUrl: d.thumbnailUrl || null,
         categoryId: d.categoryId || null,
-        isPublished: d.isPublished !== false ? 1 : 0,
+        isPublished: d.isPublished !== false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        category: cat ? { id: cat.id, name: cat.name, slug: cat.slug } : null,
       };
       fallbackStore.gallery.unshift(newItem as any);
-      const found = await this.findUnique({ where: { id: insertedId } });
-      return found || newItem;
+      return newItem;
     },
 
     async update(data: any) {
@@ -934,17 +986,33 @@ export const db = {
           params.push(v === undefined ? null : v);
         }
       }
-      updates.push(`updatedAt = NOW(3)`);
-      params.push(id);
-
-      await execute(`UPDATE gallery_items SET ${updates.join(', ')} WHERE id = ?`, params);
-
-      const idx = fallbackStore.gallery.findIndex((g: any) => g.id === Number(id));
-      if (idx !== -1) {
-        fallbackStore.gallery[idx] = { ...fallbackStore.gallery[idx], ...d };
+      if (updates.length > 0) {
+        updates.push(`updatedAt = NOW(3)`);
+        params.push(id);
+        await execute(`UPDATE gallery_items SET ${updates.join(', ')} WHERE id = ?`, params).catch((err) => {
+          console.warn('MySQL galleryItem.update warn:', err.message);
+        });
       }
 
-      return this.findUnique({ where: { id } });
+      const cat = d.categoryId ? fallbackStore.categories.find((c: any) => c.id === Number(d.categoryId)) : null;
+      const idx = fallbackStore.gallery.findIndex((g: any) => g.id === Number(id));
+      if (idx !== -1) {
+        const current = fallbackStore.gallery[idx] as any;
+        fallbackStore.gallery[idx] = {
+          ...current,
+          ...d,
+          id: Number(id),
+          isPublished: d.isPublished !== undefined ? Boolean(d.isPublished) : current.isPublished,
+          category: cat ? { id: cat.id, name: cat.name, slug: cat.slug } : (current.category || null),
+        };
+        return fallbackStore.gallery[idx];
+      }
+
+      return {
+        id: Number(id),
+        ...d,
+        category: cat ? { id: cat.id, name: cat.name, slug: cat.slug } : null,
+      };
     },
 
     async delete(data: any) {
@@ -1093,7 +1161,7 @@ export const db = {
   websiteSetting: {
     async findFirst() {
       const row = await queryOne<any>(`SELECT * FROM website_settings ORDER BY id ASC LIMIT 1`);
-      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : null;
+      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : (fallbackStore.settings || null);
     },
 
     async create(data: any) {
@@ -1105,15 +1173,18 @@ export const db = {
         `INSERT INTO website_settings (${keys.join(', ')}, updatedAt) VALUES (${placeholders}, NOW(3))`,
         values
       );
-      if (fallbackStore.settings) {
-        fallbackStore.settings = { ...fallbackStore.settings, ...d, id: res.insertId || 1 };
-      }
-      const row = await queryOne<any>(`SELECT * FROM website_settings WHERE id = ?`, [res.insertId]);
-      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : (fallbackStore.settings || null);
+      const newSettings = {
+        ...(fallbackStore.settings || {}),
+        ...d,
+        id: res.insertId || 1,
+        isAnnouncementBarActive: Boolean(d.isAnnouncementBarActive),
+      };
+      fallbackStore.settings = newSettings;
+      return newSettings;
     },
 
     async update(data: any) {
-      const id = data.where?.id || data.id;
+      const id = data.where?.id || data.id || 1;
       const d = data.data || data;
       const updates: string[] = [];
       const params: any[] = [];
@@ -1127,15 +1198,20 @@ export const db = {
           params.push(v === undefined ? null : v);
         }
       }
-      updates.push(`updatedAt = NOW(3)`);
-      params.push(id);
-
-      await execute(`UPDATE website_settings SET ${updates.join(', ')} WHERE id = ?`, params);
-      if (fallbackStore.settings) {
-        fallbackStore.settings = { ...fallbackStore.settings, ...d };
+      if (updates.length > 0) {
+        updates.push(`updatedAt = NOW(3)`);
+        params.push(id);
+        await execute(`UPDATE website_settings SET ${updates.join(', ')} WHERE id = ?`, params).catch((err) => {
+          console.warn('MySQL websiteSetting.update warn:', err.message);
+        });
       }
-      const row = await queryOne<any>(`SELECT * FROM website_settings WHERE id = ?`, [id]);
-      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : (fallbackStore.settings || null);
+      fallbackStore.settings = {
+        ...(fallbackStore.settings || {}),
+        ...d,
+        id,
+        isAnnouncementBarActive: Boolean(d.isAnnouncementBarActive ?? fallbackStore.settings?.isAnnouncementBarActive),
+      };
+      return fallbackStore.settings;
     },
   },
 

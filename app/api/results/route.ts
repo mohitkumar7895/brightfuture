@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { resultSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -31,6 +32,13 @@ export async function POST(request: Request) {
     const result = await db.result.create({
       data: validated,
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/results');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, result });
   } catch (error: any) {

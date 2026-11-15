@@ -8,7 +8,7 @@ interface FloatingCallButtonProps {
 }
 
 export default function FloatingCallButton({
-  primaryPhone = '9450067223',
+  primaryPhone = '8726343417',
 }: FloatingCallButtonProps) {
   return (
     <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 z-40 sm:hidden">

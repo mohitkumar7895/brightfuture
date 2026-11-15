@@ -107,12 +107,19 @@ export default function AdminResultsPage() {
         body: JSON.stringify(payload),
       });
 
+      const data = await res.json();
       if (res.ok) {
         toast.success(editingResult ? 'Result updated' : 'Achievement added successfully');
         setModalOpen(false);
+        const savedResult = data.result || { id: editingResult ? editingResult.id : Date.now(), ...payload };
+        if (editingResult) {
+          setResults((prev) => prev.map((r) => (r.id === savedResult.id ? { ...r, ...savedResult } : r)));
+        } else {
+          setResults((prev) => [savedResult, ...prev]);
+        }
         fetchResults();
       } else {
-        toast.error('Failed to save achievement');
+        toast.error(data.error || 'Failed to save achievement');
       }
     } catch {
       toast.error('Error saving result');
@@ -124,16 +131,19 @@ export default function AdminResultsPage() {
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this achievement?')) return;
 
+    // Optimistically remove immediately
+    setResults((prev) => prev.filter((r) => r.id !== id));
+    toast.success('Achievement deleted');
+
     try {
       const res = await fetch(`/api/results/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        toast.success('Achievement deleted');
-        fetchResults();
-      } else {
+      if (!res.ok) {
         toast.error('Delete failed');
+        fetchResults();
       }
     } catch {
       toast.error('Delete failed');
+      fetchResults();
     }
   };
 

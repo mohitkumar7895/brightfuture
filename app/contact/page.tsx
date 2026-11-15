@@ -30,8 +30,8 @@ export default async function ContactPage() {
     }).catch(() => []),
   ]);
 
-  const primaryPhone = settings?.primaryPhone || '9450067223';
-  const alternatePhones = settings?.alternatePhones || '9451935450, 8726343417';
+  const primaryPhone = settings?.primaryPhone || '8726343417';
+  const alternatePhones = settings?.alternatePhones || '9450067223, 9451935450';
   const email = settings?.email || 'aj2819147@gmail.com';
   const headOffice = settings?.headOfficeAddress || 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.';
   const marketBranch = settings?.marketBranchAddress || 'Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur. PIN: 284403';

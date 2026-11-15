@@ -21,7 +21,7 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({
-  primaryPhone = '9450067223',
+  primaryPhone = '8726343417',
 }: HeroSectionProps) {
   // Realistic, authentic coaching slides - 100% in clear professional English
   const slides = [

@@ -84,7 +84,7 @@ export default async function HomePage() {
         heroBadge={pageContent?.heroBadge || undefined}
         heroTitle={pageContent?.heroTitle || undefined}
         heroSubtitle={pageContent?.heroSubtitle || undefined}
-        primaryPhone={settings?.primaryPhone || '9450067223'}
+        primaryPhone={settings?.primaryPhone || '8726343417'}
       />
 
       {/* 2. Breaking Updates & Ticker */}

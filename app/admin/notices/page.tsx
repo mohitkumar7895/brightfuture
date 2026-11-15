@@ -80,12 +80,19 @@ export default function AdminNoticesPage() {
         body: JSON.stringify(payload),
       });
 
+      const data = await res.json();
       if (res.ok) {
         toast.success(editingNotice ? 'Notice updated' : 'Notice published successfully');
         setModalOpen(false);
+        const savedNotice = data.notice || { id: editingNotice ? editingNotice.id : Date.now(), ...payload };
+        if (editingNotice) {
+          setNotices((prev) => prev.map((n) => (n.id === savedNotice.id ? { ...n, ...savedNotice } : n)));
+        } else {
+          setNotices((prev) => [savedNotice, ...prev]);
+        }
         fetchNotices();
       } else {
-        toast.error('Failed to save notice');
+        toast.error(data.error || 'Failed to save notice');
       }
     } catch {
       toast.error('Error saving notice');
@@ -97,16 +104,19 @@ export default function AdminNoticesPage() {
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this notice?')) return;
 
+    // Optimistically remove immediately
+    setNotices((prev) => prev.filter((n) => n.id !== id));
+    toast.success('Notice deleted');
+
     try {
       const res = await fetch(`/api/notices/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        toast.success('Notice deleted');
-        fetchNotices();
-      } else {
+      if (!res.ok) {
         toast.error('Delete failed');
+        fetchNotices();
       }
     } catch {
       toast.error('Delete failed');
+      fetchNotices();
     }
   };
 

@@ -29,10 +29,10 @@ export default function AdminSettingsPage() {
   const [headOfficeAddress, setHeadOfficeAddress] = useState('');
   const [marketBranchAddress, setMarketBranchAddress] = useState('');
   const [pinCode, setPinCode] = useState('284403');
-  const [primaryPhone, setPrimaryPhone] = useState('9450067223');
-  const [alternatePhones, setAlternatePhones] = useState('9451935450, 8726343417');
+  const [primaryPhone, setPrimaryPhone] = useState('8726343417');
+  const [alternatePhones, setAlternatePhones] = useState('9450067223, 9451935450');
   const [email, setEmail] = useState('aj2819147@gmail.com');
-  const [whatsappNumber, setWhatsappNumber] = useState('9450067223');
+  const [whatsappNumber, setWhatsappNumber] = useState('8726343417');
   const [openingHours, setOpeningHours] = useState('');
   const [announcementBarText, setAnnouncementBarText] = useState('');
   const [isAnnouncementBarActive, setIsAnnouncementBarActive] = useState(true);

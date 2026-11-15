@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { websiteSettingSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -13,9 +14,10 @@ export async function GET() {
           headOfficeAddress: 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.',
           marketBranchAddress: 'Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur.',
           pinCode: '284403',
-          primaryPhone: '9450067223',
+          primaryPhone: '8726343417',
+          alternatePhones: '9450067223, 9451935450',
           email: 'aj2819147@gmail.com',
-          whatsappNumber: '9450067223',
+          whatsappNumber: '8726343417',
         },
       });
     }
@@ -29,27 +31,33 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
     const validated = websiteSettingSchema.parse(body);
 
-    const existing = await db.websiteSetting.findFirst();
-    const settings = existing
-      ? await db.websiteSetting.update({
-          where: { id: existing.id },
-          data: validated,
-        })
-      : await db.websiteSetting.create({
-          data: validated,
-        });
+    const settings = await db.websiteSetting.update({
+      where: { id: 1 },
+      data: validated,
+    });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/contact');
+      revalidatePath('/courses');
+      revalidatePath('/admin/settings');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, settings });
   } catch (error: any) {
     console.error('Update settings error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to update settings' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Failed to update settings' }, { status: 400 });
   }
 }
-

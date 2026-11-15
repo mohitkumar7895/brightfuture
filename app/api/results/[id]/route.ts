@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { resultSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -25,6 +26,13 @@ export async function PUT(
       data: validated,
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/results');
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json({ success: true, result: updated });
   } catch (error: any) {
     console.error('Update result error:', error);
@@ -42,7 +50,10 @@ export async function DELETE(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -50,6 +61,13 @@ export async function DELETE(
     await db.result.delete({
       where: { id: Number(id) },
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/results');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, message: 'Result deleted successfully' });
   } catch (error) {

@@ -40,6 +40,7 @@ export default function AdmissionEnquiryForm({
 }: AdmissionEnquiryFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
+  const [whatsappUrl, setWhatsappUrl] = useState<string>('');
 
   const {
     register,
@@ -83,11 +84,25 @@ export default function AdmissionEnquiryForm({
         throw new Error(result.error || 'Failed to submit enquiry');
       }
 
+      const forwardUrl =
+        result.whatsappUrl ||
+        `https://wa.me/918726343417?text=${encodeURIComponent(
+          `*Admission Enquiry - Bright Future Lalitpur*\n👤 Student: ${payload.studentName}\n📞 Mobile: ${payload.mobile}\n📚 Course: ${payload.courseName || 'Competitive Batch'}\n🎓 Qualification: ${payload.qualification || 'N/A'}`
+        )}`;
+
+      setWhatsappUrl(forwardUrl);
       setSubmittedData(payload);
-      toast.success('Admission enquiry submitted successfully! Our counseling team will contact you shortly.');
+      toast.success('Admission enquiry submitted! Opening counselor WhatsApp (+91 8726343417)...');
       reset();
+
+      // Automatically open WhatsApp so enquiry is delivered directly to 8726343417
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          window.open(forwardUrl, '_blank');
+        }, 400);
+      }
     } catch (error: any) {
-      toast.error(error.message || 'Something went wrong. Please call 8726343417 or 9450067223 directly.');
+      toast.error(error.message || 'Something went wrong. Please call counselor directly at 8726343417.');
     } finally {
       setIsSubmitting(false);
     }
@@ -137,25 +152,30 @@ export default function AdmissionEnquiryForm({
           Our senior counseling mentor will call you within 24 hours to confirm your batch time (Morning/Evening).
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2 flex-wrap">
           <a
-            href="tel:8726343417"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow-md transition-colors uppercase tracking-wider"
+            href={whatsappUrl || 'https://wa.me/918726343417'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-black text-xs sm:text-sm rounded-xl shadow-lg transition-transform hover:scale-102 active:scale-98 uppercase tracking-wider"
           >
-            <PhoneCall className="w-4 h-4" />
-            <span>Call Helpline: 8726343417</span>
+            <MessageSquare className="w-4 h-4 fill-white" />
+            <span>Send Enquiry to Counselor (+91 8726343417)</span>
           </a>
           <a
-            href="tel:9450067223"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-colors uppercase tracking-wider"
+            href="tel:8726343417"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-colors uppercase tracking-wider"
           >
-            <PhoneCall className="w-4 h-4" />
-            <span>Desk: 9450067223</span>
+            <PhoneCall className="w-4 h-4 text-amber-400" />
+            <span>Call: 8726343417</span>
           </a>
           <button
             type="button"
-            onClick={() => setSubmittedData(null)}
-            className="w-full sm:w-auto px-5 py-3 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors uppercase tracking-wider"
+            onClick={() => {
+              setSubmittedData(null);
+              setWhatsappUrl('');
+            }}
+            className="w-full sm:w-auto px-5 py-3.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors uppercase tracking-wider"
           >
             Submit Another Form
           </button>

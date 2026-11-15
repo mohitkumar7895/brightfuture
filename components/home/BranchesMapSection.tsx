@@ -16,8 +16,8 @@ interface BranchesMapSectionProps {
 export default function BranchesMapSection({
   headOfficeAddress = 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.',
   marketBranchAddress = 'Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur. PIN: 284403',
-  primaryPhone = '9450067223',
-  alternatePhones = '9451935450, 8726343417',
+  primaryPhone = '8726343417',
+  alternatePhones = '9450067223, 9451935450',
   mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14549.467891234!2d78.406981!3d24.688172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3979ea375d000001%3A0x6b8f1b6238b725b8!2sLalitpur%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000',
 }: BranchesMapSectionProps) {
   const whatsappUrl = `https://wa.me/91${primaryPhone}?text=${encodeURIComponent(

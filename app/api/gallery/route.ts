@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth/session';
 
@@ -65,6 +66,13 @@ export async function POST(request: Request) {
         isPublished: isPublished !== false,
       },
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/gallery');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, item });
   } catch (error: any) {

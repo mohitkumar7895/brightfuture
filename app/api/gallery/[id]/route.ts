@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth/session';
 
@@ -8,7 +9,10 @@ export async function PUT(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -29,6 +33,13 @@ export async function PUT(
       },
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/gallery');
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json({ success: true, item: updated });
   } catch (error: any) {
     console.error('Update gallery item error:', error);
@@ -42,7 +53,10 @@ export async function DELETE(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -51,10 +65,16 @@ export async function DELETE(
       where: { id: Number(id) },
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/gallery');
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json({ success: true, message: 'Item deleted successfully' });
   } catch (error) {
     console.error('Delete gallery item error:', error);
     return NextResponse.json({ error: 'Failed to delete item' }, { status: 500 });
   }
 }
-

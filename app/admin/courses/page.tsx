@@ -199,6 +199,19 @@ export default function AdminCoursesPage() {
       if (res.ok) {
         toast.success(editingCourse ? 'Course updated successfully' : 'Course created successfully');
         setModalOpen(false);
+        const savedCourse = data.course;
+        if (savedCourse) {
+          const selectedCat = categories.find((cat) => cat.id === savedCourse.categoryId);
+          const courseWithCat = {
+            ...savedCourse,
+            category: selectedCat ? { id: selectedCat.id, name: selectedCat.name, slug: selectedCat.slug, icon: selectedCat.icon } : null,
+          };
+          if (editingCourse) {
+            setCourses((prev) => prev.map((c) => (c.id === courseWithCat.id ? { ...c, ...courseWithCat } : c)));
+          } else {
+            setCourses((prev) => [courseWithCat, ...prev]);
+          }
+        }
         fetchCourses();
       } else {
         toast.error(data.error || 'Failed to save course');
@@ -213,16 +226,19 @@ export default function AdminCoursesPage() {
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to permanently delete this course?')) return;
 
+    // Optimistically remove from state immediately
+    setCourses((prev) => prev.filter((c) => c.id !== id));
+    toast.success('Course deleted');
+
     try {
       const res = await fetch(`/api/courses/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        toast.success('Course deleted');
-        fetchCourses();
-      } else {
+      if (!res.ok) {
         toast.error('Failed to delete course');
+        fetchCourses();
       }
     } catch {
       toast.error('Delete failed');
+      fetchCourses();
     }
   };
 

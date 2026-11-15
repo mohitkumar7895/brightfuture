@@ -99,6 +99,8 @@ export default function AdminEnquiriesPage() {
       const data = await res.json();
       if (res.ok) {
         toast.success('Enquiry updated successfully');
+        const updatedEnquiry = { ...selectedEnquiry, status: editStatus, adminNotes };
+        setEnquiries((prev) => prev.map((e) => (e.id === updatedEnquiry.id ? { ...e, ...updatedEnquiry } : e)));
         setSelectedEnquiry(null);
         fetchEnquiries();
       } else {
@@ -114,18 +116,21 @@ export default function AdminEnquiriesPage() {
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this enquiry record?')) return;
 
+    // Optimistically remove immediately
+    setEnquiries((prev) => prev.filter((e) => e.id !== id));
+    toast.success('Enquiry deleted');
+
     try {
       const res = await fetch(`/api/enquiries?id=${id}`, {
         method: 'DELETE',
       });
-      if (res.ok) {
-        toast.success('Enquiry deleted');
-        fetchEnquiries();
-      } else {
+      if (!res.ok) {
         toast.error('Delete failed');
+        fetchEnquiries();
       }
     } catch {
       toast.error('Failed to delete enquiry');
+      fetchEnquiries();
     }
   };
 

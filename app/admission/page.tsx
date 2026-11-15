@@ -40,8 +40,8 @@ export default async function AdmissionPage({
     db.websiteSetting.findFirst().catch(() => null),
   ]);
 
-  const primaryPhone = settings?.primaryPhone || '9450067223';
-  const whatsappNumber = settings?.whatsappNumber || '9450067223';
+  const primaryPhone = settings?.primaryPhone || '8726343417';
+  const whatsappNumber = settings?.whatsappNumber || '8726343417';
 
   return (
     <div className="bg-slate-50 min-h-screen pb-24">

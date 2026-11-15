@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { courseSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -75,6 +76,14 @@ export async function POST(request: Request) {
         keywords: validated.keywords || null,
       },
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/courses');
+      revalidatePath('/admission');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, course });
   } catch (error: any) {

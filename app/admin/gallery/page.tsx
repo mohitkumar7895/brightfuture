@@ -82,15 +82,18 @@ export default function AdminGalleryPage() {
         body: JSON.stringify(payload),
       });
 
+      const data = await res.json();
       if (res.ok) {
         toast.success('Gallery item added successfully');
         setModalOpen(false);
         setTitle('');
         setUrl('');
         setCaption('');
+        const newItem = data.item || { id: Date.now(), ...payload };
+        setItems((prev) => [newItem, ...prev]);
         fetchGallery();
       } else {
-        toast.error('Failed to add gallery item');
+        toast.error(data.error || 'Failed to add gallery item');
       }
     } catch {
       toast.error('Error adding gallery item');
@@ -102,16 +105,19 @@ export default function AdminGalleryPage() {
   const handleDelete = async (id: number) => {
     if (!confirm('Are you sure you want to delete this media item?')) return;
 
+    // Optimistically remove immediately
+    setItems((prev) => prev.filter((item) => item.id !== id));
+    toast.success('Media item deleted');
+
     try {
       const res = await fetch(`/api/gallery/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        toast.success('Media item deleted');
-        fetchGallery();
-      } else {
+      if (!res.ok) {
         toast.error('Delete failed');
+        fetchGallery();
       }
     } catch {
       toast.error('Delete failed');
+      fetchGallery();
     }
   };
 

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { noticeSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -28,7 +29,10 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -46,10 +50,16 @@ export async function POST(request: Request) {
       },
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/notices');
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json({ success: true, notice });
   } catch (error: any) {
     console.error('Create notice error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to create notice' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Failed to create notice' }, { status: 400 });
   }
 }
-

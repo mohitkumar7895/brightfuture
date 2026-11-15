@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { courseSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -77,6 +78,15 @@ export async function PUT(
       },
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/courses');
+      revalidatePath('/courses/' + validated.slug);
+      revalidatePath('/admission');
+    } catch {
+      // ignore
+    }
+
     return NextResponse.json({ success: true, course: updated });
   } catch (error: any) {
     console.error('Update course error:', error);
@@ -103,7 +113,10 @@ export async function DELETE(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -116,6 +129,14 @@ export async function DELETE(
     await db.course.delete({
       where: { id: courseId },
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/courses');
+      revalidatePath('/admission');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, message: 'Course deleted successfully' });
   } catch (error) {
