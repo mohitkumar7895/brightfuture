@@ -139,7 +139,10 @@ export default async function RootLayout({
               <TopBar
                 announcement={settings.announcementBarText || undefined}
                 phone={settings.primaryPhone}
+                helpline="8726343417"
                 email={settings.email}
+                facebookUrl={settings.facebookUrl || undefined}
+                instagramUrl={settings.instagramUrl || undefined}
               />
             ) : undefined
           }
@@ -158,6 +161,10 @@ export default async function RootLayout({
               alternatePhones={settings?.alternatePhones}
               email={settings?.email}
               openingHours={settings?.openingHours || undefined}
+              facebookUrl={settings?.facebookUrl || undefined}
+              instagramUrl={settings?.instagramUrl || undefined}
+              youtubeUrl={settings?.youtubeUrl || undefined}
+              telegramUrl={settings?.telegramUrl || undefined}
             />
           }
           floatingWhatsApp={

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { 
   Plus, 
   Edit3, 
@@ -13,7 +14,9 @@ import {
   AlertCircle,
   Eye, 
   EyeOff,
-  BookOpen
+  BookOpen,
+  Calendar,
+  Sparkles
 } from 'lucide-react';
 import { formatCurrency, slugify } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -428,17 +431,52 @@ export default function AdminCoursesPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block font-bold text-slate-700 mb-1">
-                  Batch Timings & Schedule
-                </label>
+              <div className="space-y-2 bg-blue-50/50 p-3.5 rounded-2xl border border-blue-100">
+                <div className="flex items-center justify-between">
+                  <label className="block font-bold text-slate-800 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-blue-700" />
+                    <span>New Batch Date &amp; Timings System</span>
+                  </label>
+                  <span className="text-[10px] font-bold text-blue-700 bg-white px-2 py-0.5 rounded-md border border-blue-200">
+                    Live On Website
+                  </span>
+                </div>
                 <input
                   type="text"
                   value={batchInfo}
                   onChange={(e) => setBatchInfo(e.target.value)}
-                  placeholder="Morning: 7:30 AM - 10:30 AM | Evening: 3:30 PM - 6:30 PM"
-                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  placeholder="e.g. New Batch Starts: Monday | Morning: 7:30 AM - 10:30 AM | Evening: 3:30 PM - 6:30 PM"
+                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setBatchInfo('New Batch Starts: Monday | Morning: 7:30 AM - 10:30 AM | Evening: 3:30 PM - 6:30 PM')
+                    }
+                    className="px-2 py-1 bg-white hover:bg-blue-100 text-slate-700 text-[10px] font-semibold rounded-lg border border-slate-200 transition-colors"
+                  >
+                    + Morning &amp; Evening
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setBatchInfo('Target Batch Starts 20th | Morning Shift: 8:00 AM - 11:30 AM (Limited 40 Seats)')
+                    }
+                    className="px-2 py-1 bg-white hover:bg-blue-100 text-slate-700 text-[10px] font-semibold rounded-lg border border-slate-200 transition-colors"
+                  >
+                    + Morning 8:00 AM
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setBatchInfo('Evening Special Batch | 3:30 PM - 6:30 PM | 2 Days Free Demo Available')
+                    }
+                    className="px-2 py-1 bg-white hover:bg-blue-100 text-slate-700 text-[10px] font-semibold rounded-lg border border-slate-200 transition-colors"
+                  >
+                    + Evening 3:30 PM
+                  </button>
+                </div>
               </div>
 
               <div>
@@ -506,7 +544,7 @@ export default function AdminCoursesPage() {
                     placeholder="/images/hero-classroom.jpg"
                     className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
-                  <label className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl cursor-pointer flex items-center gap-1.5">
+                  <label className="px-4 py-2 bg-blue-800 hover:bg-blue-900 text-white font-bold rounded-xl cursor-pointer flex items-center gap-1.5 shadow-sm">
                     <Upload className="w-3.5 h-3.5" />
                     <span>Upload</span>
                     <input
@@ -518,6 +556,33 @@ export default function AdminCoursesPage() {
                   </label>
                 </div>
               </div>
+
+              {/* Course Image Preview */}
+              {image && (
+                <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 p-2.5 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">
+                      Course Banner Preview
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setImage('/images/hero-classroom.jpg')}
+                      className="text-[11px] font-bold text-slate-500 hover:text-slate-700"
+                    >
+                      Reset Default
+                    </button>
+                  </div>
+                  <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-900 border border-slate-200 shadow-inner">
+                    <Image
+                      src={image}
+                      alt={title || 'Course Image'}
+                      fill
+                      className="object-cover"
+                      unoptimized={image.startsWith('data:') || image.startsWith('http')}
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-center gap-6 pt-2">
                 <label className="flex items-center gap-2 cursor-pointer">

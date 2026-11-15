@@ -240,13 +240,22 @@ export default function Header({
                 <span>Book 2-Day Free Demo</span>
               </Link>
               
-              <a
-                href={`tel:${primaryPhone}`}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold text-slate-800 border border-slate-200 hover:bg-slate-50 min-h-[44px]"
-              >
-                <Phone className="w-4 h-4 text-blue-800" />
-                <span>Call Admission Desk: +91 {primaryPhone}</span>
-              </a>
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={`tel:${primaryPhone}`}
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-[11px] font-bold text-slate-800 border border-slate-200 hover:bg-slate-50 min-h-[44px]"
+                >
+                  <Phone className="w-3.5 h-3.5 text-blue-800" />
+                  <span>Call: {primaryPhone}</span>
+                </a>
+                <a
+                  href="tel:8726343417"
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-[11px] font-bold text-amber-900 bg-amber-50 border border-amber-200 hover:bg-amber-100 min-h-[44px]"
+                >
+                  <Phone className="w-3.5 h-3.5 text-amber-700" />
+                  <span>Call: 8726343417</span>
+                </a>
+              </div>
 
               <div className="text-center pt-2">
                 <span className="text-[11px] text-slate-400">

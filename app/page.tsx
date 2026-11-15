@@ -144,13 +144,20 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <div className="pt-2 sm:pt-4 flex items-center gap-3">
+              <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-center gap-3">
                 <a
                   href={`tel:${settings?.primaryPhone || '9450067223'}`}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-white/25 backdrop-blur-md transition-colors shadow-md text-center min-h-[44px]"
                 >
                   <PhoneCall className="w-4 h-4 text-amber-300" />
-                  <span>Helpline: +91 {settings?.primaryPhone || '9450067223'}</span>
+                  <span>Main Desk: +91 {settings?.primaryPhone || '9450067223'}</span>
+                </a>
+                <a
+                  href="tel:8726343417"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider hover:bg-amber-300 transition-colors shadow-lg text-center min-h-[44px]"
+                >
+                  <PhoneCall className="w-4 h-4 text-slate-950" />
+                  <span>Counseling: +91 8726343417</span>
                 </a>
               </div>
             </div>

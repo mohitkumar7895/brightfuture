@@ -264,6 +264,36 @@ export default function AdminResultsPage() {
                     placeholder="e.g. UP Police Constable"
                     className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
+                  <div className="flex flex-wrap gap-1 mt-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setExamName('UP Police Constable 2024-25')}
+                      className="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-[10px]"
+                    >
+                      UP Police
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setExamName('UP Sub-Inspector (SI)')}
+                      className="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-[10px]"
+                    >
+                      UP SI
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setExamName('SSC CGL')}
+                      className="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-[10px]"
+                    >
+                      SSC CGL
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setExamName('Railway NTPC')}
+                      className="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-[10px]"
+                    >
+                      Railway
+                    </button>
+                  </div>
                 </div>
 
                 <div>
@@ -273,7 +303,7 @@ export default function AdminResultsPage() {
                     required
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    placeholder="2024"
+                    placeholder="2025"
                     className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                   />
                 </div>
@@ -285,7 +315,7 @@ export default function AdminResultsPage() {
                   type="text"
                   value={rank}
                   onChange={(e) => setRank(e.target.value)}
-                  placeholder="e.g. Inspector of Central Excise / Selected"
+                  placeholder="e.g. Selected Constable (Score 224/300) / AIR 412"
                   className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
                 />
               </div>
@@ -293,7 +323,7 @@ export default function AdminResultsPage() {
               <div>
                 <label className="block font-bold text-slate-700 mb-1">Student Quote / Testimonial</label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="e.g. Credited regular mock test series and speed mathematics at Bright Future..."
@@ -302,21 +332,53 @@ export default function AdminResultsPage() {
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Student Photo</label>
+                <label className="block font-bold text-slate-700 mb-1">Student Selection Photo *</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="text"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
+                    placeholder="/uploads/topper_photo.jpg"
                     className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl"
                   />
-                  <label className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl cursor-pointer flex items-center gap-1.5">
+                  <label className="px-4 py-2 bg-blue-800 hover:bg-blue-900 text-white font-bold rounded-xl cursor-pointer flex items-center gap-1.5 shadow-sm">
                     <Upload className="w-3.5 h-3.5" />
-                    <span>Upload</span>
+                    <span>Upload Photo</span>
                     <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
                   </label>
                 </div>
               </div>
+
+              {/* Live Student Photo Preview Box */}
+              {photo && (
+                <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 p-3 flex items-center gap-4">
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-slate-900 border border-slate-300 shrink-0 shadow-sm">
+                    <Image
+                      src={photo}
+                      alt={studentName || 'Selected student photo'}
+                      fill
+                      className="object-cover"
+                      unoptimized={photo.startsWith('data:') || photo.startsWith('http')}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
+                      Topper Photo Attached
+                    </span>
+                    <p className="text-xs font-bold text-slate-900 truncate">
+                      {studentName || 'New Student'}
+                    </p>
+                    <p className="text-[11px] text-slate-500 truncate">{rank || examName}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setPhoto('/images/student-toppers.jpg')}
+                    className="text-[11px] font-bold text-rose-600 hover:text-rose-800 px-2 py-1 rounded bg-rose-50"
+                  >
+                    Reset
+                  </button>
+                </div>
+              )}
 
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
                 <button

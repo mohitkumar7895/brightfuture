@@ -153,13 +153,22 @@ export default async function CoursesPage({
                           <Clock className="w-3 h-3 text-blue-700" />
                           {course.duration}
                         </span>
-                        {course.batchInfo && (
-                          <span className="inline-flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-md font-medium text-blue-800">
-                            <Users className="w-3 h-3 text-blue-700" />
-                            Regular Batches
-                          </span>
-                        )}
+                        <span className="inline-flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded-md font-bold text-emerald-800 border border-emerald-200">
+                          <Users className="w-3 h-3 text-emerald-700" />
+                          New Batch Open
+                        </span>
                       </div>
+
+                      {/* Dynamic Batch Date & Timings */}
+                      {course.batchInfo && (
+                        <div className="mt-2.5 p-2 bg-gradient-to-r from-blue-50/80 to-indigo-50/60 rounded-xl border border-blue-100 flex items-start gap-1.5 text-[11px]">
+                          <Clock className="w-3.5 h-3.5 text-blue-700 shrink-0 mt-0.5" />
+                          <div className="min-w-0">
+                            <span className="font-bold text-blue-900 block leading-tight">Batch Timing:</span>
+                            <span className="text-slate-700 font-medium line-clamp-1 leading-tight">{course.batchInfo}</span>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 

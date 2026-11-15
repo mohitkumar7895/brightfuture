@@ -337,7 +337,32 @@ export const db = {
         d.keywords || null,
       ];
       const res = await execute(sql, params);
-      return this.findUnique({ where: { id: res.insertId } });
+      const insertedId = res.insertId || Date.now();
+      const newCourse = {
+        id: insertedId,
+        title: d.title,
+        slug: d.slug,
+        categoryId: d.categoryId || null,
+        shortDescription: d.shortDescription || null,
+        description: d.description,
+        eligibility: d.eligibility || null,
+        duration: d.duration,
+        subjects: d.subjects || null,
+        fee: d.fee,
+        discountFee: d.discountFee || null,
+        batchInfo: d.batchInfo || null,
+        image: d.image || null,
+        isFeatured: d.isFeatured ? 1 : 0,
+        isPublished: d.isPublished !== false ? 1 : 0,
+        metaTitle: d.metaTitle || null,
+        metaDescription: d.metaDescription || null,
+        keywords: d.keywords || null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      fallbackStore.courses.unshift(newCourse as any);
+      const found = await this.findUnique({ where: { id: insertedId } });
+      return found || newCourse;
     },
 
     async update(data: any) {
@@ -360,11 +385,18 @@ export const db = {
 
       const sql = `UPDATE courses SET ${updates.join(', ')} WHERE id = ?`;
       await execute(sql, params);
+
+      const idx = fallbackStore.courses.findIndex((c: any) => c.id === Number(id));
+      if (idx !== -1) {
+        fallbackStore.courses[idx] = { ...fallbackStore.courses[idx], ...d };
+      }
+
       return this.findUnique({ where: { id } });
     },
 
     async delete(data: any) {
       const id = data.where?.id || data.id || data;
+      fallbackStore.courses = fallbackStore.courses.filter((c: any) => c.id !== Number(id));
       return execute(`DELETE FROM courses WHERE id = ?`, [id]);
     },
 
@@ -635,7 +667,22 @@ export const db = {
         d.isFeatured !== false ? 1 : 0,
       ];
       const res = await execute(sql, params);
-      return this.findUnique({ where: { id: res.insertId } });
+      const insertedId = res.insertId || Date.now();
+      const newResult = {
+        id: insertedId,
+        studentName: d.studentName,
+        examName: d.examName,
+        rank: d.rank || null,
+        year: d.year,
+        photo: d.photo || null,
+        description: d.description || null,
+        isFeatured: d.isFeatured !== false ? 1 : 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      fallbackStore.results.unshift(newResult as any);
+      const found = await this.findUnique({ where: { id: insertedId } });
+      return found || newResult;
     },
 
     async update(data: any) {
@@ -657,11 +704,18 @@ export const db = {
       params.push(id);
 
       await execute(`UPDATE results SET ${updates.join(', ')} WHERE id = ?`, params);
+
+      const idx = fallbackStore.results.findIndex((r: any) => r.id === Number(id));
+      if (idx !== -1) {
+        fallbackStore.results[idx] = { ...fallbackStore.results[idx], ...d };
+      }
+
       return this.findUnique({ where: { id } });
     },
 
     async delete(data: any) {
       const id = data.where?.id || data.id;
+      fallbackStore.results = fallbackStore.results.filter((r: any) => r.id !== Number(id));
       return execute(`DELETE FROM results WHERE id = ?`, [id]);
     },
 
@@ -832,7 +886,22 @@ export const db = {
         d.isPublished !== false ? 1 : 0,
       ];
       const res = await execute(sql, params);
-      return this.findUnique({ where: { id: res.insertId } });
+      const insertedId = res.insertId || Date.now();
+      const newItem = {
+        id: insertedId,
+        title: d.title || null,
+        caption: d.caption || null,
+        type: d.type || 'IMAGE',
+        url: d.url,
+        thumbnailUrl: d.thumbnailUrl || null,
+        categoryId: d.categoryId || null,
+        isPublished: d.isPublished !== false ? 1 : 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      fallbackStore.gallery.unshift(newItem as any);
+      const found = await this.findUnique({ where: { id: insertedId } });
+      return found || newItem;
     },
 
     async update(data: any) {
@@ -854,11 +923,18 @@ export const db = {
       params.push(id);
 
       await execute(`UPDATE gallery_items SET ${updates.join(', ')} WHERE id = ?`, params);
+
+      const idx = fallbackStore.gallery.findIndex((g: any) => g.id === Number(id));
+      if (idx !== -1) {
+        fallbackStore.gallery[idx] = { ...fallbackStore.gallery[idx], ...d };
+      }
+
       return this.findUnique({ where: { id } });
     },
 
     async delete(data: any) {
       const id = data.where?.id || data.id;
+      fallbackStore.gallery = fallbackStore.gallery.filter((g: any) => g.id !== Number(id));
       return execute(`DELETE FROM gallery_items WHERE id = ?`, [id]);
     },
 
@@ -1014,8 +1090,11 @@ export const db = {
         `INSERT INTO website_settings (${keys.join(', ')}, updatedAt) VALUES (${placeholders}, NOW(3))`,
         values
       );
+      if (fallbackStore.settings) {
+        fallbackStore.settings = { ...fallbackStore.settings, ...d, id: res.insertId || 1 };
+      }
       const row = await queryOne<any>(`SELECT * FROM website_settings WHERE id = ?`, [res.insertId]);
-      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : null;
+      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : (fallbackStore.settings || null);
     },
 
     async update(data: any) {
@@ -1037,8 +1116,11 @@ export const db = {
       params.push(id);
 
       await execute(`UPDATE website_settings SET ${updates.join(', ')} WHERE id = ?`, params);
+      if (fallbackStore.settings) {
+        fallbackStore.settings = { ...fallbackStore.settings, ...d };
+      }
       const row = await queryOne<any>(`SELECT * FROM website_settings WHERE id = ?`, [id]);
-      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : null;
+      return row ? normalizeBooleans(row, ['isAnnouncementBarActive']) : (fallbackStore.settings || null);
     },
   },
 

@@ -104,7 +104,12 @@ export default function BranchesMapSection({
                 </div>
                 <div className="flex items-center gap-2 text-slate-700 font-medium">
                   <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                  <span>Contact: {alternatePhones}</span>
+                  <a href="tel:8726343417" className="hover:underline text-blue-900 font-bold">
+                    Helpline: +91 8726343417
+                  </a>
+                </div>
+                <div className="flex items-center gap-2 text-slate-500 text-[11px]">
+                  <span>Alternate: {alternatePhones}</span>
                 </div>
               </div>
             </div>

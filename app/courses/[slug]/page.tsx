@@ -267,6 +267,12 @@ export default async function CourseDetailPage({
               </div>
 
               <div className="space-y-3 pt-2 text-xs border-t border-slate-100">
+                {course.batchInfo && (
+                  <div className="flex items-start justify-between text-slate-600 gap-2 bg-blue-50/70 p-2.5 rounded-xl border border-blue-100">
+                    <span className="font-bold text-blue-900 shrink-0">Batch Schedule:</span>
+                    <span className="font-semibold text-slate-800 text-right">{course.batchInfo}</span>
+                  </div>
+                )}
                 <div className="flex items-center justify-between text-slate-600">
                   <span>Batch Duration:</span>
                   <span className="font-bold text-slate-900">{course.duration}</span>
@@ -281,13 +287,22 @@ export default async function CourseDetailPage({
                 </div>
               </div>
 
-              <a
-                href={`tel:${settings?.primaryPhone || '9450067223'}`}
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold text-slate-900 bg-slate-100 hover:bg-slate-200 transition-colors uppercase tracking-wider min-h-[44px]"
-              >
-                <PhoneCall className="w-4 h-4 text-blue-800" />
-                <span>Call Helpline: {settings?.primaryPhone || '9450067223'}</span>
-              </a>
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <a
+                  href={`tel:${settings?.primaryPhone || '9450067223'}`}
+                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-[11px] font-bold text-slate-900 bg-slate-100 hover:bg-slate-200 transition-colors uppercase tracking-wider min-h-[44px]"
+                >
+                  <PhoneCall className="w-3.5 h-3.5 text-blue-800" />
+                  <span>9450067223</span>
+                </a>
+                <a
+                  href="tel:8726343417"
+                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-[11px] font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 transition-colors uppercase tracking-wider min-h-[44px]"
+                >
+                  <PhoneCall className="w-3.5 h-3.5 text-amber-700" />
+                  <span>8726343417</span>
+                </a>
+              </div>
             </div>
 
             {/* Quick Enquiry Form for this Course */}

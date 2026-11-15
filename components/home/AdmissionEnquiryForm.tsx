@@ -87,7 +87,7 @@ export default function AdmissionEnquiryForm({
       toast.success('Admission enquiry submitted successfully! Our counseling team will contact you shortly.');
       reset();
     } catch (error: any) {
-      toast.error(error.message || 'Something went wrong. Please call 9450067223 directly.');
+      toast.error(error.message || 'Something went wrong. Please call 8726343417 or 9450067223 directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -139,16 +139,23 @@ export default function AdmissionEnquiryForm({
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <a
-            href="tel:9450067223"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-colors uppercase tracking-wider"
+            href="tel:8726343417"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow-md transition-colors uppercase tracking-wider"
           >
             <PhoneCall className="w-4 h-4" />
-            <span>Call Admission Desk: 9450067223</span>
+            <span>Call Helpline: 8726343417</span>
+          </a>
+          <a
+            href="tel:9450067223"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-colors uppercase tracking-wider"
+          >
+            <PhoneCall className="w-4 h-4" />
+            <span>Desk: 9450067223</span>
           </a>
           <button
             type="button"
             onClick={() => setSubmittedData(null)}
-            className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors uppercase tracking-wider"
+            className="w-full sm:w-auto px-5 py-3 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors uppercase tracking-wider"
           >
             Submit Another Form
           </button>
@@ -373,16 +380,23 @@ export default function AdmissionEnquiryForm({
         </button>
       </div>
 
-      <div className="pt-1 text-center">
-        <p className="text-xs text-slate-500 inline-flex items-center gap-1.5 justify-center flex-wrap">
-          <span>🔒 Your personal details are completely confidential. You can also call directly at</span>
+      <div className="pt-2 text-center bg-blue-50/70 p-3 rounded-2xl border border-blue-100">
+        <p className="text-xs text-slate-600 flex items-center justify-center gap-1.5 flex-wrap font-medium">
+          <Phone className="w-3.5 h-3.5 text-blue-700 shrink-0" />
+          <span>Need Instant Admission Counseling? Call:</span>
+          <a
+            href="tel:8726343417"
+            className="font-black text-blue-900 bg-white px-2 py-0.5 rounded-md border border-blue-200 hover:text-blue-700 hover:underline inline-flex items-center gap-1"
+          >
+            <span>+91 8726343417</span>
+          </a>
+          <span>or</span>
           <a
             href="tel:9450067223"
-            className="font-bold text-blue-700 hover:underline hover:text-blue-900"
+            className="font-bold text-slate-800 hover:underline hover:text-blue-900"
           >
             9450067223
           </a>
-          <span>.</span>
         </p>
       </div>
     </form>

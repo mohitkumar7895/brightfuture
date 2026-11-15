@@ -111,7 +111,13 @@ export default async function ContactPage() {
               <div className="pt-2 border-t border-slate-100 space-y-2 text-xs text-slate-700">
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-blue-700 shrink-0" />
-                  <span className="font-semibold text-slate-900">Contact: {alternatePhones}</span>
+                  <a href="tel:8726343417" className="font-semibold text-slate-900 hover:underline">
+                    Counselor Helpline: +91 8726343417
+                  </a>
+                </div>
+                <div className="flex items-center gap-2 text-slate-500">
+                  <Phone className="w-4 h-4 text-slate-400 shrink-0" />
+                  <span>Other: {alternatePhones}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-slate-400 shrink-0" />
@@ -140,6 +146,61 @@ export default async function ContactPage() {
                 Open WhatsApp
               </a>
             </div>
+
+            {/* Social Media Connect Box */}
+            {(settings?.facebookUrl || settings?.instagramUrl || settings?.youtubeUrl || settings?.telegramUrl) && (
+              <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+                  Official Social Channels
+                </span>
+                <div className="grid grid-cols-2 gap-2 text-xs font-bold">
+                  {settings?.facebookUrl && (
+                    <a
+                      href={settings.facebookUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 p-2.5 rounded-xl bg-blue-50 text-blue-800 hover:bg-blue-100 transition-colors border border-blue-200"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-blue-600" />
+                      <span>Facebook</span>
+                    </a>
+                  )}
+                  {settings?.instagramUrl && (
+                    <a
+                      href={settings.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 p-2.5 rounded-xl bg-pink-50 text-pink-700 hover:bg-pink-100 transition-colors border border-pink-200"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-pink-600" />
+                      <span>Instagram</span>
+                    </a>
+                  )}
+                  {settings?.youtubeUrl && (
+                    <a
+                      href={settings.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 p-2.5 rounded-xl bg-red-50 text-red-700 hover:bg-red-100 transition-colors border border-red-200"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-red-600" />
+                      <span>YouTube</span>
+                    </a>
+                  )}
+                  {settings?.telegramUrl && (
+                    <a
+                      href={settings.telegramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 p-2.5 rounded-xl bg-sky-50 text-sky-700 hover:bg-sky-100 transition-colors border border-sky-200"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-sky-600" />
+                      <span>Telegram</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
 
           </div>
 
