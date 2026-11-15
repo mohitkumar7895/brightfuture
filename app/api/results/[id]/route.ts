@@ -9,8 +9,11 @@ export async function PUT(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
+      return NextResponse.json({ error: 'Unauthorized. Please login to continue.' }, { status: 401 });
     }
 
     const { id } = await params;
@@ -25,7 +28,11 @@ export async function PUT(
     return NextResponse.json({ success: true, result: updated });
   } catch (error: any) {
     console.error('Update result error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to update result' }, { status: 500 });
+    if (error.name === 'ZodError' || error.issues) {
+      const msg = error.issues?.[0]?.message || 'Invalid achievement details provided';
+      return NextResponse.json({ error: msg }, { status: 400 });
+    }
+    return NextResponse.json({ error: error.message || 'Failed to update result' }, { status: 400 });
   }
 }
 

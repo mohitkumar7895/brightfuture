@@ -16,20 +16,20 @@ export const courseSchema = z.object({
   title: z.string().min(3, 'Course title is required'),
   slug: z.string().min(3, 'Slug is required'),
   categoryId: z.coerce.number().optional().nullable(),
-  shortDescription: z.string().optional(),
+  shortDescription: z.string().optional().nullable(),
   description: z.string().min(10, 'Description must be at least 10 characters'),
-  eligibility: z.string().optional(),
+  eligibility: z.string().optional().nullable(),
   duration: z.string().min(1, 'Duration is required'),
-  subjects: z.string().optional(),
+  subjects: z.string().optional().nullable(),
   fee: z.coerce.number().min(0, 'Fee cannot be negative'),
   discountFee: z.coerce.number().optional().nullable(),
-  batchInfo: z.string().optional(),
-  image: z.string().optional(),
+  batchInfo: z.string().optional().nullable(),
+  image: z.string().optional().nullable(),
   isFeatured: z.boolean().default(false),
   isPublished: z.boolean().default(true),
-  metaTitle: z.string().optional(),
-  metaDescription: z.string().optional(),
-  keywords: z.string().optional(),
+  metaTitle: z.string().optional().nullable(),
+  metaDescription: z.string().optional().nullable(),
+  keywords: z.string().optional().nullable(),
 });
 
 export const facultySchema = z.object({
@@ -38,8 +38,8 @@ export const facultySchema = z.object({
   qualification: z.string().min(2, 'Qualification is required'),
   experience: z.string().min(1, 'Experience is required'),
   subjects: z.string().min(2, 'Subjects are required'),
-  bio: z.string().optional(),
-  photo: z.string().optional(),
+  bio: z.string().optional().nullable(),
+  photo: z.string().optional().nullable(),
   order: z.coerce.number().default(0),
   isPublished: z.boolean().default(true),
 });
@@ -47,10 +47,10 @@ export const facultySchema = z.object({
 export const resultSchema = z.object({
   studentName: z.string().min(2, 'Student name is required'),
   examName: z.string().min(2, 'Exam name is required'),
-  rank: z.string().optional(),
+  rank: z.string().optional().nullable(),
   year: z.coerce.number().min(2000).max(2035),
-  photo: z.string().optional(),
-  description: z.string().optional(),
+  photo: z.string().optional().nullable(),
+  description: z.string().optional().nullable(),
   isFeatured: z.boolean().default(true),
 });
 
@@ -60,7 +60,7 @@ export const noticeSchema = z.object({
   category: z.string().default('GENERAL'),
   isPinned: z.boolean().default(false),
   isPublished: z.boolean().default(true),
-  publishDate: z.string().optional(),
+  publishDate: z.string().optional().nullable(),
 });
 
 export const faqSchema = z.object({
@@ -73,22 +73,22 @@ export const faqSchema = z.object({
 
 export const websiteSettingSchema = z.object({
   instituteName: z.string().min(2),
-  tagline: z.string().optional(),
+  tagline: z.string().optional().nullable(),
   headOfficeAddress: z.string().min(5),
   marketBranchAddress: z.string().min(5),
   pinCode: z.string().min(6),
   primaryPhone: z.string().min(10),
-  alternatePhones: z.string().optional(),
+  alternatePhones: z.string().optional().nullable(),
   email: z.string().email(),
   whatsappNumber: z.string().min(10),
-  openingHours: z.string().optional(),
-  mapEmbedUrl: z.string().optional(),
-  facebookUrl: z.string().optional(),
-  youtubeUrl: z.string().optional(),
-  telegramUrl: z.string().optional(),
-  instagramUrl: z.string().optional(),
-  footerText: z.string().optional(),
-  announcementBarText: z.string().optional(),
+  openingHours: z.string().optional().nullable(),
+  mapEmbedUrl: z.string().optional().nullable(),
+  facebookUrl: z.string().optional().nullable(),
+  youtubeUrl: z.string().optional().nullable(),
+  telegramUrl: z.string().optional().nullable(),
+  instagramUrl: z.string().optional().nullable(),
+  footerText: z.string().optional().nullable(),
+  announcementBarText: z.string().optional().nullable(),
   isAnnouncementBarActive: z.boolean().default(true),
 });
 

@@ -59,7 +59,7 @@ export async function PUT(
       data: {
         title: validated.title,
         slug: validated.slug,
-        categoryId: validated.categoryId || null,
+        categoryId: validated.categoryId && Number(validated.categoryId) > 0 ? Number(validated.categoryId) : null,
         shortDescription: validated.shortDescription || null,
         description: validated.description,
         eligibility: validated.eligibility || null,
@@ -80,7 +80,20 @@ export async function PUT(
     return NextResponse.json({ success: true, course: updated });
   } catch (error: any) {
     console.error('Update course error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to update course' }, { status: 500 });
+    if (error.name === 'ZodError' || error.issues) {
+      const msg = error.issues?.[0]?.message || 'Invalid course details provided';
+      return NextResponse.json({ error: msg }, { status: 400 });
+    }
+    if (error.code === 'ER_DUP_ENTRY' || error.errno === 1062 || error.code === 'P2002') {
+      return NextResponse.json(
+        { error: 'A course with this URL slug or title already exists. Please choose a different title or slug.' },
+        { status: 400 }
+      );
+    }
+    if (error.code === 'ER_NO_REFERENCED_ROW_2' || error.errno === 1452) {
+      return NextResponse.json({ error: 'Selected course category does not exist.' }, { status: 400 });
+    }
+    return NextResponse.json({ error: error.message || 'Failed to update course' }, { status: 400 });
   }
 }
 

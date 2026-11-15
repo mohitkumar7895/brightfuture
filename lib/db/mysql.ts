@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise';
 import { initialFallbackData } from './fallbackData';
+import { slugify } from '../utils';
 
 // Resilient in-memory store for fallback mode (e.g. serverless Vercel without local MySQL)
 const fallbackStore = {
@@ -309,6 +310,18 @@ export const db = {
 
     async create(data: any) {
       const d = data.data || data;
+      const baseSlug = (d.slug || slugify(d.title || 'course')).trim();
+      let uniqueSlug = baseSlug;
+      let counter = 1;
+      while (true) {
+        const existing = await queryOne<any>(`SELECT id FROM courses WHERE slug = ?`, [uniqueSlug]);
+        if (!existing) break;
+        counter++;
+        uniqueSlug = `${baseSlug}-${counter}`;
+      }
+
+      const catId = d.categoryId && Number(d.categoryId) > 0 ? Number(d.categoryId) : null;
+
       const sql = `
         INSERT INTO courses (
           title, slug, categoryId, shortDescription, description,
@@ -319,15 +332,15 @@ export const db = {
       `;
       const params = [
         d.title,
-        d.slug,
-        d.categoryId || null,
+        uniqueSlug,
+        catId,
         d.shortDescription || null,
         d.description,
         d.eligibility || null,
         d.duration,
         d.subjects || null,
-        d.fee,
-        d.discountFee || null,
+        Number(d.fee) || 0,
+        d.discountFee ? Number(d.discountFee) : null,
         d.batchInfo || null,
         d.image || null,
         d.isFeatured ? 1 : 0,
@@ -341,15 +354,15 @@ export const db = {
       const newCourse = {
         id: insertedId,
         title: d.title,
-        slug: d.slug,
-        categoryId: d.categoryId || null,
+        slug: uniqueSlug,
+        categoryId: catId,
         shortDescription: d.shortDescription || null,
         description: d.description,
         eligibility: d.eligibility || null,
         duration: d.duration,
         subjects: d.subjects || null,
-        fee: d.fee,
-        discountFee: d.discountFee || null,
+        fee: Number(d.fee) || 0,
+        discountFee: d.discountFee ? Number(d.discountFee) : null,
         batchInfo: d.batchInfo || null,
         image: d.image || null,
         isFeatured: d.isFeatured ? 1 : 0,
@@ -376,6 +389,8 @@ export const db = {
         updates.push(`${k} = ?`);
         if (k === 'isFeatured' || k === 'isPublished') {
           params.push(v ? 1 : 0);
+        } else if (k === 'categoryId') {
+          params.push(v && Number(v) > 0 ? Number(v) : null);
         } else {
           params.push(v === undefined ? null : v);
         }

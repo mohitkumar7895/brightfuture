@@ -77,10 +77,10 @@ export default function AdminCoursesPage() {
     setSlug('');
     setCategoryId(categories.length > 0 ? String(categories[0].id) : '1');
     setShortDescription('');
-    setDescription('');
-    setEligibility('');
+    setDescription('Comprehensive exam-oriented batch with daily lectures, weekly mock tests, and printed study material.');
+    setEligibility('12th Pass (Intermediate) / Graduate depending on examination requirements');
     setDuration('6 Months');
-    setSubjects('');
+    setSubjects('General Knowledge, Maths, Reasoning, General Hindi');
     setFee('7500');
     setDiscountFee('5999');
     setBatchInfo('Morning: 8:00 AM - 11:30 AM | Evening: 3:30 PM - 6:30 PM');
@@ -149,23 +149,40 @@ export default function AdminCoursesPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const cleanTitle = (title || '').trim();
+    if (cleanTitle.length < 3) {
+      toast.error('Course title must be at least 3 characters');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const cleanDescription = (description || '').trim();
+    if (cleanDescription.length < 10) {
+      toast.error('Course description must be at least 10 characters');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const cleanSlug = (slug || slugify(cleanTitle)).trim();
+
     const payload = {
-      title,
-      slug: slug || slugify(title),
-      categoryId: categoryId ? Number(categoryId) : null,
-      shortDescription,
-      description,
-      eligibility,
-      duration,
-      subjects,
-      fee: Number(fee),
-      discountFee: discountFee ? Number(discountFee) : null,
-      batchInfo,
-      image,
-      isFeatured,
-      isPublished,
-      metaTitle,
-      metaDescription,
+      title: cleanTitle,
+      slug: cleanSlug,
+      categoryId: categoryId && Number(categoryId) > 0 ? Number(categoryId) : null,
+      shortDescription: shortDescription?.trim() || null,
+      description: cleanDescription,
+      eligibility: eligibility?.trim() || null,
+      duration: duration.trim() || '6 Months',
+      subjects: subjects?.trim() || null,
+      fee: Number(fee) || 0,
+      discountFee: discountFee && Number(discountFee) > 0 ? Number(discountFee) : null,
+      batchInfo: batchInfo?.trim() || null,
+      image: image || '/images/hero-classroom.jpg',
+      isFeatured: Boolean(isFeatured),
+      isPublished: Boolean(isPublished),
+      metaTitle: metaTitle?.trim() || null,
+      metaDescription: metaDescription?.trim() || null,
+      keywords: null,
     };
 
     try {
@@ -180,11 +197,11 @@ export default function AdminCoursesPage() {
 
       const data = await res.json();
       if (res.ok) {
-        toast.success(editingCourse ? 'Course updated' : 'Course created successfully');
+        toast.success(editingCourse ? 'Course updated successfully' : 'Course created successfully');
         setModalOpen(false);
         fetchCourses();
       } else {
-        toast.error(data.error || 'Operation failed');
+        toast.error(data.error || 'Failed to save course');
       }
     } catch (err: any) {
       toast.error(err.message || 'Error saving course');
@@ -356,8 +373,8 @@ export default function AdminCoursesPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs font-medium">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-2">
                   <label className="block font-bold text-slate-700 mb-1">
                     Course Title *
                   </label>
@@ -373,17 +390,35 @@ export default function AdminCoursesPage() {
 
                 <div>
                   <label className="block font-bold text-slate-700 mb-1">
-                    URL Slug *
+                    Course Category *
                   </label>
-                  <input
-                    type="text"
-                    required
-                    value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
-                    placeholder="up-police-constable-target-batch"
-                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono"
-                  />
+                  <select
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                    className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  >
+                    <option value="">-- General Category --</option>
+                    {categories.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">
+                  URL Slug *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={slug}
+                  onChange={(e) => setSlug(e.target.value)}
+                  placeholder="up-police-constable-target-batch"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono"
+                />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
