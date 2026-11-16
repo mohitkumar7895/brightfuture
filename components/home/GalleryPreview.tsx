@@ -22,6 +22,33 @@ interface GalleryPreviewProps {
 export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryItemPreview | null>(null);
 
+  // Lock background scroll when image modal is open
+  React.useEffect(() => {
+    if (selectedImage !== null) {
+      const scrollY = window.scrollY;
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalDocOverflow = document.documentElement.style.overflow;
+      const originalPosition = document.body.style.position;
+      const originalTop = document.body.style.top;
+      const originalWidth = document.body.style.width;
+
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.position = originalPosition;
+        document.body.style.top = originalTop;
+        document.body.style.width = originalWidth;
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalDocOverflow;
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [selectedImage]);
+
   if (items.length === 0) return null;
 
   return (
@@ -91,28 +118,9 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
                   className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out select-none"
                 />
 
-                {/* Category Pill */}
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white uppercase tracking-wider bg-black/60 backdrop-blur-md border border-white/20">
-                    {item.category?.name || 'Campus Moment'}
-                  </span>
-                </div>
-
                 {/* Zoom icon */}
-                <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-white/20">
+                <div className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-white/20">
                   <ZoomIn className="w-4 h-4 text-amber-300" />
-                </div>
-
-                {/* Caption text */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 bg-black/60 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 text-white space-y-0.5">
-                  <h3 className="text-xs sm:text-sm font-extrabold line-clamp-1 leading-snug drop-shadow-xs">
-                    {item.title}
-                  </h3>
-                  {item.caption && (
-                    <p className="text-[10px] sm:text-[11px] text-slate-300 line-clamp-1">
-                      {item.caption}
-                    </p>
-                  )}
                 </div>
               </div>
             </div>
@@ -121,52 +129,54 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
 
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal - Compact Modal with 100% Full Uncropped Image */}
       {selectedImage && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200 select-none touch-none overscroll-contain cursor-pointer"
           onClick={() => setSelectedImage(null)}
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
         >
+          {/* Modal Container - Compact & Framed (Chota Sa Modal) */}
           <div
-            className="relative max-w-4xl w-full max-h-[90dvh] bg-slate-900 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col"
+            className="relative w-full max-w-3xl lg:max-w-4xl bg-slate-950/85 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/20 p-2 sm:p-3 cursor-default"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Top Close Button inside the modal frame */}
             <button
+              type="button"
               onClick={() => setSelectedImage(null)}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2 sm:p-2.5 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors shadow-lg cursor-pointer"
+              className="absolute top-3.5 right-3.5 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/70 hover:bg-rose-600 text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-white/20 shadow-lg hover:scale-110"
               aria-label="Close image modal"
             >
-              <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              <X className="w-5 h-5" />
             </button>
 
-            <div className="relative aspect-[16/10] w-full bg-slate-950 shrink-0 min-h-[260px] max-h-[66dvh] flex items-center justify-center">
+            {/* Image Stage - Full uncropped photo */}
+            <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full max-h-[78vh] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950">
+              {/* Soft ambient background */}
               <Image
                 src={selectedImage.url}
-                alt={selectedImage.title}
+                alt=""
+                fill
+                unoptimized={true}
+                aria-hidden="true"
+                className="object-cover blur-xl scale-110 opacity-30 pointer-events-none"
+              />
+
+              {/* 100% Full Uncropped Image */}
+              <Image
+                src={selectedImage.url}
+                alt={selectedImage.title || 'Campus Image'}
                 fill
                 priority
                 unoptimized={true}
                 quality={100}
-                sizes="100vw"
-                className="object-contain"
+                className="object-contain p-1 sm:p-2 select-none drop-shadow-2xl"
+                sizes="(max-width: 1024px) 95vw, 1000px"
               />
-            </div>
-
-            <div className="p-4 sm:p-6 bg-slate-900 text-white space-y-1.5 overflow-y-auto">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
-                  {selectedImage.category?.name || 'Campus Infrastructure'}
-                </span>
-                <span className="text-xs text-slate-400">Bright Future Institute • Lalitpur</span>
-              </div>
-              <h3 className="text-lg font-bold">{selectedImage.title}</h3>
-              {selectedImage.caption && (
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  {selectedImage.caption}
-                </p>
-              )}
             </div>
           </div>
         </div>

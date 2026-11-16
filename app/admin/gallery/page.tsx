@@ -67,6 +67,33 @@ export default function AdminGalleryPage() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [previewPhoto, setPreviewPhoto] = useState<GalleryItem | null>(null);
 
+  // Lock background scroll when preview modal is open
+  useEffect(() => {
+    if (previewPhoto !== null) {
+      const scrollY = window.scrollY;
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalDocOverflow = document.documentElement.style.overflow;
+      const originalPosition = document.body.style.position;
+      const originalTop = document.body.style.top;
+      const originalWidth = document.body.style.width;
+
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.position = originalPosition;
+        document.body.style.top = originalTop;
+        document.body.style.width = originalWidth;
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalDocOverflow;
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [previewPhoto]);
+
   useEffect(() => {
     fetchGallery();
   }, []);
@@ -609,8 +636,11 @@ export default function AdminGalleryPage() {
                       : 'border-slate-200 hover:border-slate-300 shadow-xs hover:shadow-md'
                   }`}
                 >
-                  {/* Photo Container */}
-                  <div className="relative aspect-[4/3] bg-slate-950 overflow-hidden">
+                  {/* Photo Container - Click to open in modal */}
+                  <div
+                    onClick={() => setPreviewPhoto(item)}
+                    className="relative aspect-[4/3] bg-slate-950 overflow-hidden cursor-pointer"
+                  >
                     <Image
                       src={item.url}
                       alt={item.title || 'Campus photo'}
@@ -623,7 +653,10 @@ export default function AdminGalleryPage() {
                     {/* Selection Checkbox */}
                     <button
                       type="button"
-                      onClick={() => toggleSelectOne(item.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSelectOne(item.id);
+                      }}
                       className="absolute top-2 left-2 p-1 rounded-lg bg-black/60 hover:bg-black/80 text-white transition-colors z-10"
                     >
                       {isSelected ? (
@@ -634,7 +667,10 @@ export default function AdminGalleryPage() {
                     </button>
 
                     {/* Action Buttons Overlay */}
-                    <div className="absolute top-2 right-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                    <div 
+                      className="absolute top-2 right-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <button
                         type="button"
                         onClick={() => setPreviewPhoto(item)}
@@ -680,48 +716,54 @@ export default function AdminGalleryPage() {
         )}
       </div>
 
-      {/* Lightbox Preview Modal */}
+      {/* Lightbox Preview Modal - Compact Modal with 100% Full Uncropped Image */}
       {previewPhoto && (
         <div
           role="dialog"
           aria-modal="true"
           onClick={() => setPreviewPhoto(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 cursor-pointer touch-none overscroll-contain animate-in fade-in duration-200"
         >
+          {/* Modal Container - Compact & Framed (Chota Sa Modal) */}
           <div
+            className="relative w-full max-w-3xl lg:max-w-4xl bg-slate-950/85 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/20 p-2 sm:p-3 cursor-default"
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full bg-slate-950 rounded-3xl overflow-hidden shadow-2xl border border-white/10 cursor-default"
           >
+            {/* Top Close Button inside the modal frame */}
             <button
               type="button"
               onClick={() => setPreviewPhoto(null)}
-              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 hover:bg-rose-600 text-white transition-colors"
+              className="absolute top-3.5 right-3.5 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/70 hover:bg-rose-600 text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-white/20 shadow-lg hover:scale-110"
+              aria-label="Close image modal"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="relative aspect-[16/10] w-full bg-slate-950 flex items-center justify-center">
+            {/* Image Stage - Full uncropped photo */}
+            <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full max-h-[78vh] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950">
+              {/* Soft ambient background */}
               <Image
                 src={previewPhoto.url}
-                alt={previewPhoto.title}
+                alt=""
                 fill
                 unoptimized={true}
-                className="object-contain"
+                aria-hidden="true"
+                className="object-cover blur-xl scale-110 opacity-30 pointer-events-none"
               />
-            </div>
 
-            <div className="p-4 sm:p-6 bg-slate-900 text-white space-y-1">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-600 text-white inline-block mb-1">
-                {previewPhoto.category?.name || 'Campus Photo'}
-              </span>
-              <h3 className="text-base sm:text-lg font-bold">
-                {previewPhoto.title}
-              </h3>
-              {previewPhoto.caption && (
-                <p className="text-xs text-slate-300 font-normal">
-                  {previewPhoto.caption}
-                </p>
-              )}
+              {/* 100% Full Uncropped Image */}
+              <Image
+                src={previewPhoto.url}
+                alt={previewPhoto.title || 'Campus Photo'}
+                fill
+                priority
+                unoptimized={true}
+                quality={100}
+                className="object-contain p-1 sm:p-2 select-none drop-shadow-2xl"
+                sizes="(max-width: 1024px) 95vw, 1000px"
+              />
             </div>
           </div>
         </div>

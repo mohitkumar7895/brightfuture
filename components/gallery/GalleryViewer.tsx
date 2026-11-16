@@ -76,16 +76,31 @@ export default function GalleryViewer({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activePhotoIndex, handlePrev, handleNext]);
 
-  // Lock scroll when lightbox is open
+  // Lock background scroll when lightbox is open
   useEffect(() => {
     if (activePhotoIndex !== null) {
+      const scrollY = window.scrollY;
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalDocOverflow = document.documentElement.style.overflow;
+      const originalPosition = document.body.style.position;
+      const originalTop = document.body.style.top;
+      const originalWidth = document.body.style.width;
+
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.position = originalPosition;
+        document.body.style.top = originalTop;
+        document.body.style.width = originalWidth;
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalDocOverflow;
+        window.scrollTo(0, scrollY);
+      };
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [activePhotoIndex]);
 
   // Category counts
@@ -169,14 +184,14 @@ export default function GalleryViewer({
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7">
           {filteredItems.map((item, index) => (
             <div
               key={item.id}
               onClick={() => setActivePhotoIndex(index)}
-              className="group relative bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col"
+              className="group relative bg-slate-950 rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
             >
-              {/* Image Frame - 100% Full Uncropped HD View */}
+              {/* Image Frame - 100% Pure Full Uncropped HD Image */}
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-950 flex items-center justify-center">
                 {/* Ambient Blurred Background Fill */}
                 <Image
@@ -191,53 +206,17 @@ export default function GalleryViewer({
                 {/* 100% Full Photo - Crisp HD and Never Cropped */}
                 <Image
                   src={item.url}
-                  alt={item.title}
+                  alt={item.title || 'Campus photo'}
                   fill
                   unoptimized={true}
                   quality={100}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out select-none"
+                  className="object-contain p-1.5 sm:p-2 group-hover:scale-105 transition-transform duration-500 ease-out select-none"
                 />
 
-                {/* Top Badge (Category) */}
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-black/60 text-white backdrop-blur-md border border-white/20 shadow-md flex items-center gap-1.5">
-                    <Sparkles className="w-3 h-3 text-amber-300" />
-                    <span>{item.category?.name || 'Campus Moment'}</span>
-                  </span>
-                </div>
-
-                {/* Top Right Zoom Icon */}
-                <div className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-md border border-white/20">
+                {/* Subtle Hover Zoom Icon */}
+                <div className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-md border border-white/20">
                   <ZoomIn className="w-4 h-4 text-amber-300" />
-                </div>
-
-                {/* Location / Campus Stamp */}
-                <div className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1 text-[10px] font-semibold text-white/90 bg-black/60 px-2 py-0.5 rounded-md backdrop-blur-xs border border-white/10">
-                  <MapPin className="w-3 h-3 text-amber-400" />
-                  <span>Lalitpur Campus</span>
-                </div>
-              </div>
-
-              {/* Text Card Details */}
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-3 bg-white">
-                <div>
-                  <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-blue-900 transition-colors leading-snug line-clamp-2">
-                    {item.title}
-                  </h3>
-                  {item.caption && (
-                    <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed line-clamp-2">
-                      {item.caption}
-                    </p>
-                  )}
-                </div>
-
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <span className="text-blue-800 font-extrabold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    <span>Click to view in HD</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                  <span className="text-slate-400 font-medium">Bright Future Institute</span>
                 </div>
               </div>
             </div>
@@ -245,141 +224,54 @@ export default function GalleryViewer({
         </div>
       )}
 
-      {/* Interactive Lightbox Modal */}
+      {/* Interactive Lightbox Modal - Compact Modal with 100% Full Uncropped Image */}
       {activePhoto && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-3 sm:p-6 animate-in fade-in duration-200 select-none overflow-y-auto"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200 select-none touch-none overscroll-contain cursor-pointer"
           onClick={() => setActivePhotoIndex(null)}
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
         >
-          {/* Lightbox Topbar */}
-          <div 
-            className="flex items-center justify-between gap-4 text-white z-20 pb-3"
+          {/* Modal Container - Compact & Framed (Chota Sa Modal) */}
+          <div
+            className="relative w-full max-w-3xl lg:max-w-4xl bg-slate-950/85 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/20 p-2 sm:p-3 cursor-default"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-white/20 text-white backdrop-blur-md border border-white/20">
-                {activePhoto.category?.name || 'Photo Gallery'}
-              </span>
-              <span className="text-xs text-slate-300 font-medium hidden sm:inline">
-                Photo {activePhotoIndex! + 1} of {filteredItems.length}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <a
-                href={activePhoto.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white rounded-xl text-xs font-bold transition-colors border border-white/15"
-                title="Open 100% Full HD Original Image in new tab"
-              >
-                <ZoomIn className="w-4 h-4 text-amber-300" />
-                <span>Open Full HD</span>
-              </a>
-
-              <Link
-                href="/admission"
-                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-md"
-              >
-                <GraduationCap className="w-4 h-4" />
-                <span>Book Free Demo</span>
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setActivePhotoIndex(null)}
-                aria-label="Close Lightbox"
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Lightbox Center Image Stage - Generous Full View */}
-          <div 
-            className="relative flex-1 flex items-center justify-center w-full min-h-[280px] max-h-[78dvh] sm:max-h-[82dvh] my-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Prev Button */}
+            {/* Top Close Button inside the modal frame */}
             <button
               type="button"
-              onClick={handlePrev}
-              aria-label="Previous photo"
-              className="absolute left-1 sm:left-4 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-black/70 hover:bg-black/90 text-white flex items-center justify-center transition-all hover:scale-110 border border-white/20 shadow-2xl cursor-pointer"
+              onClick={() => setActivePhotoIndex(null)}
+              aria-label="Close Lightbox"
+              className="absolute top-3.5 right-3.5 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/70 hover:bg-rose-600 text-white flex items-center justify-center transition-all duration-200 cursor-pointer border border-white/20 shadow-lg hover:scale-110"
             >
-              <ChevronLeft className="w-5 h-5 sm:w-7 sm:h-7" />
+              <X className="w-5 h-5" />
             </button>
 
-            {/* Next Button */}
-            <button
-              type="button"
-              onClick={handleNext}
-              aria-label="Next photo"
-              className="absolute right-1 sm:right-4 z-20 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-black/70 hover:bg-black/90 text-white flex items-center justify-center transition-all hover:scale-110 border border-white/20 shadow-2xl cursor-pointer"
-            >
-              <ChevronRight className="w-5 h-5 sm:w-7 sm:h-7" />
-            </button>
+            {/* Image Stage - Full uncropped photo */}
+            <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full max-h-[78vh] flex items-center justify-center rounded-xl sm:rounded-2xl overflow-hidden bg-slate-950">
+              {/* Soft ambient background */}
+              <Image
+                src={activePhoto.url}
+                alt=""
+                fill
+                unoptimized={true}
+                aria-hidden="true"
+                className="object-cover blur-xl scale-110 opacity-30 pointer-events-none"
+              />
 
-            {/* Active Image - 100% Full Uncropped HD */}
-            <div className="relative w-full h-full max-w-6xl flex items-center justify-center p-1 sm:p-2">
-              <div className="relative w-full h-full min-h-[260px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src={activePhoto.url}
-                  alt={activePhoto.title}
-                  fill
-                  priority
-                  unoptimized={true}
-                  quality={100}
-                  className="object-contain select-none drop-shadow-2xl"
-                  sizes="100vw"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Lightbox Bottom Details Bar */}
-          <div 
-            className="bg-slate-900/90 border border-white/10 rounded-2xl p-3.5 sm:p-5 max-w-4xl mx-auto w-full text-white z-20 space-y-2 backdrop-blur-md shrink-0"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <h2 className="text-base sm:text-xl font-black text-white leading-tight">
-                {activePhoto.title}
-              </h2>
-              <div className="flex items-center gap-1.5 text-xs text-amber-300 font-bold shrink-0">
-                <MapPin className="w-4 h-4" />
-                <span>Station Road &amp; Ghantaghar, Lalitpur</span>
-              </div>
-            </div>
-
-            {activePhoto.caption && (
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {activePhoto.caption}
-              </p>
-            )}
-
-            <div className="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
-              <span className="text-slate-400">
-                Bright Future Competition Institute • Lalitpur (UP)
-              </span>
-              <div className="flex items-center gap-3">
-                <a
-                  href="tel:9450067223"
-                  className="text-amber-300 hover:underline font-bold flex items-center gap-1"
-                >
-                  <PhoneCall className="w-3.5 h-3.5" />
-                  <span>Call: 9450067223</span>
-                </a>
-                <Link
-                  href="/admission"
-                  className="text-blue-400 hover:text-white font-bold flex items-center gap-1 hover:underline"
-                >
-                  <span>Book 2-Day Free Demo →</span>
-                </Link>
-              </div>
+              {/* 100% Full Uncropped Image */}
+              <Image
+                src={activePhoto.url}
+                alt={activePhoto.title || 'Campus Photo'}
+                fill
+                priority
+                unoptimized={true}
+                quality={100}
+                className="object-contain p-1 sm:p-2 select-none drop-shadow-2xl"
+                sizes="(max-width: 1024px) 95vw, 1000px"
+              />
             </div>
           </div>
         </div>
