@@ -15,67 +15,90 @@ export async function POST(request: Request) {
     }
 
     const data = await request.formData();
-    const file: File | null = data.get('file') as unknown as File;
+    const filesList = data.getAll('files') as unknown as File[];
+    const singleFile = data.get('file') as unknown as File | null;
+    const filesToUpload: File[] =
+      filesList && filesList.length > 0
+        ? filesList
+        : singleFile
+        ? [singleFile]
+        : [];
 
-    if (!file) {
+    if (filesToUpload.length === 0) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
     // Validate mime type
-    const validMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'application/pdf'];
-    if (!validMimes.includes(file.type)) {
-      return NextResponse.json(
-        { error: 'Invalid file type. Only JPEG, PNG, WEBP, SVG, and PDF are allowed.' },
-        { status: 400 }
-      );
-    }
+    const validMimes = [
+      'image/jpeg',
+      'image/png',
+      'image/webp',
+      'image/svg+xml',
+      'image/gif',
+      'application/pdf',
+    ];
 
-    // Validate size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json(
-        { error: 'File size exceeds 5MB limit.' },
-        { status: 400 }
-      );
-    }
-
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    let publicUrl = '';
-    const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-    const filename = `${Date.now()}_${safeName}`;
-
+    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
     try {
-      const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
       await mkdir(uploadsDir, { recursive: true });
-      const filePath = path.join(uploadsDir, filename);
-      await writeFile(filePath, buffer);
-      publicUrl = `/uploads/${filename}`;
-    } catch (fsErr) {
-      // Serverless / Vercel read-only filesystem (EROFS) fallback
-      console.warn('Filesystem write failed on serverless, using base64 data URL:', (fsErr as any)?.message);
-      publicUrl = `data:${file.type};base64,${buffer.toString('base64')}`;
+    } catch {
+      // directory might already exist
     }
 
-    // Store in media table
-    try {
-      await db.media.create({
-        data: {
-          filename,
-          url: publicUrl,
-          mimeType: file.type,
-          size: file.size,
-          altText: file.name,
-        },
+    const uploadedResults: Array<{ url: string; filename: string; originalName: string }> = [];
+
+    for (const file of filesToUpload) {
+      if (!validMimes.includes(file.type)) continue;
+
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      let publicUrl = '';
+      const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+      const filename = `${Date.now()}_${Math.random().toString(36).substring(2, 6)}_${safeName}`;
+
+      try {
+        const filePath = path.join(uploadsDir, filename);
+        await writeFile(filePath, buffer);
+        publicUrl = `/uploads/${filename}`;
+      } catch (fsErr) {
+        // Serverless / Vercel read-only filesystem (EROFS) fallback
+        console.warn('Filesystem write failed, using base64 data URL:', (fsErr as any)?.message);
+        publicUrl = `data:${file.type};base64,${buffer.toString('base64')}`;
+      }
+
+      // Store in media table
+      try {
+        await db.media.create({
+          data: {
+            filename,
+            url: publicUrl,
+            mimeType: file.type,
+            size: file.size,
+            altText: file.name,
+          },
+        });
+      } catch {
+        // ignore
+      }
+
+      uploadedResults.push({
+        url: publicUrl,
+        filename,
+        originalName: file.name,
       });
-    } catch {
-      // ignore
+    }
+
+    if (uploadedResults.length === 0) {
+      return NextResponse.json({ error: 'No valid images were uploaded' }, { status: 400 });
     }
 
     return NextResponse.json({
       success: true,
-      url: publicUrl,
-      filename,
+      url: uploadedResults[0].url,
+      filename: uploadedResults[0].filename,
+      items: uploadedResults,
+      total: uploadedResults.length,
     });
   } catch (error) {
     console.error('Upload error:', error);

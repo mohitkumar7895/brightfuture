@@ -49,23 +49,54 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { title, url, thumbnailUrl, caption, categoryId, type, isPublished } = body;
+    
+    // Support single item or batch array of items
+    const rawItems: any[] = Array.isArray(body)
+      ? body
+      : Array.isArray(body.items)
+      ? body.items
+      : [body];
 
-    if (!title || !url) {
-      return NextResponse.json({ error: 'Title and media URL are required' }, { status: 400 });
+    const createdItems: any[] = [];
+
+    for (const raw of rawItems) {
+      const { title, url, thumbnailUrl, caption, categoryId, type, isPublished } = raw;
+      if (!url) continue;
+
+      // Auto-format title from filename or fallback if title wasn't typed
+      let cleanTitle = title;
+      if (!cleanTitle || cleanTitle.trim() === '') {
+        const rawName = url.split('/').pop()?.split('?')[0] || 'Campus Photograph';
+        cleanTitle = rawName
+          .replace(/^[0-9]+_[0-9a-zA-Z]+_/, '') // remove timestamp / random prefix
+          .replace(/^[0-9]+_/, '')
+          .replace(/\.[^/.]+$/, '') // remove extension
+          .replace(/[-_]+/g, ' ') // convert dashes and underscores to spaces
+          .trim();
+        if (cleanTitle) {
+          cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+        } else {
+          cleanTitle = 'Campus Photograph';
+        }
+      }
+
+      const item = await db.galleryItem.create({
+        data: {
+          title: cleanTitle,
+          url,
+          thumbnailUrl: thumbnailUrl || null,
+          caption: caption || null,
+          categoryId: categoryId ? Number(categoryId) : null,
+          type: type || 'IMAGE',
+          isPublished: isPublished !== false,
+        },
+      });
+      createdItems.push(item);
     }
 
-    const item = await db.galleryItem.create({
-      data: {
-        title,
-        url,
-        thumbnailUrl: thumbnailUrl || null,
-        caption: caption || null,
-        categoryId: categoryId ? Number(categoryId) : null,
-        type: type || 'IMAGE',
-        isPublished: isPublished !== false,
-      },
-    });
+    if (createdItems.length === 0) {
+      return NextResponse.json({ error: 'No valid items provided' }, { status: 400 });
+    }
 
     try {
       revalidatePath('/', 'layout');
@@ -74,7 +105,12 @@ export async function POST(request: Request) {
       // ignore
     }
 
-    return NextResponse.json({ success: true, item });
+    return NextResponse.json({
+      success: true,
+      item: createdItems[0],
+      items: createdItems,
+      count: createdItems.length,
+    });
   } catch (error: any) {
     console.error('Create gallery item error:', error);
     return NextResponse.json({ error: error.message || 'Failed to create gallery item' }, { status: 400 });
