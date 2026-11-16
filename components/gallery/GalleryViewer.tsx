@@ -170,34 +170,44 @@ export default function GalleryViewer({
               onClick={() => setActivePhotoIndex(index)}
               className="group relative bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col"
             >
-              {/* Image Frame */}
-              <div className="relative aspect-[16/11] w-full overflow-hidden bg-slate-900">
+              {/* Image Frame - 100% Full Uncropped HD View */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-950 flex items-center justify-center">
+                {/* Ambient Blurred Background Fill */}
+                <Image
+                  src={item.url}
+                  alt=""
+                  fill
+                  unoptimized={true}
+                  aria-hidden="true"
+                  className="object-cover blur-xl scale-125 opacity-25 pointer-events-none"
+                />
+
+                {/* 100% Full Photo - Crisp HD and Never Cropped */}
                 <Image
                   src={item.url}
                   alt={item.title}
                   fill
+                  unoptimized={true}
+                  quality={100}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out select-none"
                 />
 
-                {/* Dark gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-black/20 opacity-60 group-hover:opacity-80 transition-opacity" />
-
                 {/* Top Badge (Category) */}
-                <div className="absolute top-3.5 left-3.5 z-10">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-black/50 text-white backdrop-blur-md border border-white/20 shadow-md flex items-center gap-1.5">
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-black/60 text-white backdrop-blur-md border border-white/20 shadow-md flex items-center gap-1.5">
                     <Sparkles className="w-3 h-3 text-amber-300" />
                     <span>{item.category?.name || 'Campus Moment'}</span>
                   </span>
                 </div>
 
                 {/* Top Right Zoom Icon */}
-                <div className="absolute top-3.5 right-3.5 z-10 w-9 h-9 rounded-full bg-white/30 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-md">
-                  <ZoomIn className="w-4 h-4" />
+                <div className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-md border border-white/20">
+                  <ZoomIn className="w-4 h-4 text-amber-300" />
                 </div>
 
                 {/* Location / Campus Stamp */}
-                <div className="absolute bottom-3 right-3.5 z-10 flex items-center gap-1 text-[11px] font-semibold text-white/90 bg-black/40 px-2.5 py-1 rounded-md backdrop-blur-xs">
+                <div className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1 text-[10px] font-semibold text-white/90 bg-black/60 px-2 py-0.5 rounded-md backdrop-blur-xs border border-white/10">
                   <MapPin className="w-3 h-3 text-amber-400" />
                   <span>Lalitpur Campus</span>
                 </div>
@@ -252,6 +262,17 @@ export default function GalleryViewer({
             </div>
 
             <div className="flex items-center gap-2">
+              <a
+                href={activePhoto.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 bg-white/15 hover:bg-white/25 text-white rounded-xl text-xs font-bold transition-colors border border-white/15"
+                title="Open 100% Full HD Original Image in new tab"
+              >
+                <ZoomIn className="w-4 h-4 text-amber-300" />
+                <span>Open Full HD</span>
+              </a>
+
               <Link
                 href="/admission"
                 className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-md"
@@ -271,9 +292,9 @@ export default function GalleryViewer({
             </div>
           </div>
 
-          {/* Lightbox Center Image Stage */}
+          {/* Lightbox Center Image Stage - Generous Full View */}
           <div 
-            className="relative flex-1 flex items-center justify-center w-full min-h-[250px] max-h-[70dvh] my-auto"
+            className="relative flex-1 flex items-center justify-center w-full min-h-[280px] max-h-[78dvh] sm:max-h-[82dvh] my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Prev Button */}
@@ -296,16 +317,18 @@ export default function GalleryViewer({
               <ChevronRight className="w-5 h-5 sm:w-7 sm:h-7" />
             </button>
 
-            {/* Active Image */}
-            <div className="relative w-full h-full max-w-5xl flex items-center justify-center p-2">
-              <div className="relative w-full h-full min-h-[240px] max-h-[66dvh] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            {/* Active Image - 100% Full Uncropped HD */}
+            <div className="relative w-full h-full max-w-6xl flex items-center justify-center p-1 sm:p-2">
+              <div className="relative w-full h-full min-h-[260px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src={activePhoto.url}
                   alt={activePhoto.title}
                   fill
                   priority
-                  className="object-contain"
-                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  unoptimized={true}
+                  quality={100}
+                  className="object-contain select-none drop-shadow-2xl"
+                  sizes="100vw"
                 />
               </div>
             </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react';
 import AnimatedSectionHeader from '@/components/ui/AnimatedSectionHeader';
 
@@ -57,6 +58,30 @@ export default function BranchesMapSection({
             
             {/* Branch 1: Head Office */}
             <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-200 shadow-inner flex items-center justify-center">
+                {/* Ambient Blurred Background */}
+                <Image
+                  src="/images/gallery/bfci-head-office-station-road.jpg"
+                  alt=""
+                  fill
+                  unoptimized={true}
+                  aria-hidden="true"
+                  className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+                />
+                {/* 100% Full Uncropped HD View */}
+                <Image
+                  src="/images/gallery/bfci-head-office-station-road.jpg"
+                  alt="BFCI Head Office Station Road Lalitpur entrance gate"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  quality={100}
+                  unoptimized={true}
+                  className="object-contain p-1 hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute bottom-2 left-2 z-10 px-2.5 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs text-amber-300 text-[10px] font-black tracking-wide border border-white/10">
+                  Head Office Gate • Full View
+                </span>
+              </div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
                 <span className="text-[10px] font-black uppercase text-amber-700 tracking-wider">
@@ -83,16 +108,40 @@ export default function BranchesMapSection({
               </div>
             </div>
 
-            {/* Branch 2: Market Branch */}
+            {/* Branch 2: Digital Library & Chandmari */}
             <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-200 shadow-inner flex items-center justify-center">
+                {/* Ambient Blurred Background */}
+                <Image
+                  src="/images/gallery/bfci-digital-library-chandmari.jpg"
+                  alt=""
+                  fill
+                  unoptimized={true}
+                  aria-hidden="true"
+                  className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+                />
+                {/* 100% Full Uncropped HD View */}
+                <Image
+                  src="/images/gallery/bfci-digital-library-chandmari.jpg"
+                  alt="BFCI Digital Library Chandmari Lalitpur building"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  quality={100}
+                  unoptimized={true}
+                  className="object-contain p-1 hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute bottom-2 left-2 z-10 px-2.5 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs text-amber-300 text-[10px] font-black tracking-wide border border-white/10">
+                  Digital Library Campus • Full View
+                </span>
+              </div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
                 <span className="text-[10px] font-black uppercase text-blue-700 tracking-wider">
-                  Market Branch &amp; Study Center
+                  Digital Library &amp; Study Center
                 </span>
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-1.5">
-                Mahaveerpura / Ghantaghar Branch
+                BFCI Digital Library &amp; Branch
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-3">
                 {marketBranchAddress}

@@ -18,8 +18,8 @@ export default function TopBar({
   phone = '9450067223',
   helpline = '8726343417',
   email = 'aj2819147@gmail.com',
-  facebookUrl,
-  instagramUrl,
+  facebookUrl = 'https://www.facebook.com/share/1EvdQ3hyD2/',
+  instagramUrl = 'https://instagram.com/brightfuturelalitpur',
 }: TopBarProps) {
   // Strip any accidental corrupted characters/emojis from database strings
   const cleanAnnouncement = announcement

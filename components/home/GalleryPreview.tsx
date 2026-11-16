@@ -67,39 +67,49 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
             <div
               key={item.id}
               onClick={() => setSelectedImage(item)}
-              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-900 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 hover:-translate-y-1"
+              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-200/80 hover:-translate-y-1"
             >
-              <div className="relative aspect-[16/11] w-full overflow-hidden">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-950 flex items-center justify-center">
+                {/* Ambient Blurred Background */}
+                <Image
+                  src={item.url}
+                  alt=""
+                  fill
+                  unoptimized={true}
+                  aria-hidden="true"
+                  className="object-cover blur-xl scale-125 opacity-25 pointer-events-none"
+                />
+
+                {/* 100% Full Uncropped HD Image */}
                 <Image
                   src={item.url}
                   alt={item.title}
                   fill
+                  unoptimized={true}
+                  quality={100}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-108 transition-transform duration-600 opacity-90 group-hover:opacity-100"
+                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out select-none"
                 />
-                
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent opacity-75 group-hover:opacity-90 transition-opacity" />
 
                 {/* Category Pill */}
-                <div className="absolute top-3 left-3">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white uppercase tracking-wider bg-black/50 backdrop-blur-md border border-white/20">
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white uppercase tracking-wider bg-black/60 backdrop-blur-md border border-white/20">
                     {item.category?.name || 'Campus Moment'}
                   </span>
                 </div>
 
                 {/* Zoom icon */}
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/25 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <ZoomIn className="w-4 h-4" />
+                <div className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-white/20">
+                  <ZoomIn className="w-4 h-4 text-amber-300" />
                 </div>
 
                 {/* Caption text */}
-                <div className="absolute bottom-3 left-3 right-3 text-white space-y-0.5">
-                  <h3 className="text-sm font-extrabold line-clamp-1 leading-snug drop-shadow-xs">
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 z-10 bg-black/60 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 text-white space-y-0.5">
+                  <h3 className="text-xs sm:text-sm font-extrabold line-clamp-1 leading-snug drop-shadow-xs">
                     {item.title}
                   </h3>
                   {item.caption && (
-                    <p className="text-[11px] text-slate-300 line-clamp-1">
+                    <p className="text-[10px] sm:text-[11px] text-slate-300 line-clamp-1">
                       {item.caption}
                     </p>
                   )}
@@ -131,11 +141,14 @@ export default function GalleryPreview({ items = [] }: GalleryPreviewProps) {
               <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
-            <div className="relative aspect-[16/10] w-full bg-black shrink-0 max-h-[60dvh]">
+            <div className="relative aspect-[16/10] w-full bg-slate-950 shrink-0 min-h-[260px] max-h-[66dvh] flex items-center justify-center">
               <Image
                 src={selectedImage.url}
                 alt={selectedImage.title}
                 fill
+                priority
+                unoptimized={true}
+                quality={100}
                 sizes="100vw"
                 className="object-contain"
               />

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import db from '@/lib/db';
-import { Trophy, ShieldCheck, ArrowRight, Award } from 'lucide-react';
+import { Trophy, ShieldCheck, ArrowRight, Award, Sparkles, ImageIcon } from 'lucide-react';
 
 
 export async function generateMetadata() {
@@ -136,6 +136,134 @@ export default async function ResultsPage({
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Felicitation & Awards Gallery Highlights */}
+        <div className="mt-16 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-amber-900 bg-amber-100 uppercase tracking-wider mb-2">
+                <Award className="w-3.5 h-3.5 text-amber-600" />
+                Celebration of Excellence
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+                Toppers Felicitation &amp; Officer Award Ceremonies
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600">
+                Real moments celebrating student triumphs with dignity, mementos, and police officer felicitations at our institute.
+              </p>
+            </div>
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-blue-900 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors uppercase tracking-wider shrink-0"
+            >
+              <ImageIcon className="w-4 h-4" />
+              <span>Full Photo Gallery</span>
+            </Link>
+          </div>
+
+          {/* 4 Authentic Lalitpur Felicitation Photos */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-xs group bg-slate-950 flex items-center justify-center">
+              <Image
+                src="/images/gallery/felicitation-police-award.jpg"
+                alt=""
+                fill
+                unoptimized={true}
+                aria-hidden="true"
+                className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+              />
+              <Image
+                src="/images/gallery/felicitation-police-award.jpg"
+                alt="Police officer presenting trophy to topper student"
+                fill
+                quality={100}
+                unoptimized={true}
+                sizes="(max-width: 640px) 100vw, 25vw"
+                className="object-contain p-1 group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                <span className="text-white text-xs font-bold leading-tight">
+                  Police Officer Honoring Topper
+                </span>
+              </div>
+            </div>
+
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-xs group bg-slate-950 flex items-center justify-center">
+              <Image
+                src="/images/gallery/toppers-trophy-celebration-1.jpg"
+                alt=""
+                fill
+                unoptimized={true}
+                aria-hidden="true"
+                className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+              />
+              <Image
+                src="/images/gallery/toppers-trophy-celebration-1.jpg"
+                alt="Toppers raising trophies and victory signs"
+                fill
+                quality={100}
+                unoptimized={true}
+                sizes="(max-width: 640px) 100vw, 25vw"
+                className="object-contain p-1 group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                <span className="text-white text-xs font-bold leading-tight">
+                  Grand Trophy Victory Celebration
+                </span>
+              </div>
+            </div>
+
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-xs group bg-slate-950 flex items-center justify-center">
+              <Image
+                src="/images/gallery/toppers-police-felicitation.jpg"
+                alt=""
+                fill
+                unoptimized={true}
+                aria-hidden="true"
+                className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+              />
+              <Image
+                src="/images/gallery/toppers-police-felicitation.jpg"
+                alt="Faculty and police officer presenting rank shield"
+                fill
+                quality={100}
+                unoptimized={true}
+                sizes="(max-width: 640px) 100vw, 25vw"
+                className="object-contain p-1 group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                <span className="text-white text-xs font-bold leading-tight">
+                  2nd Rank Shield Presentation
+                </span>
+              </div>
+            </div>
+
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-xs group bg-slate-950 flex items-center justify-center">
+              <Image
+                src="/images/gallery/female-toppers-felicitation.jpg"
+                alt=""
+                fill
+                unoptimized={true}
+                aria-hidden="true"
+                className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+              />
+              <Image
+                src="/images/gallery/female-toppers-felicitation.jpg"
+                alt="Female toppers batch receiving medals and awards"
+                fill
+                quality={100}
+                unoptimized={true}
+                sizes="(max-width: 640px) 100vw, 25vw"
+                className="object-contain p-1 group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+                <span className="text-white text-xs font-bold leading-tight">
+                  Girls Batch Merit Medals
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Motivational Call to Action */}

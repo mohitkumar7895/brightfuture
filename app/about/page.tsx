@@ -60,13 +60,23 @@ export default async function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             <div className="lg:col-span-6 relative">
-              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white bg-slate-100">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white bg-slate-950 flex items-center justify-center">
                 <Image
-                  src="/images/institute-study.jpg"
-                  alt="Bright Future Competition Institute study hall and library in Lalitpur"
+                  src="/images/gallery/classroom-students-batch.jpg"
+                  alt=""
+                  fill
+                  unoptimized={true}
+                  aria-hidden="true"
+                  className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+                />
+                <Image
+                  src="/images/gallery/classroom-students-batch.jpg"
+                  alt="Bright Future Competition Institute smart classroom lecture and study session in Lalitpur"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  quality={100}
+                  unoptimized={true}
+                  className="object-contain p-1"
                 />
               </div>
               <div className="absolute bottom-4 right-4 bg-blue-900 text-white p-4 sm:p-5 rounded-2xl shadow-xl hidden sm:block max-w-xs z-10 border border-white/20">

@@ -62,7 +62,7 @@ export default async function HomePage() {
     }).catch(() => []),
     db.galleryItem.findMany({
       where: { isPublished: true },
-      orderBy: { id: 'desc' },
+      orderBy: { id: 'asc' },
       take: 6,
       include: { category: true },
     }).catch(() => []),

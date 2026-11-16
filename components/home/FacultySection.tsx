@@ -74,6 +74,8 @@ export default function FacultySection({ faculty = [] }: FacultySectionProps) {
                     src={mentor.photo || '/images/faculty-teaching.jpg'}
                     alt={mentor.name}
                     fill
+                    quality={100}
+                    unoptimized={true}
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />

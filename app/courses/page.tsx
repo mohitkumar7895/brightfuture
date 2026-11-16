@@ -113,6 +113,8 @@ export default async function CoursesPage({
                         src={course.image || '/images/hero-classroom.jpg'}
                         alt={course.title}
                         fill
+                        quality={100}
+                        unoptimized={true}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />

@@ -72,6 +72,8 @@ export default function AchievementsSection({ results = [] }: AchievementsSectio
                 src={item.photo || '/images/student-toppers.jpg'}
                 alt={item.studentName}
                 fill
+                quality={100}
+                unoptimized={true}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
                 className="object-cover group-hover:scale-108 transition-transform duration-500"
               />

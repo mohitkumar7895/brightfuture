@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import db from '@/lib/db';
 import { 
   GraduationCap, 
@@ -94,6 +95,35 @@ export default async function AdmissionPage({
           {/* Left Column: Benefits & Walk-in Office Info (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             
+            {/* Real Classroom & Mock Test Photo - 100% Full Uncropped HD */}
+            <div className="relative aspect-[16/10] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-lg bg-slate-950 group flex items-center justify-center">
+              <Image
+                src="/images/gallery/classroom-mock-test-1.jpg"
+                alt=""
+                fill
+                unoptimized={true}
+                aria-hidden="true"
+                className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+              />
+              <Image
+                src="/images/gallery/classroom-mock-test-1.jpg"
+                alt="Bright Future Competition Institute real classroom mock test session in Lalitpur"
+                fill
+                quality={100}
+                unoptimized={true}
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-contain p-1 group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-4">
+                <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 mb-1 w-max">
+                  100% Real Classroom Session
+                </span>
+                <span className="text-white text-xs sm:text-sm font-bold leading-tight">
+                  Sunday All-Lalitpur Real Exam OMR Mock Test Hall
+                </span>
+              </div>
+            </div>
+
             {/* What You Receive Card */}
             <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl space-y-6">
               <div className="border-b border-slate-100 pb-4">

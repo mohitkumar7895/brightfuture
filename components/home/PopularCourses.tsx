@@ -3,10 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { 
-  Clock, 
-  Users, 
-  Sparkles, 
+import {
+  Clock,
+  Users,
+  Sparkles,
   ArrowRight
 } from 'lucide-react';
 import AnimatedSectionHeader from '@/components/ui/AnimatedSectionHeader';
@@ -36,7 +36,7 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
   return (
     <section className="py-8 sm:py-12 lg:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Animated Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <AnimatedSectionHeader
@@ -85,11 +85,13 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
                       src={course.image || '/images/hero-classroom.jpg'}
                       alt={course.title}
                       fill
+                      quality={100}
+                      unoptimized={true}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
-                    
+
                     {/* Category Pill */}
                     <div className="absolute top-3 left-3">
                       <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold text-white bg-blue-900/90 backdrop-blur-xs uppercase tracking-wider shadow-xs">
