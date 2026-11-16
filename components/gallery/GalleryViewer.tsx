@@ -46,6 +46,8 @@ export default function GalleryViewer({
     if (selectedCategory === 'all') return true;
     if (item.category?.slug === selectedCategory) return true;
     if (String(item.categoryId) === selectedCategory) return true;
+    const catMatch = categories.find((c) => c.slug === selectedCategory || String(c.id) === selectedCategory);
+    if (catMatch && (item.categoryId === catMatch.id || item.category?.id === catMatch.id)) return true;
     return false;
   });
 
@@ -89,8 +91,12 @@ export default function GalleryViewer({
   // Category counts
   const getCategoryCount = (slugOrId: string) => {
     if (slugOrId === 'all') return initialItems.length;
+    const catMatch = categories.find((c) => c.slug === slugOrId || String(c.id) === slugOrId);
     return initialItems.filter(
-      (item) => item.category?.slug === slugOrId || String(item.categoryId) === slugOrId
+      (item) =>
+        item.category?.slug === slugOrId ||
+        String(item.categoryId) === slugOrId ||
+        (catMatch && (item.categoryId === catMatch.id || item.category?.id === catMatch.id))
     ).length;
   };
 

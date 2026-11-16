@@ -11,6 +11,7 @@ const fallbackStore = {
   notices: [...initialFallbackData.notices],
   testimonials: [...initialFallbackData.testimonials],
   faqs: [...initialFallbackData.faqs],
+  galleryCategories: [...((initialFallbackData as any).galleryCategories || [])],
   gallery: [...initialFallbackData.gallery],
   settings: { ...initialFallbackData.settings },
   homePageContent: { ...initialFallbackData.homePageContent },
@@ -83,9 +84,13 @@ function getFallbackRows(sql: string, values?: any[]): any[] {
     return fallbackStore.faqs;
   }
 
+  if (s.includes('from gallery_categories')) {
+    return fallbackStore.galleryCategories;
+  }
+
   if (s.includes('from gallery_items')) {
-    return fallbackStore.gallery.map((g) => {
-      const cat = fallbackStore.categories.find((ct) => ct.id === g.categoryId);
+    return fallbackStore.gallery.map((g: any) => {
+      const cat = fallbackStore.galleryCategories.find((ct: any) => ct.id === g.categoryId);
       return {
         ...g,
         cat_id: cat?.id || null,
@@ -897,6 +902,14 @@ export const db = {
         sql += ` AND g.categoryId = ?`;
         params.push(options.where.categoryId);
       }
+      if (options?.where?.category?.slug) {
+        sql += ` AND cat.slug = ?`;
+        params.push(options.where.category.slug);
+      }
+      if (options?.where?.category?.id) {
+        sql += ` AND cat.id = ?`;
+        params.push(options.where.category.id);
+      }
       if (options?.where?.type !== undefined) {
         sql += ` AND g.type = ?`;
         params.push(options.where.type);
@@ -953,7 +966,7 @@ export const db = {
       ];
       const res = await execute(sql, params);
       const insertedId = res.insertId || Date.now();
-      const cat = d.categoryId ? fallbackStore.categories.find((c: any) => c.id === Number(d.categoryId)) : null;
+      const cat = d.categoryId ? fallbackStore.galleryCategories.find((c: any) => c.id === Number(d.categoryId)) : null;
       const newItem = {
         id: insertedId,
         title: d.title || null,
@@ -994,7 +1007,7 @@ export const db = {
         });
       }
 
-      const cat = d.categoryId ? fallbackStore.categories.find((c: any) => c.id === Number(d.categoryId)) : null;
+      const cat = d.categoryId ? fallbackStore.galleryCategories.find((c: any) => c.id === Number(d.categoryId)) : null;
       const idx = fallbackStore.gallery.findIndex((g: any) => g.id === Number(id));
       if (idx !== -1) {
         const current = fallbackStore.gallery[idx] as any;

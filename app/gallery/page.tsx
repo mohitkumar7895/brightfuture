@@ -3,6 +3,9 @@ import db from '@/lib/db';
 import { ImageIcon, Sparkles, MapPin, CheckCircle2, ShieldCheck } from 'lucide-react';
 import GalleryViewer from '@/components/gallery/GalleryViewer';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateMetadata() {
   const seo = await db.seoMetadata.findUnique({ where: { pageSlug: '/gallery' } }).catch(() => null);
   return {
