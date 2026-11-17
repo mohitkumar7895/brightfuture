@@ -45,7 +45,7 @@ export default function BranchesMapSection({
           }
           subtitle={
             <p className="text-slate-600 text-xs sm:text-sm">
-              Conveniently accessible from all corners of Lalitpur and nearby tehsils with daily public transport connectivity.
+              Est. 14 July 2002 • 24 Years Completed • 10,000+ Students&apos; Choice. Conveniently accessible across Lalitpur and Bundelkhand with daily public transport connectivity.
             </p>
           }
         />
@@ -82,15 +82,33 @@ export default function BranchesMapSection({
                   Head Office Gate • Full View
                 </span>
               </div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
-                <span className="text-[10px] font-black uppercase text-amber-700 tracking-wider">
-                  Head Office &amp; Main Campus
+              
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+                  <span className="text-[10px] font-black uppercase text-amber-700 tracking-wider">
+                    Head Office &amp; Main Campus
+                  </span>
+                </div>
+                <span className="px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black uppercase tracking-wider">
+                  Evening 3:30 PM Batch
                 </span>
               </div>
+
               <h3 className="text-lg font-bold text-slate-900 mb-1.5">
-                Station Road Branch
+                Station Road Branch (Head Office)
               </h3>
+              
+              <div className="mb-2.5 p-2 bg-amber-50 rounded-xl border border-amber-200/80 flex items-center justify-between text-xs">
+                <span className="font-extrabold text-amber-950 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-amber-600" />
+                  <span>New Batch: Evening 3:30 PM</span>
+                </span>
+                <span className="text-[10px] font-black uppercase px-2 py-0.5 bg-amber-500 text-white rounded">
+                  Open Now
+                </span>
+              </div>
+
               <p className="text-xs text-slate-600 leading-relaxed mb-3">
                 {headOfficeAddress}
               </p>
@@ -108,7 +126,7 @@ export default function BranchesMapSection({
               </div>
             </div>
 
-            {/* Branch 2: Digital Library & Chandmari */}
+            {/* Branch 2: Market Branch (Richariya Market) */}
             <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
               <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-200 shadow-inner flex items-center justify-center">
                 {/* Ambient Blurred Background */}
@@ -123,7 +141,7 @@ export default function BranchesMapSection({
                 {/* 100% Full Uncropped HD View */}
                 <Image
                   src="/images/gallery/bfci-digital-library-chandmari.jpg"
-                  alt="BFCI Digital Library Chandmari Lalitpur building"
+                  alt="BFCI Market Branch Ghantaghar Lalitpur building"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   quality={100}
@@ -131,25 +149,43 @@ export default function BranchesMapSection({
                   className="object-contain p-1 hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute bottom-2 left-2 z-10 px-2.5 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs text-amber-300 text-[10px] font-black tracking-wide border border-white/10">
-                  Digital Library Campus • Full View
+                  Market Branch • Full View
                 </span>
               </div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
-                <span className="text-[10px] font-black uppercase text-blue-700 tracking-wider">
-                  Digital Library &amp; Study Center
+
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
+                  <span className="text-[10px] font-black uppercase text-emerald-800 tracking-wider">
+                    Market Branch &amp; Library
+                  </span>
+                </div>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 text-[10px] font-black uppercase tracking-wider">
+                  Morning 7:00 AM Batch
                 </span>
               </div>
+
               <h3 className="text-lg font-bold text-slate-900 mb-1.5">
-                BFCI Digital Library &amp; Branch
+                Market Branch (Richariya Market, Ghantaghar)
               </h3>
+
+              <div className="mb-2.5 p-2 bg-emerald-50 rounded-xl border border-emerald-200/80 flex items-center justify-between text-xs">
+                <span className="font-extrabold text-emerald-950 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>New Batch: Morning 7:00 AM</span>
+                </span>
+                <span className="text-[10px] font-black uppercase px-2 py-0.5 bg-emerald-600 text-white rounded">
+                  Open Now
+                </span>
+              </div>
+
               <p className="text-xs text-slate-600 leading-relaxed mb-3">
                 {marketBranchAddress}
               </p>
               <div className="space-y-1.5 pt-2 border-t border-slate-100 text-xs">
                 <div className="flex items-center gap-2 text-slate-700 font-medium">
                   <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                  <span>Timings: 7:30 AM – 7:00 PM (Mon-Sat)</span>
+                  <span>Timings: 7:00 AM – 7:00 PM (Mon-Sat)</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-700 font-medium">
                   <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />

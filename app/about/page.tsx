@@ -44,14 +44,14 @@ export default async function AboutPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold text-amber-300 bg-white/10 border border-white/20 uppercase tracking-wider backdrop-blur-md">
-            {content?.heroBadge || 'About Our Institution'}
+            {content?.heroBadge || 'Est. 14 July 2002 • 24 Years Completed'}
           </span>
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight max-w-4xl mx-auto leading-tight">
-            {content?.heroTitle || 'A Decade of Dedication & Unmatched Selections in Lalitpur'}
+            {content?.heroTitle || '24 Years of Educational Excellence & 10,000+ Students\' Choice in Lalitpur'}
           </h1>
           <p className="text-blue-100/90 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             {content?.heroSubtitle ||
-              'Empowering Bundelkhand youth with top-tier competitive coaching right at home without needing to relocate.'}
+              'Started on 14 July 2002, empowering Bundelkhand youth with top-tier competitive coaching, weekly tests, and verified selections across UP Police, SSC, and Railways.'}
           </p>
         </div>
       </section>
@@ -82,9 +82,12 @@ export default async function AboutPage() {
                 />
               </div>
               <div className="absolute bottom-4 right-4 bg-blue-900 text-white p-4 sm:p-5 rounded-2xl shadow-xl hidden sm:block max-w-xs z-10 border border-white/20">
-                <span className="text-xl sm:text-2xl font-black text-amber-400 block">2012 - 2026</span>
-                <span className="text-xs font-semibold text-blue-200">
-                  Over a decade of academic integrity and student selections.
+                <span className="text-xl sm:text-2xl font-black text-amber-400 block">14 July 2002 – 2026</span>
+                <span className="text-xs font-black text-white uppercase tracking-wider block mt-0.5">
+                  24 Years Completed
+                </span>
+                <span className="text-xs font-semibold text-blue-200 block mt-1">
+                  10,000+ Students&apos; Choice across Bundelkhand.
                 </span>
               </div>
             </div>
@@ -94,26 +97,30 @@ export default async function AboutPage() {
                 Institute Overview
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                {content?.aboutTitle || 'Transforming Ambition into Government Service Careers'}
+                {content?.aboutTitle || '24 Years of Academic Integrity & Top Selections'}
               </h2>
               <div className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed space-y-3 sm:space-y-4">
                 <p>
                   {content?.aboutContent ||
-                    'Bright Future Competition Institute was founded with a clear objective: to make high-quality competitive examination education accessible to every hardworking student in Lalitpur district. Through structured courses, concept-driven lectures, and daily test practice, we have produced officers across UP Police, SSC, Railways, and UPSSSC.'}
+                    'Bright Future Competition Institute was established on 14 July 2002 with a singular mission: to make high-quality competitive examination education accessible to every hardworking student in Lalitpur district. Over 24 completed years, we have become the trusted choice of 10,000+ students and produced hundreds of selections across UP Police, SSC, Railways, and UPSSSC.'}
                 </p>
                 <p>
-                  With two prime locations in Lalitpur — behind Krishna Cinema at Station Road and at Richariya Market near Ghantaghar — we provide state-of-the-art classroom facilities, a disciplined reference library, and individualized doubt-clearing sessions.
+                  With two prime locations in Lalitpur — behind Krishna Cinema at Station Road (Evening Batch: 3:30 PM) and at Richariya Market near Ghantaghar (Morning Batch: 7:00 AM) — we provide state-of-the-art classroom facilities, a disciplined reference library, and individualized doubt-clearing sessions.
                 </p>
               </div>
 
               <div className="pt-2 flex flex-wrap gap-2.5 sm:gap-4 text-xs font-bold">
-                <div className="flex items-center gap-2 bg-slate-100 text-slate-800 px-3 py-2 rounded-xl">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Govt. Exam Specialist Mentors</span>
+                <div className="flex items-center gap-2 bg-blue-50 text-blue-900 border border-blue-200 px-3 py-2 rounded-xl">
+                  <Clock className="w-4 h-4 text-blue-700 shrink-0" />
+                  <span>Est. 14 July 2002 (24 Years)</span>
                 </div>
-                <div className="flex items-center gap-2 bg-slate-100 text-slate-800 px-3 py-2 rounded-xl">
-                  <Award className="w-4 h-4 text-amber-600 shrink-0" />
-                  <span>1,200+ Selected Students</span>
+                <div className="flex items-center gap-2 bg-emerald-50 text-emerald-900 border border-emerald-200 px-3 py-2 rounded-xl">
+                  <Award className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>10,000+ Students&apos; Choice</span>
+                </div>
+                <div className="flex items-center gap-2 bg-amber-50 text-amber-900 border border-amber-200 px-3 py-2 rounded-xl">
+                  <Target className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>Market: 7 AM | Head Office: 3:30 PM</span>
                 </div>
               </div>
             </div>
@@ -171,7 +178,7 @@ export default async function AboutPage() {
               <div className="text-slate-600 text-xs sm:text-sm leading-relaxed space-y-3">
                 <p>
                   {content?.history ||
-                    'Founded in 2012 in Lalitpur by visionary educators, Bright Future Competition Institute started with just 25 ambitious students. Through unwavering focus on conceptual clarity and rigorous practice, the institute grew to become Lalitpur\'s most reputable coaching organization, producing hundreds of selections year after year across state and central examinations.'}
+                    'Started on 14 July 2002 in Lalitpur by visionary educators, Bright Future Competition Institute has completed 24 glorious years of educational excellence. Today, it stands proud as the first choice of over 10,000+ students across Bundelkhand, producing top rankers and selections year after year across UP Police, SSC, Railways, and UPSSSC examinations.'}
                 </p>
                 <p>
                   Today, alumni of Bright Future are actively serving as Sub-Inspectors, Police Constables, Revenue Lekhpals, Railway Station Masters, and Central Excise Inspectors across Uttar Pradesh and India.

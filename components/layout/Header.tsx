@@ -88,8 +88,8 @@ export default function Header({
                   </span>
                 </div>
                 <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-blue-700 leading-none mt-1 whitespace-nowrap">
-                  <span className="hidden xs:inline">Competition Institute • Lalitpur</span>
-                  <span className="xs:hidden">Competition Institute</span>
+                  <span className="hidden xs:inline">Competition Institute • Est. 14 July 2002</span>
+                  <span className="xs:hidden">Est. 2002</span>
                 </span>
               </div>
             </Link>

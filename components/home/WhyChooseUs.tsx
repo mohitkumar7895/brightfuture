@@ -103,6 +103,68 @@ export default function WhyChooseUs({
           }
         />
 
+        {/* Institute Milestones & New Batch Alerts Strip */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
+          {/* Milestone 1: Start 14 July 2002 */}
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-blue-200/80 shadow-xs flex flex-col justify-center items-center text-center relative overflow-hidden group hover:shadow-md transition-shadow">
+            <div className="w-2 h-2 rounded-full bg-blue-600 absolute top-3 right-3 animate-ping" />
+            <span className="text-xl sm:text-2xl font-black text-blue-950 tracking-tight leading-none">
+              14 July 2002
+            </span>
+            <span className="text-xs font-bold text-blue-700 uppercase tracking-wider mt-1.5">
+              Foundation Date
+            </span>
+            <span className="mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300">
+              24 Years Completed
+            </span>
+          </div>
+
+          {/* Milestone 2: 10,000 Students Choice */}
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-emerald-200/80 shadow-xs flex flex-col justify-center items-center text-center relative overflow-hidden group hover:shadow-md transition-shadow">
+            <span className="text-xl sm:text-2xl font-black text-emerald-700 tracking-tight leading-none">
+              10,000+
+            </span>
+            <span className="text-xs font-bold text-slate-800 uppercase tracking-wider mt-1.5">
+              Students&apos; Choice
+            </span>
+            <span className="mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200">
+              Across Bundelkhand
+            </span>
+          </div>
+
+          {/* Milestone 3: Market Branch New Batch */}
+          <div className="bg-gradient-to-br from-blue-900 via-blue-950 to-slate-900 text-white p-4 sm:p-5 rounded-2xl shadow-sm flex flex-col justify-center items-center text-center border border-blue-800/80 relative overflow-hidden">
+            <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[9px] font-black uppercase tracking-wider">
+              New Batch
+            </div>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-blue-200">
+              Market Branch (Ghantaghar)
+            </span>
+            <span className="text-lg sm:text-xl font-black text-amber-300 leading-tight mt-1">
+              Morning 7:00 AM
+            </span>
+            <span className="text-[10px] text-slate-300 mt-1 font-medium">
+              Daily Target &amp; Concept Batch
+            </span>
+          </div>
+
+          {/* Milestone 4: Head Office Branch New Batch */}
+          <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white p-4 sm:p-5 rounded-2xl shadow-sm flex flex-col justify-center items-center text-center border border-slate-700 relative overflow-hidden">
+            <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-emerald-400 text-slate-950 text-[9px] font-black uppercase tracking-wider">
+              New Batch
+            </div>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-blue-200">
+              Head Office (Station Road)
+            </span>
+            <span className="text-lg sm:text-xl font-black text-emerald-300 leading-tight mt-1">
+              Evening 3:30 PM
+            </span>
+            <span className="text-[10px] text-slate-300 mt-1 font-medium">
+              Speed Tests &amp; Doubt Clearing
+            </span>
+          </div>
+        </div>
+
         {/* 6 Core Edge Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {edgeFeatures.map((item, index) => {

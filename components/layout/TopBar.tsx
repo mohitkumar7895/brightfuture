@@ -14,7 +14,7 @@ interface TopBarProps {
 }
 
 export default function TopBar({
-  announcement = 'Admissions Open for New Batches: UP Police Constable / SI, SSC CGL/CHSL & Railway NTPC! Visit Head Office or Call 8726343417 / 9450067223.',
+  announcement = '24 Years Completed (Est. 14 July 2002) • 10,000+ Students Choice | New Batches: Market Branch (Morning 7:00 AM) • Head Office Branch (Evening 3:30 PM) | Call: 8726343417 / 9450067223',
   phone = '9450067223',
   helpline = '8726343417',
   email = 'aj2819147@gmail.com',

@@ -69,11 +69,11 @@ export default function Footer({
             <div className="hidden sm:flex flex-col gap-1.5 text-xs text-slate-300 pt-1">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Dedicated Faculty with 12+ Years Track Record</span>
+                <span>Est. 14 July 2002 • 24 Years Completed</span>
               </div>
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Hundreds of Selections in UP State &amp; Central Services</span>
+                <span>10,000+ Students&apos; Choice in Bundelkhand</span>
               </div>
             </div>
 
@@ -149,9 +149,14 @@ export default function Footer({
 
             {/* Head Office */}
             <div className="bg-[#0B1B3D] p-2.5 sm:p-3.5 rounded-xl border border-blue-900/60 space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400">
-                <MapPin className="w-3.5 h-3.5 shrink-0" />
-                <span>Head Office:</span>
+              <div className="flex items-center justify-between gap-1">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400">
+                  <MapPin className="w-3.5 h-3.5 shrink-0" />
+                  <span>Head Office:</span>
+                </div>
+                <span className="text-[10px] font-black uppercase text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded">
+                  Evening 3:30 PM
+                </span>
               </div>
               <p className="text-[11px] sm:text-xs text-slate-300 pl-4 sm:pl-5 leading-relaxed">
                 {headOfficeAddress}
@@ -160,9 +165,14 @@ export default function Footer({
 
             {/* Market Branch */}
             <div className="bg-[#0B1B3D] p-2.5 sm:p-3.5 rounded-xl border border-blue-900/60 space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-blue-300">
-                <MapPin className="w-3.5 h-3.5 shrink-0" />
-                <span>Market Branch:</span>
+              <div className="flex items-center justify-between gap-1">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+                  <MapPin className="w-3.5 h-3.5 shrink-0" />
+                  <span>Market Branch:</span>
+                </div>
+                <span className="text-[10px] font-black uppercase text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded">
+                  Morning 7:00 AM
+                </span>
               </div>
               <p className="text-[11px] sm:text-xs text-slate-300 pl-4 sm:pl-5 leading-relaxed">
                 {marketBranchAddress}
