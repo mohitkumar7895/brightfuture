@@ -4,6 +4,8 @@ import Link from 'next/link';
 import db from '@/lib/db';
 import { Trophy, ShieldCheck, ArrowRight, Award, Sparkles, ImageIcon } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata() {
   const seo = await db.seoMetadata.findUnique({ where: { pageSlug: '/results' } }).catch(() => null);

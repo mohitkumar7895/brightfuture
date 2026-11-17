@@ -17,6 +17,8 @@ import {
 import { formatCurrency } from '@/lib/utils';
 import AdmissionEnquiryForm from '@/components/home/AdmissionEnquiryForm';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata({
   params,

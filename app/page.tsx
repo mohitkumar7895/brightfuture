@@ -14,6 +14,8 @@ import BranchesMapSection from '@/components/home/BranchesMapSection';
 import AdmissionEnquiryForm from '@/components/home/AdmissionEnquiryForm';
 import { Sparkles, PhoneCall } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function HomePage() {
   // Fetch dynamic content from MySQL coaching database

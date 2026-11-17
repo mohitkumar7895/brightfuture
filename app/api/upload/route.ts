@@ -28,15 +28,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    // Validate mime type
+    // Validate mime type or extension
     const validMimes = [
       'image/jpeg',
+      'image/jpg',
       'image/png',
       'image/webp',
       'image/svg+xml',
       'image/gif',
+      'image/avif',
+      'image/jfif',
       'application/pdf',
     ];
+    const validExts = ['.jpg', '.jpeg', '.png', '.webp', '.svg', '.gif', '.avif', '.jfif', '.pdf'];
 
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
     try {
@@ -48,7 +52,11 @@ export async function POST(request: Request) {
     const uploadedResults: Array<{ url: string; filename: string; originalName: string }> = [];
 
     for (const file of filesToUpload) {
-      if (!validMimes.includes(file.type)) continue;
+      const ext = path.extname(file.name || '').toLowerCase();
+      const isValidMime = validMimes.includes(file.type) || (file.type && file.type.startsWith('image/'));
+      const isValidExt = validExts.includes(ext);
+
+      if (!isValidMime && !isValidExt) continue;
 
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);

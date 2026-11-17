@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import BranchesMapSection from '@/components/home/BranchesMapSection';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata() {
   const seo = await db.seoMetadata.findUnique({ where: { pageSlug: '/about' } }).catch(() => null);

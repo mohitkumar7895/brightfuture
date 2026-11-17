@@ -5,6 +5,8 @@ import db from '@/lib/db';
 import { Clock, Users, ArrowRight, Sparkles, BookOpen, Tag } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata() {
   const seo = await db.seoMetadata.findUnique({ where: { pageSlug: '/courses' } }).catch(() => null);

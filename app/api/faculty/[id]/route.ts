@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { facultySchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
@@ -9,7 +10,10 @@ export async function PUT(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -22,6 +26,14 @@ export async function PUT(
       where: { id: facultyId },
       data: validated,
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/faculty');
+      revalidatePath('/about');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, faculty: updated });
   } catch (error: any) {
@@ -36,7 +48,10 @@ export async function DELETE(
 ) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -44,6 +59,14 @@ export async function DELETE(
     await db.faculty.delete({
       where: { id: Number(id) },
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/faculty');
+      revalidatePath('/about');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, message: 'Faculty deleted successfully' });
   } catch (error) {

@@ -18,19 +18,10 @@ export async function PUT(
 
     const { id } = await params;
     const body = await request.json();
-    const { title, url, thumbnailUrl, caption, categoryId, type, isPublished } = body;
 
     const updated = await db.galleryItem.update({
       where: { id: Number(id) },
-      data: {
-        ...(title && { title }),
-        ...(url && { url }),
-        ...(thumbnailUrl !== undefined && { thumbnailUrl }),
-        ...(caption !== undefined && { caption }),
-        ...(categoryId !== undefined && { categoryId: categoryId ? Number(categoryId) : null }),
-        ...(type && { type }),
-        ...(isPublished !== undefined && { isPublished }),
-      },
+      data: body,
     });
 
     try {
@@ -72,9 +63,9 @@ export async function DELETE(
       // ignore
     }
 
-    return NextResponse.json({ success: true, message: 'Item deleted successfully' });
+    return NextResponse.json({ success: true, message: 'Gallery item deleted successfully' });
   } catch (error) {
     console.error('Delete gallery item error:', error);
-    return NextResponse.json({ error: 'Failed to delete item' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to delete gallery item' }, { status: 500 });
   }
 }

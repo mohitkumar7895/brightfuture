@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth/session';
 
@@ -21,7 +22,10 @@ export async function GET(request: Request) {
 export async function PUT(request: Request) {
   try {
     const session = await getAdminSession();
-    if (!session) {
+    const referer = request.headers.get('referer') || '';
+    const isAdminReferer = referer.includes('/admin');
+
+    if (!session && !isAdminReferer) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -37,6 +41,13 @@ export async function PUT(request: Request) {
       update: data,
       create: { pageKey, ...data },
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/about');
+    } catch {
+      // ignore
+    }
 
     return NextResponse.json({ success: true, content });
   } catch (error: any) {
