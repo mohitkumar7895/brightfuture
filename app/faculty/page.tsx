@@ -92,14 +92,14 @@ export default async function FacultyPage() {
 
       {/* Faculty Profiles Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {faculty.map((mentor) => (
             <div
               key={mentor.id}
-              className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+                <div className="relative aspect-[3/4] bg-slate-100 overflow-hidden">
                   <Image
                     src={mentor.photo || '/images/faculty-teaching.jpg'}
                     alt={mentor.name}
@@ -107,33 +107,33 @@ export default async function FacultyPage() {
                     quality={100}
                     unoptimized={true}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                  
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="text-[11px] font-bold text-amber-300 block uppercase tracking-wider">
+                  <div className="absolute top-3.5 right-3.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-extrabold text-blue-950 bg-white/95 backdrop-blur-md shadow-sm border border-slate-200/60 uppercase tracking-wider">
                       {mentor.experience}
                     </span>
-                    <h3 className="text-lg sm:text-xl font-bold text-white leading-tight">
-                      {mentor.name}
-                    </h3>
                   </div>
                 </div>
 
-                <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
-                  <p className="text-xs font-bold text-blue-800 uppercase tracking-wider">
-                    {mentor.designation}
-                  </p>
+                <div className="p-5 sm:p-6 space-y-3 sm:space-y-4">
+                  <div>
+                    <h3 className="text-xl font-black text-slate-900 leading-tight">
+                      {mentor.name}
+                    </h3>
+                    <p className="text-xs font-bold text-blue-700 uppercase tracking-wider mt-1">
+                      {mentor.designation}
+                    </p>
+                  </div>
 
                   <div className="flex items-center gap-2 text-xs text-slate-600">
                     <Award className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span>{mentor.qualification}</span>
+                    <span className="font-semibold">{mentor.qualification}</span>
                   </div>
 
                   <div className="bg-slate-50 p-3 sm:p-3.5 rounded-2xl border border-slate-100">
-                    <span className="text-[11px] font-bold text-slate-700 block mb-1">Subjects Handled:</span>
-                    <p className="text-xs font-semibold text-slate-900">{mentor.subjects}</p>
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Subjects Handled:</span>
+                    <p className="text-xs font-bold text-slate-900">{mentor.subjects}</p>
                   </div>
 
                   {mentor.bio && (
@@ -144,7 +144,7 @@ export default async function FacultyPage() {
                 </div>
               </div>
 
-              <div className="p-4 sm:p-6 pt-0">
+              <div className="p-5 sm:p-6 pt-0">
                 <Link
                   href="/admission"
                   className="w-full inline-flex items-center justify-center py-2.5 px-4 rounded-xl text-xs font-bold text-blue-900 bg-blue-50 hover:bg-blue-900 hover:text-white transition-colors"

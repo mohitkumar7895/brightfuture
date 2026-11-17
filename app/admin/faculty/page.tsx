@@ -215,13 +215,15 @@ export default function AdminFacultyPage() {
           >
             <div className="space-y-4">
               <div className="flex items-start gap-4">
-                <div className="relative w-16 h-16 rounded-2xl overflow-hidden shrink-0 border border-slate-200 bg-slate-100">
+                <div className="relative w-16 h-20 rounded-2xl overflow-hidden shrink-0 border border-slate-200 bg-slate-100 shadow-2xs">
                   <Image
                     src={f.photo || '/images/faculty-teaching.jpg'}
                     alt={f.name}
                     fill
-                    sizes="64px"
-                    className="object-cover"
+                    quality={100}
+                    unoptimized={true}
+                    sizes="80px"
+                    className="object-cover object-top"
                   />
                 </div>
                 <div className="min-w-0">
@@ -462,14 +464,14 @@ export default function AdminFacultyPage() {
                       Reset Default
                     </button>
                   </div>
-                  <div className="relative aspect-[4/3] w-32 mx-auto rounded-xl overflow-hidden bg-slate-900 border border-slate-200 shadow-inner">
+                  <div className="relative aspect-[3/4] w-36 mx-auto rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-md">
                     <Image
                       src={photo}
                       alt={name || 'Faculty Member'}
                       fill
                       quality={100}
                       unoptimized={true}
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                   </div>
                 </div>
