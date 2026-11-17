@@ -142,24 +142,26 @@ function getFallbackRows(sql: string, values?: any[]): any[] {
 
 // Low-level query functions with resilient error fallbacks
 export async function query<T = any>(sql: string, values?: any[]): Promise<T[]> {
+  const safeValues = values ? values.map((v) => (v === undefined ? null : v)) : undefined;
   try {
-    const [rows] = await pool.query(sql, values);
+    const [rows] = await pool.query(sql, safeValues);
     return rows as T[];
   } catch (error) {
     console.warn('MySQL pool query failed, using resilient fallback data:', (error as any)?.message);
-    return getFallbackRows(sql, values) as T[];
+    return getFallbackRows(sql, safeValues) as T[];
   }
 }
 
 export async function queryOne<T = any>(sql: string, values?: any[]): Promise<T | null> {
+  const safeValues = values ? values.map((v) => (v === undefined ? null : v)) : undefined;
   try {
-    const [rows] = await pool.query(sql, values);
+    const [rows] = await pool.query(sql, safeValues);
     const arr = rows as T[];
     return arr.length > 0 ? arr[0] : null;
   } catch (error) {
-    const rows = getFallbackRows(sql, values);
-    if (values && values.length > 0) {
-      const val = values[0];
+    const rows = getFallbackRows(sql, safeValues);
+    if (safeValues && safeValues.length > 0) {
+      const val = safeValues[0];
       const match = rows.find(
         (r: any) =>
           String(r.id) === String(val) ||
@@ -174,8 +176,9 @@ export async function queryOne<T = any>(sql: string, values?: any[]): Promise<T 
 }
 
 export async function execute(sql: string, values?: any[]): Promise<mysql.ResultSetHeader> {
+  const safeValues = values ? values.map((v) => (v === undefined ? null : v)) : undefined;
   try {
-    const [result] = await pool.execute(sql, values);
+    const [result] = await pool.query(sql, safeValues);
     return result as mysql.ResultSetHeader;
   } catch (error) {
     console.warn('MySQL pool execute failed, simulating successful execution:', (error as any)?.message);
@@ -232,6 +235,50 @@ export const db = {
   // 1. Courses
   course: {
     async findMany(options?: any) {
+      try {
+        let sql = `
+          SELECT c.*, cat.id as cat_id, cat.name as cat_name, cat.slug as cat_slug, cat.icon as cat_icon 
+          FROM courses c 
+          LEFT JOIN course_categories cat ON c.categoryId = cat.id 
+          WHERE 1=1
+        `;
+        const params: any[] = [];
+        if (options?.where?.isPublished !== undefined) {
+          sql += ` AND c.isPublished = ?`;
+          params.push(options.where.isPublished ? 1 : 0);
+        }
+        if (options?.where?.isFeatured !== undefined) {
+          sql += ` AND c.isFeatured = ?`;
+          params.push(options.where.isFeatured ? 1 : 0);
+        }
+        if (options?.where?.categoryId !== undefined) {
+          sql += ` AND c.categoryId = ?`;
+          params.push(Number(options.where.categoryId));
+        }
+        if (options?.where?.category?.slug !== undefined) {
+          sql += ` AND cat.slug = ?`;
+          params.push(options.where.category.slug);
+        }
+        if (options?.where?.slug !== undefined) {
+          sql += ` AND c.slug = ?`;
+          params.push(options.where.slug);
+        }
+        sql += buildOrderBy(options?.orderBy, 'c.isFeatured DESC, c.id ASC');
+        if (options?.take) {
+          sql += ` LIMIT ${Number(options.take)}`;
+        }
+        const rows = await query<any>(sql, params);
+        if (rows && rows.length > 0) {
+          return rows.map((r) => {
+            const { cat_id, cat_name, cat_slug, cat_icon, ...rest } = r;
+            return {
+              ...normalizeBooleans(rest, ['isFeatured', 'isPublished']),
+              category: cat_id ? { id: cat_id, name: cat_name, slug: cat_slug, icon: cat_icon } : null,
+            };
+          });
+        }
+      } catch (err) {}
+
       const store = getPersistentStore();
       let items = [...store.courses];
 
@@ -274,8 +321,34 @@ export const db = {
     },
 
     async findUnique(options: any) {
-      const store = getPersistentStore();
       const where = options?.where || {};
+      try {
+        let sql = `
+          SELECT c.*, cat.id as cat_id, cat.name as cat_name, cat.slug as cat_slug, cat.icon as cat_icon 
+          FROM courses c 
+          LEFT JOIN course_categories cat ON c.categoryId = cat.id 
+          WHERE 1=1
+        `;
+        const params: any[] = [];
+        if (where.id !== undefined) {
+          sql += ` AND c.id = ?`;
+          params.push(Number(where.id));
+        }
+        if (where.slug !== undefined) {
+          sql += ` AND c.slug = ?`;
+          params.push(where.slug);
+        }
+        const row = await queryOne<any>(sql, params);
+        if (row) {
+          const { cat_id, cat_name, cat_slug, cat_icon, ...rest } = row;
+          return {
+            ...normalizeBooleans(rest, ['isFeatured', 'isPublished']),
+            category: cat_id ? { id: cat_id, name: cat_name, slug: cat_slug, icon: cat_icon } : null,
+          };
+        }
+      } catch (err) {}
+
+      const store = getPersistentStore();
       const found = store.courses.find((c: any) => {
         if (where.id !== undefined && Number(c.id) === Number(where.id)) return true;
         if (where.slug !== undefined && c.slug === where.slug) return true;
@@ -317,7 +390,7 @@ export const db = {
         fee: Number(d.fee) || 0,
         discountFee: d.discountFee ? Number(d.discountFee) : null,
         batchInfo: d.batchInfo || null,
-        image: d.image || '/images/hero-classroom.jpg',
+        image: d.image || '/images/gallery/classroom-mock-test-1.jpg',
         isFeatured: d.isFeatured ? 1 : 0,
         isPublished: d.isPublished !== false ? 1 : 0,
         metaTitle: d.metaTitle || null,
@@ -330,7 +403,6 @@ export const db = {
       store.courses.unshift(newCourse as any);
       savePersistentStore(store);
 
-      // Async sync to MySQL if available
       try {
         const sql = `
           INSERT INTO courses (
@@ -360,8 +432,8 @@ export const db = {
           d.metaDescription || null,
           d.keywords || null,
         ];
-        execute(sql, params).catch(() => {});
-      } catch {}
+        await execute(sql, params);
+      } catch (e) {}
 
       const cat = store.categories.find((c: any) => Number(c.id) === catId);
       return {
@@ -373,25 +445,8 @@ export const db = {
     async update(data: any) {
       const id = Number(data.where?.id ?? data.id);
       const d = data.data || data;
-      const store = getPersistentStore();
-      const idx = store.courses.findIndex((c: any) => Number(c.id) === id);
-      if (idx === -1) {
-        throw new Error(`Course with ID ${id} not found`);
-      }
 
-      const existing = store.courses[idx];
-      const updated = {
-        ...existing,
-        ...d,
-        id,
-        isFeatured: d.isFeatured !== undefined ? (d.isFeatured ? 1 : 0) : existing.isFeatured,
-        isPublished: d.isPublished !== undefined ? (d.isPublished ? 1 : 0) : existing.isPublished,
-        updatedAt: new Date().toISOString(),
-      };
-      store.courses[idx] = updated;
-      savePersistentStore(store);
-
-      // Async MySQL update if running
+      // 1. MySQL direct update
       try {
         const updates: string[] = [];
         const params: any[] = [];
@@ -409,9 +464,31 @@ export const db = {
         if (updates.length > 0) {
           updates.push(`updatedAt = NOW(3)`);
           params.push(id);
-          execute(`UPDATE courses SET ${updates.join(', ')} WHERE id = ?`, params).catch(() => {});
+          await execute(`UPDATE courses SET ${updates.join(', ')} WHERE id = ?`, params);
         }
-      } catch {}
+      } catch (err: any) {
+        console.warn('MySQL courses update error:', err.message);
+      }
+
+      // 2. Persistent store update
+      const store = getPersistentStore();
+      const idx = store.courses.findIndex((c: any) => Number(c.id) === id);
+      let updated: any;
+      if (idx !== -1) {
+        updated = {
+          ...store.courses[idx],
+          ...d,
+          id,
+          isFeatured: d.isFeatured !== undefined ? (d.isFeatured ? 1 : 0) : store.courses[idx].isFeatured,
+          isPublished: d.isPublished !== undefined ? (d.isPublished ? 1 : 0) : store.courses[idx].isPublished,
+          updatedAt: new Date().toISOString(),
+        };
+        store.courses[idx] = updated;
+      } else {
+        updated = { id, ...d, updatedAt: new Date().toISOString() };
+        store.courses.push(updated);
+      }
+      savePersistentStore(store);
 
       const cat = store.categories.find((c: any) => Number(c.id) === Number(updated.categoryId));
       return {
@@ -422,14 +499,25 @@ export const db = {
 
     async delete(data: any) {
       const id = Number(data.where?.id ?? data.id ?? data);
+      await execute(`DELETE FROM courses WHERE id = ?`, [id]).catch(() => {});
       const store = getPersistentStore();
       store.courses = store.courses.filter((c: any) => Number(c.id) !== id);
       savePersistentStore(store);
-      execute(`DELETE FROM courses WHERE id = ?`, [id]).catch(() => {});
       return { id };
     },
 
     async count(options?: any) {
+      try {
+        let sql = `SELECT COUNT(*) as count FROM courses WHERE 1=1`;
+        const params: any[] = [];
+        if (options?.where?.isPublished !== undefined) {
+          sql += ` AND isPublished = ?`;
+          params.push(options.where.isPublished ? 1 : 0);
+        }
+        const row = await queryOne<{ count: number }>(sql, params);
+        if (row) return Number(row.count);
+      } catch (e) {}
+
       const store = getPersistentStore();
       if (options?.where?.isPublished !== undefined) {
         return store.courses.filter((c: any) => Boolean(c.isPublished) === Boolean(options.where.isPublished)).length;
@@ -580,6 +668,23 @@ export const db = {
   // 4. Faculty
   faculty: {
     async findMany(options?: any) {
+      try {
+        let sql = `SELECT * FROM faculty WHERE 1=1`;
+        const params: any[] = [];
+        if (options?.where?.isPublished !== undefined) {
+          sql += ` AND isPublished = ?`;
+          params.push(options.where.isPublished ? 1 : 0);
+        }
+        sql += buildOrderBy(options?.orderBy, '`order` ASC, id ASC');
+        if (options?.take) {
+          sql += ` LIMIT ${Number(options.take)}`;
+        }
+        const rows = await query<any>(sql, params);
+        if (rows && rows.length > 0) {
+          return rows.map((f: any) => normalizeBooleans(f, ['isPublished']));
+        }
+      } catch (e) {}
+
       const store = getPersistentStore();
       let items = [...store.faculty];
       if (options?.where?.isPublished !== undefined) {
@@ -594,6 +699,11 @@ export const db = {
 
     async findUnique(options: any) {
       const id = Number(options.where?.id ?? options.id);
+      try {
+        const row = await queryOne<any>(`SELECT * FROM faculty WHERE id = ?`, [id]);
+        if (row) return normalizeBooleans(row, ['isPublished']);
+      } catch (e) {}
+
       const store = getPersistentStore();
       const match = store.faculty.find((f: any) => Number(f.id) === id);
       return match ? normalizeBooleans(match, ['isPublished']) : null;
@@ -639,7 +749,7 @@ export const db = {
           d.order || 0,
           d.isPublished !== false ? 1 : 0,
         ];
-        execute(sql, params).catch(() => {});
+        await execute(sql, params);
       } catch {}
 
       return newMember;
@@ -648,8 +758,34 @@ export const db = {
     async update(data: any) {
       const id = Number(data.where?.id ?? data.id);
       const d = data.data || data;
+
+      // 1. MySQL direct update
+      try {
+        const updates: string[] = [];
+        const params: any[] = [];
+        for (const [k, v] of Object.entries(d)) {
+          if (k === 'id' || k === 'createdAt') continue;
+          const col = k === 'order' ? '`order`' : k;
+          updates.push(`${col} = ?`);
+          if (k === 'isPublished') {
+            params.push(v ? 1 : 0);
+          } else {
+            params.push(v === undefined ? null : v);
+          }
+        }
+        if (updates.length > 0) {
+          updates.push(`updatedAt = NOW(3)`);
+          params.push(id);
+          await execute(`UPDATE faculty SET ${updates.join(', ')} WHERE id = ?`, params);
+        }
+      } catch (err: any) {
+        console.warn('MySQL faculty update error:', err.message);
+      }
+
+      // 2. Persistent store update
       const store = getPersistentStore();
       const idx = store.faculty.findIndex((f: any) => Number(f.id) === id);
+      let updated: any;
       if (idx !== -1) {
         store.faculty[idx] = {
           ...store.faculty[idx],
@@ -659,43 +795,30 @@ export const db = {
           isPublished: d.isPublished !== undefined ? Boolean(d.isPublished) : store.faculty[idx].isPublished,
           updatedAt: new Date().toISOString(),
         };
-        savePersistentStore(store);
-
-        try {
-          const updates: string[] = [];
-          const params: any[] = [];
-          for (const [k, v] of Object.entries(d)) {
-            if (k === 'id' || k === 'createdAt') continue;
-            const col = k === 'order' ? '`order`' : k;
-            updates.push(`${col} = ?`);
-            if (k === 'isPublished') {
-              params.push(v ? 1 : 0);
-            } else {
-              params.push(v === undefined ? null : v);
-            }
-          }
-          if (updates.length > 0) {
-            updates.push(`updatedAt = NOW(3)`);
-            params.push(id);
-            execute(`UPDATE faculty SET ${updates.join(', ')} WHERE id = ?`, params).catch(() => {});
-          }
-        } catch {}
-
-        return normalizeBooleans(store.faculty[idx], ['isPublished']);
+        updated = store.faculty[idx];
+      } else {
+        updated = { id, ...d, updatedAt: new Date().toISOString() };
+        store.faculty.push(updated);
       }
-      return { id, ...d };
+      savePersistentStore(store);
+
+      return normalizeBooleans(updated, ['isPublished']);
     },
 
     async delete(data: any) {
       const id = Number(data.where?.id ?? data.id);
+      await execute(`DELETE FROM faculty WHERE id = ?`, [id]).catch(() => {});
       const store = getPersistentStore();
       store.faculty = store.faculty.filter((f: any) => Number(f.id) !== id);
       savePersistentStore(store);
-      execute(`DELETE FROM faculty WHERE id = ?`, [id]).catch(() => {});
       return { id };
     },
 
     async count() {
+      try {
+        const row = await queryOne<{ count: number }>(`SELECT COUNT(*) as count FROM faculty WHERE isPublished = 1`);
+        if (row) return Number(row.count);
+      } catch (e) {}
       const store = getPersistentStore();
       return store.faculty.length;
     },

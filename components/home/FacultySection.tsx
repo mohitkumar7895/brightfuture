@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { GraduationCap, Award, ArrowRight } from 'lucide-react';
 import AnimatedSectionHeader from '@/components/ui/AnimatedSectionHeader';
+import { getImageUrl } from '@/lib/utils';
 
 export interface FacultyMember {
   id: number;

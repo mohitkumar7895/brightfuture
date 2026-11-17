@@ -45,3 +45,14 @@ export function slugify(text: string): string {
     .replace(/\-\-+/g, '-');
 }
 
+export function getImageUrl(url: string | null | undefined, fallback: string = '/images/hero-classroom.jpg', version?: any): string {
+  if (!url || typeof url !== 'string' || url.trim() === '') return fallback;
+  const clean = url.trim();
+  if (clean.startsWith('data:') || clean.startsWith('http://') || clean.startsWith('https://') || clean.includes('?')) {
+    return clean;
+  }
+  const v = version ? (typeof version === 'string' ? new Date(version).getTime() || '1' : version) : '2';
+  return `${clean}?v=${v}`;
+}
+
+

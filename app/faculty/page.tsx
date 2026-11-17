@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import db from '@/lib/db';
 import { GraduationCap, Award, BookOpen, Clock, ArrowRight } from 'lucide-react';
+import { getImageUrl } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -101,7 +102,7 @@ export default async function FacultyPage() {
               <div>
                 <div className="relative aspect-[3/4] bg-slate-100 overflow-hidden">
                   <Image
-                    src={mentor.photo || '/images/faculty-teaching.jpg'}
+                    src={getImageUrl(mentor.photo, '/images/faculty-teaching.jpg', (mentor as any).updatedAt)}
                     alt={mentor.name}
                     fill
                     quality={100}

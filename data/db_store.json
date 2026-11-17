@@ -14,13 +14,13 @@
       "discountFee": 5999,
       "batchInfo": "Morning Batch: 7:30 AM - 10:30 AM | Evening Batch: 3:30 PM - 6:30 PM",
       "image": "/images/gallery/felicitation-police-award.jpg",
-      "isFeatured": 1,
+      "isFeatured": 0,
       "isPublished": 1,
       "metaTitle": "UP Police Constable & SI Coaching in Lalitpur - Bright Future",
       "metaDescription": "Join the best UP Police Constable and Sub-Inspector coaching in Lalitpur at Bright Future Competition Institute. Daily tests, expert faculty, and proven results.",
-      "keywords": "UP Police coaching Lalitpur, UP SI coaching, Police Constable exam preparation Lalitpur, Bright Future Institute",
+      "keywords": null,
       "createdAt": "2026-11-05T11:10:13.000Z",
-      "updatedAt": "2026-11-05T11:10:13.000Z"
+      "updatedAt": "2026-11-17T01:28:48.147Z"
     },
     {
       "id": 2,
@@ -62,9 +62,9 @@
       "isPublished": 1,
       "metaTitle": "Railway RRB NTPC & Group D Coaching in Lalitpur - Bright Future",
       "metaDescription": "Prepare for Railway RRB NTPC, ALP, and Group D in Lalitpur. Get high-yield study material and mock tests at Bright Future Competition Institute.",
-      "keywords": "Railway coaching Lalitpur, RRB NTPC coaching, Group D classes Lalitpur",
+      "keywords": null,
       "createdAt": "2026-11-05T11:10:13.000Z",
-      "updatedAt": "2026-11-05T11:10:13.000Z"
+      "updatedAt": "2026-11-17T00:00:31.173Z"
     },
     {
       "id": 4,
@@ -84,9 +84,9 @@
       "isPublished": 1,
       "metaTitle": "UPSSSC PET Coaching in Lalitpur | Lekhpal & VDO Classes",
       "metaDescription": "Score 99 percentile in UPSSSC PET with expert guidance at Bright Future Competition Institute, Station Road, Lalitpur.",
-      "keywords": "UPSSSC PET coaching Lalitpur, Lekhpal coaching Lalitpur, VDO batch Lalitpur",
+      "keywords": null,
       "createdAt": "2026-11-05T11:10:13.000Z",
-      "updatedAt": "2026-11-05T11:10:13.000Z"
+      "updatedAt": "2026-11-17T00:03:58.940Z"
     },
     {
       "id": 5,
@@ -131,6 +131,28 @@
       "keywords": "Competitive exam foundation batch Lalitpur, One day exam coaching Lalitpur, Bright Future Lalitpur",
       "createdAt": "2026-11-05T11:10:13.000Z",
       "updatedAt": "2026-11-05T11:10:13.000Z"
+    },
+    {
+      "id": 10,
+      "title": "gdgg",
+      "slug": "gdgg",
+      "categoryId": 1,
+      "shortDescription": "ccgcg",
+      "description": "Comprehensive",
+      "eligibility": "12th Pass (Intermediate) / Graduate depending on examination requirements",
+      "duration": "6 Months",
+      "subjects": "General Knowledge, Maths, Reasoning, General Hindi",
+      "fee": 7500,
+      "discountFee": 5999,
+      "batchInfo": "Morning: 8:00 AM - 11:30 AM | Evening: 3:30 PM - 6:30 PM",
+      "image": "/images/gallery/classroom-lecture-hall.jpg",
+      "isFeatured": 0,
+      "isPublished": 1,
+      "metaTitle": null,
+      "metaDescription": null,
+      "keywords": null,
+      "createdAt": "2026-11-15T15:39:32.014Z",
+      "updatedAt": "2026-11-15T10:48:51.411Z"
     }
   ],
   "categories": [
@@ -276,7 +298,7 @@
       "order": 1,
       "isPublished": 1,
       "createdAt": "2026-11-05T11:10:13.000Z",
-      "updatedAt": "2026-11-17T06:18:22.408Z"
+      "updatedAt": "2026-11-05T11:10:13.000Z"
     },
     {
       "id": 2,
@@ -333,6 +355,20 @@
       "isPublished": 1,
       "createdAt": "2026-11-05T11:10:13.000Z",
       "updatedAt": "2026-11-05T11:10:13.000Z"
+    },
+    {
+      "id": 6,
+      "name": "hgjhkj",
+      "designation": "Faculty Member",
+      "qualification": "jgvjmh",
+      "experience": "8+ Years",
+      "subjects": "gcvhg",
+      "bio": "kjgjh",
+      "photo": "/images/faculty/faculty-team-mentors.jpg",
+      "order": 6,
+      "isPublished": 0,
+      "createdAt": "2026-11-15T15:40:56.026Z",
+      "updatedAt": "2026-11-15T15:40:56.026Z"
     }
   ],
   "notices": [
