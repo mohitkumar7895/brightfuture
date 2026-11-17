@@ -43,8 +43,55 @@ export default async function FacultyPage() {
         </div>
       </section>
 
+      {/* Real Faculty Team Showcase Feature */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+        <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 border border-slate-800 shadow-xl overflow-hidden relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div className="lg:col-span-7 space-y-3 sm:space-y-4 text-white">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-amber-300 bg-amber-400/10 border border-amber-400/20 uppercase tracking-wider">
+                <Award className="w-3.5 h-3.5" />
+                Dedicated Mentorship Team
+              </span>
+              <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white">
+                Faculty Mentors &amp; Educators at Lalitpur Campus
+              </h2>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                Direct classroom guidance by subject specialists in Mathematics, Reasoning, General Studies, Hindi, and Science. Every batch is mentored under strict examination conditions with weekly performance tracking and personal doubt resolution.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-bold text-slate-200">
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                  Concept-First Shortcut Methods
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-amber-400" />
+                  Sunday OMR Mock Test Series
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-blue-400" />
+                  Weekly Doubt Counters
+                </span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
+                <Image
+                  src="/images/faculty/faculty-team-mentors.jpg"
+                  alt="Bright Future Competition Institute faculty mentors team with topper student"
+                  fill
+                  quality={100}
+                  unoptimized={true}
+                  className="object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Faculty Profiles Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {faculty.map((mentor) => (
             <div
