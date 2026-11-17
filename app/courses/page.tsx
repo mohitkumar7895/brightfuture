@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import db from '@/lib/db';
 import { Clock, Users, ArrowRight, Sparkles, BookOpen, Tag } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, getImageUrl } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -112,7 +112,7 @@ export default async function CoursesPage({
                   <div>
                     <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                       <Image
-                        src={course.image || '/images/hero-classroom.jpg'}
+                        src={getImageUrl(course.image, '/images/hero-classroom.jpg', course.updatedAt)}
                         alt={course.title}
                         fill
                         quality={100}

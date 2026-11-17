@@ -10,6 +10,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import AnimatedSectionHeader from '@/components/ui/AnimatedSectionHeader';
+import { getImageUrl } from '@/lib/utils';
 
 export interface CourseItem {
   id: number;
@@ -82,7 +83,7 @@ export default function PopularCourses({ courses = [] }: PopularCoursesProps) {
                   {/* Thumbnail with Badge */}
                   <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                     <Image
-                      src={course.image || '/images/hero-classroom.jpg'}
+                      src={getImageUrl(course.image, '/images/hero-classroom.jpg', (course as any).updatedAt)}
                       alt={course.title}
                       fill
                       quality={100}

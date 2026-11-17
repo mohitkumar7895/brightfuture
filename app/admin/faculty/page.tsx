@@ -16,6 +16,7 @@ import {
   Check 
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { getImageUrl } from '@/lib/utils';
 
 const PRESET_FACULTY_PHOTOS = [
   { name: 'Er. A. K. Sharma (Director)', path: '/images/faculty/er-ak-sharma.jpg' },

@@ -21,7 +21,7 @@ import {
   Image as ImageIcon,
   Check
 } from 'lucide-react';
-import { formatCurrency, slugify } from '@/lib/utils';
+import { formatCurrency, slugify, getImageUrl } from '@/lib/utils';
 import { toast } from 'sonner';
 
 const PRESET_COACHING_IMAGES = [
@@ -329,7 +329,7 @@ export default function AdminCoursesPage() {
                     <td className="py-3 px-4">
                       <div className="relative w-16 h-11 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs shrink-0">
                         <Image
-                          src={c.image || '/images/hero-classroom.jpg'}
+                          src={getImageUrl(c.image, '/images/hero-classroom.jpg', c.updatedAt)}
                           alt={c.title}
                           fill
                           quality={100}

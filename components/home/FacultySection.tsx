@@ -72,7 +72,7 @@ export default function FacultySection({ faculty = [] }: FacultySectionProps) {
               <div>
                 <div className="relative aspect-[3/4] bg-slate-100 overflow-hidden">
                   <Image
-                    src={mentor.photo || '/images/faculty-teaching.jpg'}
+                    src={getImageUrl(mentor.photo, '/images/faculty-teaching.jpg', (mentor as any).updatedAt)}
                     alt={mentor.name}
                     fill
                     quality={100}

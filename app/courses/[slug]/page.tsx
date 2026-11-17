@@ -14,7 +14,7 @@ import {
   ShieldCheck, 
   Share2 
 } from 'lucide-react';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, getImageUrl } from '@/lib/utils';
 import AdmissionEnquiryForm from '@/components/home/AdmissionEnquiryForm';
 
 export const dynamic = 'force-dynamic';
@@ -138,7 +138,7 @@ export default async function CourseDetailPage({
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md">
               <div className="relative aspect-[16/9] w-full bg-slate-900">
                 <Image
-                  src={course.image || '/images/hero-classroom.jpg'}
+                  src={getImageUrl(course.image, '/images/hero-classroom.jpg', course.updatedAt)}
                   alt={course.title}
                   fill
                   priority
