@@ -277,7 +277,7 @@ export const db = {
             };
           });
         }
-      } catch (err) {}
+      } catch (err) { }
 
       const store = getPersistentStore();
       let items = [...store.courses];
@@ -346,7 +346,7 @@ export const db = {
             category: cat_id ? { id: cat_id, name: cat_name, slug: cat_slug, icon: cat_icon } : null,
           };
         }
-      } catch (err) {}
+      } catch (err) { }
 
       const store = getPersistentStore();
       const found = store.courses.find((c: any) => {
@@ -433,7 +433,7 @@ export const db = {
           d.keywords || null,
         ];
         await execute(sql, params);
-      } catch (e) {}
+      } catch (e) { }
 
       const cat = store.categories.find((c: any) => Number(c.id) === catId);
       return {
@@ -499,7 +499,7 @@ export const db = {
 
     async delete(data: any) {
       const id = Number(data.where?.id ?? data.id ?? data);
-      await execute(`DELETE FROM courses WHERE id = ?`, [id]).catch(() => {});
+      await execute(`DELETE FROM courses WHERE id = ?`, [id]).catch(() => { });
       const store = getPersistentStore();
       store.courses = store.courses.filter((c: any) => Number(c.id) !== id);
       savePersistentStore(store);
@@ -516,7 +516,7 @@ export const db = {
         }
         const row = await queryOne<{ count: number }>(sql, params);
         if (row) return Number(row.count);
-      } catch (e) {}
+      } catch (e) { }
 
       const store = getPersistentStore();
       if (options?.where?.isPublished !== undefined) {
@@ -683,7 +683,7 @@ export const db = {
         if (rows && rows.length > 0) {
           return rows.map((f: any) => normalizeBooleans(f, ['isPublished']));
         }
-      } catch (e) {}
+      } catch (e) { }
 
       const store = getPersistentStore();
       let items = [...store.faculty];
@@ -702,7 +702,7 @@ export const db = {
       try {
         const row = await queryOne<any>(`SELECT * FROM faculty WHERE id = ?`, [id]);
         if (row) return normalizeBooleans(row, ['isPublished']);
-      } catch (e) {}
+      } catch (e) { }
 
       const store = getPersistentStore();
       const match = store.faculty.find((f: any) => Number(f.id) === id);
@@ -750,7 +750,7 @@ export const db = {
           d.isPublished !== false ? 1 : 0,
         ];
         await execute(sql, params);
-      } catch {}
+      } catch { }
 
       return newMember;
     },
@@ -807,7 +807,7 @@ export const db = {
 
     async delete(data: any) {
       const id = Number(data.where?.id ?? data.id);
-      await execute(`DELETE FROM faculty WHERE id = ?`, [id]).catch(() => {});
+      await execute(`DELETE FROM faculty WHERE id = ?`, [id]).catch(() => { });
       const store = getPersistentStore();
       store.faculty = store.faculty.filter((f: any) => Number(f.id) !== id);
       savePersistentStore(store);
@@ -818,7 +818,7 @@ export const db = {
       try {
         const row = await queryOne<{ count: number }>(`SELECT COUNT(*) as count FROM faculty WHERE isPublished = 1`);
         if (row) return Number(row.count);
-      } catch (e) {}
+      } catch (e) { }
       const store = getPersistentStore();
       return store.faculty.length;
     },
@@ -885,8 +885,8 @@ export const db = {
           d.description || null,
           d.isFeatured !== false ? 1 : 0,
         ];
-        execute(sql, params).catch(() => {});
-      } catch {}
+        execute(sql, params).catch(() => { });
+      } catch { }
 
       return newResult;
     },
@@ -921,9 +921,9 @@ export const db = {
           if (updates.length > 0) {
             updates.push(`updatedAt = NOW(3)`);
             params.push(id);
-            execute(`UPDATE results SET ${updates.join(', ')} WHERE id = ?`, params).catch(() => {});
+            execute(`UPDATE results SET ${updates.join(', ')} WHERE id = ?`, params).catch(() => { });
           }
-        } catch {}
+        } catch { }
 
         return store.results[idx];
       }
@@ -935,7 +935,7 @@ export const db = {
       const store = getPersistentStore();
       store.results = store.results.filter((r: any) => Number(r.id) !== id);
       savePersistentStore(store);
-      execute(`DELETE FROM results WHERE id = ?`, [id]).catch(() => {});
+      execute(`DELETE FROM results WHERE id = ?`, [id]).catch(() => { });
       return { id };
     },
 

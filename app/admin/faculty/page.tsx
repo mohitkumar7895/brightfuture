@@ -2,18 +2,18 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { 
-  Plus, 
-  Edit3, 
-  Trash2, 
-  Award, 
-  BookOpen, 
-  Clock, 
-  X, 
-  Upload, 
-  Loader2, 
-  Image as ImageIcon, 
-  Check 
+import {
+  Plus,
+  Edit3,
+  Trash2,
+  Award,
+  BookOpen,
+  Clock,
+  X,
+  Upload,
+  Loader2,
+  Image as ImageIcon,
+  Check
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { getImageUrl } from '@/lib/utils';
@@ -218,7 +218,7 @@ export default function AdminFacultyPage() {
               <div className="flex items-start gap-4">
                 <div className="relative w-16 h-20 rounded-2xl overflow-hidden shrink-0 border border-slate-200 bg-slate-100 shadow-2xs">
                   <Image
-                    src={f.photo || '/images/faculty-teaching.jpg'}
+                    src={getImageUrl(f.photo, '/images/faculty-teaching.jpg', f.updatedAt)}
                     alt={f.name}
                     fill
                     quality={100}
@@ -393,12 +393,12 @@ export default function AdminFacultyPage() {
                         <span>Upload</span>
                       </>
                     )}
-                    <input 
-                      type="file" 
-                      accept="image/*" 
+                    <input
+                      type="file"
+                      accept="image/*"
                       disabled={isUploading}
-                      onChange={handleFileUpload} 
-                      className="hidden" 
+                      onChange={handleFileUpload}
+                      className="hidden"
                     />
                   </label>
                 </div>
@@ -420,11 +420,10 @@ export default function AdminFacultyPage() {
                           key={preset.path}
                           type="button"
                           onClick={() => setPhoto(preset.path)}
-                          className={`relative group rounded-xl overflow-hidden border-2 text-left transition-all ${
-                            isSelected
+                          className={`relative group rounded-xl overflow-hidden border-2 text-left transition-all ${isSelected
                               ? 'border-blue-700 ring-2 ring-blue-500/30 scale-[1.02]'
                               : 'border-slate-200 hover:border-blue-400 opacity-80 hover:opacity-100'
-                          }`}
+                            }`}
                         >
                           <div className="relative aspect-square bg-slate-200">
                             <Image
