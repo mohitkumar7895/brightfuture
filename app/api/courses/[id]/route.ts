@@ -4,6 +4,9 @@ import db from '@/lib/db';
 import { courseSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }

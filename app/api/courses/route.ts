@@ -4,6 +4,9 @@ import db from '@/lib/db';
 import { courseSchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -26,16 +29,18 @@ export async function GET(request: Request) {
       db.course.findMany({
         where,
         orderBy: [{ isFeatured: 'desc' }, { id: 'asc' }],
-        include: {
-          category: {
-            select: { id: true, name: true, slug: true, icon: true },
-          },
-        },
       }),
       db.courseCategory.findMany().catch(() => []),
     ]);
 
-    return NextResponse.json({ success: true, courses, categories });
+    return NextResponse.json(
+      { success: true, courses, categories },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Fetch courses error:', error);
     return NextResponse.json({ error: 'Failed to fetch courses' }, { status: 500 });

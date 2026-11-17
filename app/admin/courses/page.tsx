@@ -16,10 +16,31 @@ import {
   EyeOff,
   BookOpen,
   Calendar,
-  Sparkles
+  Sparkles,
+  Loader2,
+  Image as ImageIcon,
+  Check
 } from 'lucide-react';
 import { formatCurrency, slugify } from '@/lib/utils';
 import { toast } from 'sonner';
+
+const PRESET_COACHING_IMAGES = [
+  { name: 'Police Award', path: '/images/gallery/felicitation-police-award.jpg' },
+  { name: 'Sunday Mock Test 1', path: '/images/gallery/classroom-mock-test-1.jpg' },
+  { name: 'Sunday Mock Test 2', path: '/images/gallery/classroom-mock-test-2.jpg' },
+  { name: 'Batch Classroom', path: '/images/gallery/classroom-batch-session.jpg' },
+  { name: 'Champions Class', path: '/images/gallery/classroom-champions.jpg' },
+  { name: 'Students Batch', path: '/images/gallery/classroom-students-batch.jpg' },
+  { name: 'Lecture Hall', path: '/images/gallery/classroom-lecture-hall.jpg' },
+  { name: 'Head Office', path: '/images/gallery/bfci-head-office-station-road.jpg' },
+  { name: 'Digital Library', path: '/images/gallery/bfci-digital-library-chandmari.jpg' },
+  { name: 'Police Felicitation', path: '/images/gallery/toppers-police-felicitation.jpg' },
+  { name: 'Topper Trophy 1', path: '/images/gallery/toppers-trophy-celebration-1.jpg' },
+  { name: 'Topper Trophy 2', path: '/images/gallery/toppers-trophy-celebration-2.jpg' },
+  { name: 'Female Toppers', path: '/images/gallery/female-toppers-awards.jpg' },
+  { name: 'Mock Trophy Shield', path: '/images/gallery/mock-test-topper-trophy.jpg' },
+  { name: 'Female Toppers Shield', path: '/images/gallery/female-toppers-felicitation.jpg' },
+];
 
 export default function AdminCoursesPage() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -30,6 +51,7 @@ export default function AdminCoursesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   // Form State
   const [title, setTitle] = useState('');
@@ -56,7 +78,7 @@ export default function AdminCoursesPage() {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/courses?all=true');
+      const res = await fetch('/api/courses?all=true', { cache: 'no-store' });
       const data = await res.json();
       if (res.ok) {
         setCourses(data.courses || []);
@@ -124,9 +146,13 @@ export default function AdminCoursesPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Reset input value so re-selecting same file works
+    e.target.value = '';
+
     const formData = new FormData();
     formData.append('file', file);
 
+    setIsUploading(true);
     try {
       toast.info('Uploading course image...');
       const res = await fetch('/api/upload', {
@@ -142,6 +168,8 @@ export default function AdminCoursesPage() {
       }
     } catch {
       toast.error('Upload failed');
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -201,13 +229,13 @@ export default function AdminCoursesPage() {
         setModalOpen(false);
         const savedCourse = data.course;
         if (savedCourse) {
-          const selectedCat = categories.find((cat) => cat.id === savedCourse.categoryId);
+          const selectedCat = categories.find((cat) => Number(cat.id) === Number(savedCourse.categoryId));
           const courseWithCat = {
             ...savedCourse,
             category: selectedCat ? { id: selectedCat.id, name: selectedCat.name, slug: selectedCat.slug, icon: selectedCat.icon } : null,
           };
           if (editingCourse) {
-            setCourses((prev) => prev.map((c) => (c.id === courseWithCat.id ? { ...c, ...courseWithCat } : c)));
+            setCourses((prev) => prev.map((c) => (Number(c.id) === Number(courseWithCat.id) ? { ...c, ...courseWithCat } : c)));
           } else {
             setCourses((prev) => [courseWithCat, ...prev]);
           }
@@ -286,6 +314,7 @@ export default function AdminCoursesPage() {
             <table className="w-full text-left text-xs whitespace-nowrap">
               <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[10px] border-b border-slate-100">
                 <tr>
+                  <th className="py-3.5 px-4 w-20">Banner</th>
                   <th className="py-3.5 px-6">Course Name</th>
                   <th className="py-3.5 px-6">Category</th>
                   <th className="py-3.5 px-6">Duration</th>
@@ -297,6 +326,18 @@ export default function AdminCoursesPage() {
               <tbody className="divide-y divide-slate-100 font-medium">
                 {courses.map((c) => (
                   <tr key={c.id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="py-3 px-4">
+                      <div className="relative w-16 h-11 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs shrink-0">
+                        <Image
+                          src={c.image || '/images/hero-classroom.jpg'}
+                          alt={c.title}
+                          fill
+                          quality={100}
+                          unoptimized={true}
+                          className="object-cover"
+                        />
+                      </div>
+                    </td>
                     <td className="py-4 px-6 font-bold text-slate-900">
                       <div>
                         <span className="text-sm block">{c.title}</span>
@@ -592,19 +633,75 @@ export default function AdminCoursesPage() {
                     type="text"
                     value={image}
                     onChange={(e) => setImage(e.target.value)}
-                    placeholder="/images/hero-classroom.jpg"
-                    className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
+                    placeholder="/images/courses/up-police-target-batch.jpg"
+                    className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
-                  <label className="px-4 py-2 bg-blue-800 hover:bg-blue-900 text-white font-bold rounded-xl cursor-pointer flex items-center gap-1.5 shadow-sm">
-                    <Upload className="w-3.5 h-3.5" />
-                    <span>Upload</span>
+                  <label className={`px-4 py-2 bg-blue-800 hover:bg-blue-900 text-white font-bold rounded-xl cursor-pointer flex items-center gap-1.5 shadow-sm transition-colors ${isUploading ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>Upload</span>
+                      </>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
+                      disabled={isUploading}
                       onChange={handleFileUpload}
                       className="hidden"
                     />
                   </label>
+                </div>
+
+                {/* Instant Preset Coaching Photos */}
+                <div className="mt-3 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                      <ImageIcon className="w-3 h-3 text-blue-600" />
+                      Quick Select Coaching Photo:
+                    </span>
+                    <span className="text-[10px] text-slate-400">Click any photo to apply</span>
+                  </div>
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 max-h-40 overflow-y-auto p-1.5 bg-slate-50 border border-slate-200 rounded-2xl">
+                    {PRESET_COACHING_IMAGES.map((preset) => {
+                      const isSelected = image === preset.path;
+                      return (
+                        <button
+                          key={preset.path}
+                          type="button"
+                          onClick={() => setImage(preset.path)}
+                          className={`relative group rounded-xl overflow-hidden border-2 text-left transition-all ${
+                            isSelected
+                              ? 'border-blue-700 ring-2 ring-blue-500/30 scale-[1.02]'
+                              : 'border-slate-200 hover:border-blue-400 opacity-80 hover:opacity-100'
+                          }`}
+                        >
+                          <div className="relative aspect-[16/10] bg-slate-200">
+                            <Image
+                              src={preset.path}
+                              alt={preset.name}
+                              fill
+                              unoptimized={true}
+                              className="object-cover"
+                            />
+                            {isSelected && (
+                              <div className="absolute inset-0 bg-blue-900/40 flex items-center justify-center">
+                                <Check className="w-4 h-4 text-white stroke-[3]" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-1 bg-white text-[9px] font-bold text-slate-700 truncate">
+                            {preset.name}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
@@ -613,7 +710,7 @@ export default function AdminCoursesPage() {
                 <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 p-2.5 space-y-1.5">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">
-                      Course Banner Preview
+                      Selected Banner Preview
                     </span>
                     <button
                       type="button"
@@ -628,8 +725,9 @@ export default function AdminCoursesPage() {
                       src={image}
                       alt={title || 'Course Image'}
                       fill
+                      quality={100}
+                      unoptimized={true}
                       className="object-cover"
-                      unoptimized={image.startsWith('data:') || image.startsWith('http')}
                     />
                   </div>
                 </div>

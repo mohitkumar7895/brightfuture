@@ -4,12 +4,22 @@ import db from '@/lib/db';
 import { facultySchema } from '@/lib/validations';
 import { getAdminSession } from '@/lib/auth/session';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET() {
   try {
     const faculty = await db.faculty.findMany({
       orderBy: [{ order: 'asc' }, { id: 'asc' }],
     });
-    return NextResponse.json({ success: true, faculty });
+    return NextResponse.json(
+      { success: true, faculty },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Fetch faculty error:', error);
     return NextResponse.json({ error: 'Failed to fetch faculty' }, { status: 500 });

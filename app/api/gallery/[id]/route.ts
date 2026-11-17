@@ -3,6 +3,9 @@ import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth/session';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }

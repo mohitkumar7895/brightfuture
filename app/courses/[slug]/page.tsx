@@ -142,6 +142,8 @@ export default async function CourseDetailPage({
                   alt={course.title}
                   fill
                   priority
+                  quality={100}
+                  unoptimized={true}
                   sizes="(max-width: 1024px) 100vw, 66vw"
                   className="object-cover"
                 />

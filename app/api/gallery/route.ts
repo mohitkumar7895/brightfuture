@@ -3,6 +3,9 @@ import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { getAdminSession } from '@/lib/auth/session';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -31,7 +34,14 @@ export async function GET(request: Request) {
       orderBy: { name: 'asc' },
     });
 
-    return NextResponse.json({ success: true, items, categories });
+    return NextResponse.json(
+      { success: true, items, categories },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Fetch gallery error:', error);
     return NextResponse.json({ error: 'Failed to fetch gallery' }, { status: 500 });

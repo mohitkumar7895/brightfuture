@@ -2,8 +2,29 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Plus, Edit3, Trash2, Award, BookOpen, Clock, X, Upload } from 'lucide-react';
+import { 
+  Plus, 
+  Edit3, 
+  Trash2, 
+  Award, 
+  BookOpen, 
+  Clock, 
+  X, 
+  Upload, 
+  Loader2, 
+  Image as ImageIcon, 
+  Check 
+} from 'lucide-react';
 import { toast } from 'sonner';
+
+const PRESET_FACULTY_PHOTOS = [
+  { name: 'Er. A. K. Sharma (Director)', path: '/images/faculty/er-ak-sharma.jpg' },
+  { name: 'Dr. R. P. Singh (GS & Polity)', path: '/images/faculty/dr-rp-singh.jpg' },
+  { name: 'Prof. Neeraj Tiwari (Maths)', path: '/images/faculty/prof-neeraj-tiwari.jpg' },
+  { name: 'Ms. Priya Sahu (Reasoning)', path: '/images/faculty/ms-priya-sahu.jpg' },
+  { name: 'Vivek Richariya (Hindi)', path: '/images/faculty/vivek-richariya.jpg' },
+  { name: 'Faculty Team Mentors', path: '/images/faculty/faculty-team-mentors.jpg' },
+];
 
 export default function AdminFacultyPage() {
   const [faculty, setFaculty] = useState<any[]>([]);
@@ -13,6 +34,7 @@ export default function AdminFacultyPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingFaculty, setEditingFaculty] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   // Form State
   const [name, setName] = useState('');
@@ -31,7 +53,7 @@ export default function AdminFacultyPage() {
   const fetchFaculty = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/faculty');
+      const res = await fetch('/api/faculty', { cache: 'no-store' });
       const data = await res.json();
       if (res.ok) {
         setFaculty(data.faculty || []);
@@ -73,9 +95,13 @@ export default function AdminFacultyPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Reset input value so user can re-upload if needed
+    e.target.value = '';
+
     const formData = new FormData();
     formData.append('file', file);
 
+    setIsUploading(true);
     try {
       toast.info('Uploading photo...');
       const res = await fetch('/api/upload', {
@@ -85,12 +111,14 @@ export default function AdminFacultyPage() {
       const data = await res.json();
       if (res.ok) {
         setPhoto(data.url);
-        toast.success('Photo uploaded');
+        toast.success('Photo uploaded successfully');
       } else {
         toast.error(data.error || 'Upload failed');
       }
     } catch {
       toast.error('Upload failed');
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -99,13 +127,13 @@ export default function AdminFacultyPage() {
     setIsSubmitting(true);
 
     const payload = {
-      name,
-      designation,
-      qualification,
-      experience,
-      subjects,
-      bio,
-      photo,
+      name: name.trim(),
+      designation: designation.trim(),
+      qualification: qualification.trim(),
+      experience: experience.trim(),
+      subjects: subjects.trim(),
+      bio: bio?.trim() || null,
+      photo: photo || '/images/faculty-teaching.jpg',
       order: Number(order) || 0,
       isPublished: true,
     };
@@ -120,12 +148,19 @@ export default function AdminFacultyPage() {
         body: JSON.stringify(payload),
       });
 
+      const data = await res.json();
       if (res.ok) {
-        toast.success(editingFaculty ? 'Faculty updated' : 'Faculty added successfully');
+        toast.success(editingFaculty ? 'Faculty updated successfully' : 'Faculty added successfully');
         setModalOpen(false);
+        const saved = data.faculty || { ...payload, id: editingFaculty?.id || Date.now() };
+        if (editingFaculty) {
+          setFaculty((prev) => prev.map((f) => (Number(f.id) === Number(saved.id) ? { ...f, ...saved } : f)));
+        } else {
+          setFaculty((prev) => [saved, ...prev]);
+        }
         fetchFaculty();
       } else {
-        toast.error('Failed to save faculty details');
+        toast.error(data.error || 'Failed to save faculty details');
       }
     } catch {
       toast.error('Error saving faculty member');
@@ -334,21 +369,111 @@ export default function AdminFacultyPage() {
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Profile Photo</label>
+                <label className="block font-bold text-slate-700 mb-1">Profile Photo / Upload</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="text"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
-                    className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl"
+                    placeholder="/images/faculty/er-ak-sharma.jpg"
+                    className="flex-1 px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
-                  <label className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl cursor-pointer flex items-center gap-1.5">
-                    <Upload className="w-3.5 h-3.5" />
-                    <span>Upload</span>
-                    <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+                  <label className={`px-4 py-2 bg-blue-800 hover:bg-blue-900 text-white font-bold rounded-xl cursor-pointer flex items-center gap-1.5 shadow-sm transition-colors ${isUploading ? 'opacity-60 cursor-not-allowed' : ''}`}>
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>Upload</span>
+                      </>
+                    )}
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      disabled={isUploading}
+                      onChange={handleFileUpload} 
+                      className="hidden" 
+                    />
                   </label>
                 </div>
+
+                {/* Instant Preset Faculty Photos */}
+                <div className="mt-3 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                      <ImageIcon className="w-3 h-3 text-blue-600" />
+                      Quick Select Faculty Portrait:
+                    </span>
+                    <span className="text-[10px] text-slate-400">Click photo to select</span>
+                  </div>
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 p-1.5 bg-slate-50 border border-slate-200 rounded-2xl">
+                    {PRESET_FACULTY_PHOTOS.map((preset) => {
+                      const isSelected = photo === preset.path;
+                      return (
+                        <button
+                          key={preset.path}
+                          type="button"
+                          onClick={() => setPhoto(preset.path)}
+                          className={`relative group rounded-xl overflow-hidden border-2 text-left transition-all ${
+                            isSelected
+                              ? 'border-blue-700 ring-2 ring-blue-500/30 scale-[1.02]'
+                              : 'border-slate-200 hover:border-blue-400 opacity-80 hover:opacity-100'
+                          }`}
+                        >
+                          <div className="relative aspect-square bg-slate-200">
+                            <Image
+                              src={preset.path}
+                              alt={preset.name}
+                              fill
+                              unoptimized={true}
+                              className="object-cover"
+                            />
+                            {isSelected && (
+                              <div className="absolute inset-0 bg-blue-900/40 flex items-center justify-center">
+                                <Check className="w-4 h-4 text-white stroke-[3]" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-1 bg-white text-[9px] font-bold text-slate-700 truncate">
+                            {preset.name.split(' ')[0]}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
+
+              {/* Photo Preview */}
+              {photo && (
+                <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 p-2.5 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">
+                      Selected Photo Preview
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setPhoto('/images/faculty/er-ak-sharma.jpg')}
+                      className="text-[11px] font-bold text-slate-500 hover:text-slate-700"
+                    >
+                      Reset Default
+                    </button>
+                  </div>
+                  <div className="relative aspect-[4/3] w-32 mx-auto rounded-xl overflow-hidden bg-slate-900 border border-slate-200 shadow-inner">
+                    <Image
+                      src={photo}
+                      alt={name || 'Faculty Member'}
+                      fill
+                      quality={100}
+                      unoptimized={true}
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
                 <button
