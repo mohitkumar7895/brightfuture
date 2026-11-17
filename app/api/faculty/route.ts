@@ -37,10 +37,42 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
+
+    if (Array.isArray(body)) {
+      const createdItems = [];
+      for (const item of body) {
+        const validated = facultySchema.parse(item);
+        const member = await db.faculty.create({
+          data: {
+            ...validated,
+            name: validated.name || 'Faculty Mentor',
+            designation: validated.designation || 'Educator',
+            qualification: validated.qualification || 'Expert Mentor',
+            experience: validated.experience || 'Experienced',
+            subjects: validated.subjects || 'General',
+          },
+        });
+        createdItems.push(member);
+      }
+      try {
+        revalidatePath('/', 'layout');
+        revalidatePath('/faculty');
+        revalidatePath('/about');
+      } catch {}
+      return NextResponse.json({ success: true, faculty: createdItems, items: createdItems });
+    }
+
     const validated = facultySchema.parse(body);
 
     const member = await db.faculty.create({
-      data: validated,
+      data: {
+        ...validated,
+        name: validated.name || 'Faculty Mentor',
+        designation: validated.designation || 'Educator',
+        qualification: validated.qualification || 'Expert Mentor',
+        experience: validated.experience || 'Experienced',
+        subjects: validated.subjects || 'General',
+      },
     });
 
     try {

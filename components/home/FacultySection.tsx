@@ -90,22 +90,26 @@ export default function FacultySection({ faculty = [] }: FacultySectionProps) {
                 <div className="p-5 space-y-3">
                   <div>
                     <h3 className="text-lg font-black text-slate-900 leading-tight">
-                      {mentor.name}
+                      {mentor.name || 'Faculty Mentor'}
                     </h3>
                     <p className="text-xs font-bold text-blue-700 uppercase tracking-wide mt-1">
-                      {mentor.designation}
+                      {mentor.designation && mentor.designation !== 'Educator' ? mentor.designation : 'Specialist Educator'}
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-slate-600">
-                    <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                    <span className="font-semibold">{mentor.qualification}</span>
-                  </div>
+                  {mentor.qualification && mentor.qualification !== 'Expert Mentor' && (
+                    <div className="flex items-center gap-2 text-xs text-slate-600">
+                      <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      <span className="font-semibold">{mentor.qualification}</span>
+                    </div>
+                  )}
 
-                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Subjects Handled:</span>
-                    <p className="text-xs font-bold text-slate-800">{mentor.subjects}</p>
-                  </div>
+                  {mentor.subjects && mentor.subjects !== 'General' && (
+                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                      <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Subjects Handled:</span>
+                      <p className="text-xs font-bold text-slate-800">{mentor.subjects}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

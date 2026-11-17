@@ -25,6 +25,11 @@ import { formatCurrency, slugify, getImageUrl } from '@/lib/utils';
 import { toast } from 'sonner';
 
 const PRESET_COACHING_IMAGES = [
+  { name: 'OMR Test Batch', path: '/images/classroom/media_1794898765300_5e81d6d0.jpg' },
+  { name: 'Topper Shield Award', path: '/images/classroom/media_1794898765335_2e2a5fa1.jpg' },
+  { name: 'Exam Hall Session', path: '/images/classroom/media_1794898765329_73f50b8c.jpg' },
+  { name: 'Auditorium Celebration', path: '/images/classroom/media_1794898765335_54dd86aa.jpg' },
+  { name: 'Full Classroom Batch', path: '/images/classroom/media_1794898765345_3c9f1f88.jpg' },
   { name: 'Police Award', path: '/images/gallery/felicitation-police-award.jpg' },
   { name: 'Sunday Mock Test 1', path: '/images/gallery/classroom-mock-test-1.jpg' },
   { name: 'Sunday Mock Test 2', path: '/images/gallery/classroom-mock-test-2.jpg' },

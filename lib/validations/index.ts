@@ -33,11 +33,11 @@ export const courseSchema = z.object({
 });
 
 export const facultySchema = z.object({
-  name: z.string().min(2, 'Name is required'),
-  designation: z.string().min(2, 'Designation is required'),
-  qualification: z.string().min(2, 'Qualification is required'),
-  experience: z.string().min(1, 'Experience is required'),
-  subjects: z.string().min(2, 'Subjects are required'),
+  name: z.string().optional().nullable().default('Faculty Mentor'),
+  designation: z.string().optional().nullable().default('Educator'),
+  qualification: z.string().optional().nullable().default('Expert Mentor'),
+  experience: z.string().optional().nullable().default('Experienced'),
+  subjects: z.string().optional().nullable().default('Competitive Exams'),
   bio: z.string().optional().nullable(),
   photo: z.string().optional().nullable(),
   order: z.coerce.number().default(0),
