@@ -35,7 +35,7 @@ export default function Footer({
   email = 'aj2819147@gmail.com',
   openingHours = 'Mon - Sat: 7:00 AM - 7:30 PM | Sunday: Special Test Series',
   facebookUrl = 'https://www.facebook.com/share/1EvdQ3hyD2/',
-  instagramUrl = 'https://instagram.com/brightfuturelalitpur',
+  instagramUrl = 'https://www.instagram.com/invites/contact/?utm_content=qzmoist&bqrl=5ynh9x716074',
   youtubeUrl = 'https://youtube.com/@brightfuturecompetition',
   telegramUrl = 'https://t.me/brightfuturelalitpur',
 }: FooterProps) {
@@ -102,7 +102,7 @@ export default function Footer({
                       href={instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Instagram Profile"
+                      aria-label="Instagram Profile @bfcilalitpur"
                       className="w-8 h-8 rounded-lg bg-pink-600/20 hover:bg-pink-600 text-pink-400 hover:text-white flex items-center justify-center transition-colors border border-pink-500/30"
                     >
                       <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">

@@ -173,7 +173,7 @@ export default async function ContactPage() {
                       className="flex items-center gap-2 p-2.5 rounded-xl bg-pink-50 text-pink-700 hover:bg-pink-100 transition-colors border border-pink-200"
                     >
                       <span className="w-2 h-2 rounded-full bg-pink-600" />
-                      <span>Instagram</span>
+                      <span>Instagram (@bfcilalitpur)</span>
                     </a>
                   )}
                   {settings?.youtubeUrl && (

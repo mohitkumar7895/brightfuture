@@ -19,7 +19,7 @@ export default function TopBar({
   helpline = '8726343417',
   email = 'aj2819147@gmail.com',
   facebookUrl = 'https://www.facebook.com/share/1EvdQ3hyD2/',
-  instagramUrl = 'https://instagram.com/brightfuturelalitpur',
+  instagramUrl = 'https://www.instagram.com/invites/contact/?utm_content=qzmoist&bqrl=5ynh9x716074',
 }: TopBarProps) {
   // Strip any accidental corrupted characters/emojis from database strings
   const cleanAnnouncement = announcement

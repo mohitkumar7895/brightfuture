@@ -440,13 +440,13 @@ export default function AdminSettingsPage() {
             <div>
               <label className="block font-bold text-slate-700 mb-1 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-pink-600"></span>
-                <span>Instagram Profile URL</span>
+                <span>Instagram Profile URL (@bfcilalitpur)</span>
               </label>
               <input
                 type="text"
                 value={instagramUrl}
                 onChange={(e) => setInstagramUrl(e.target.value)}
-                placeholder="https://instagram.com/brightfuturelalitpur"
+                placeholder="https://www.instagram.com/invites/contact/?utm_content=qzmoist&bqrl=5ynh9x716074"
                 className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-600"
               />
             </div>
