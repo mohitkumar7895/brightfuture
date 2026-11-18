@@ -187,10 +187,11 @@ export default async function HomePage() {
       {/* 11. Frequently Asked Questions */}
       <FaqSection faqs={faqs} />
 
-      {/* 12. Dual Branches & Interactive Google Maps */}
+      {/* 12. Institute Branches & Interactive Google Maps */}
       <BranchesMapSection
         headOfficeAddress={settings?.headOfficeAddress}
         marketBranchAddress={settings?.marketBranchAddress}
+        libraryAddress={(settings as any)?.libraryAddress}
         primaryPhone={settings?.primaryPhone}
         alternatePhones={settings?.alternatePhones}
         email={settings?.email}

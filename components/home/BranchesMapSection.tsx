@@ -1,28 +1,159 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react';
+import { 
+  MapPin, 
+  Phone, 
+  Clock, 
+  MessageCircle, 
+  BookOpen, 
+  Navigation, 
+  LocateFixed, 
+  ExternalLink,
+  Compass
+} from 'lucide-react';
 import AnimatedSectionHeader from '@/components/ui/AnimatedSectionHeader';
 
 interface BranchesMapSectionProps {
   headOfficeAddress?: string;
   marketBranchAddress?: string;
+  libraryAddress?: string;
   primaryPhone?: string;
   alternatePhones?: string;
   email?: string;
   mapEmbedUrl?: string;
 }
 
+type BranchId = 'market' | 'headOffice' | 'library';
+
+interface BranchData {
+  id: BranchId;
+  name: string;
+  shortName: string;
+  badge: string;
+  batchNotice: string;
+  batchTiming: string;
+  address: string;
+  queryAddress: string;
+  image: string;
+  imageAlt: string;
+  imageCaption: string;
+  timings: string;
+  phone: string;
+  colorScheme: {
+    accent: string;
+    border: string;
+    bgBadge: string;
+    textBadge: string;
+    ring: string;
+    btnGrad: string;
+  };
+}
+
 export default function BranchesMapSection({
-  headOfficeAddress = 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.',
-  marketBranchAddress = 'Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur. PIN: 284403',
+  headOfficeAddress = 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh.',
+  marketBranchAddress = 'Richariya market Mahaveerpura, ghantaghar ke pass, Lalitpur.',
+  libraryAddress = 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.',
   primaryPhone = '8726343417',
   alternatePhones = '9450067223, 9451935450',
-  mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14549.467891234!2d78.406981!3d24.688172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3979ea375d000001%3A0x6b8f1b6238b725b8!2sLalitpur%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000',
+  email = 'aj2819147@gmail.com',
+  mapEmbedUrl,
 }: BranchesMapSectionProps) {
+  const [selectedBranchId, setSelectedBranchId] = useState<BranchId>('market');
+
+  const branches: BranchData[] = [
+    {
+      id: 'market',
+      name: 'Market Branch (Mahaveerpura)',
+      shortName: 'Market Branch',
+      badge: 'Morning 7:00 AM Batch',
+      batchNotice: 'New Batch Start: Morning 7:00 AM',
+      batchTiming: 'Morning 7:00 AM',
+      address: marketBranchAddress,
+      queryAddress: marketBranchAddress.includes('Lalitpur') 
+        ? marketBranchAddress 
+        : `${marketBranchAddress}, Lalitpur, Uttar Pradesh`,
+      image: '/images/gallery/bfci-market-branch-mahaveerpura.jpg',
+      imageAlt: 'BFCI Market Branch Richariya Market Mahaveerpura Lalitpur entrance gate',
+      imageCaption: 'Market Branch Gate • Richariya Market • Full View',
+      timings: '7:00 AM – 7:00 PM (Mon-Sat)',
+      phone: '8726343417',
+      colorScheme: {
+        accent: 'text-emerald-700',
+        border: 'border-emerald-300',
+        bgBadge: 'bg-emerald-100 text-emerald-950 border-emerald-300',
+        textBadge: 'text-emerald-800',
+        ring: 'ring-2 ring-emerald-600',
+        btnGrad: 'from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800',
+      },
+    },
+    {
+      id: 'headOffice',
+      name: 'Station Road Branch (Head Office)',
+      shortName: 'Head Office',
+      badge: 'Evening 3:30 PM Batch',
+      batchNotice: 'New Batch Start: Evening 3:30 PM',
+      batchTiming: 'Evening 3:30 PM',
+      address: headOfficeAddress,
+      queryAddress: headOfficeAddress.includes('Lalitpur')
+        ? headOfficeAddress
+        : `${headOfficeAddress}, Lalitpur, Uttar Pradesh`,
+      image: '/images/gallery/bfci-head-office-station-road.jpg',
+      imageAlt: 'BFCI Head Office Station Road Lalitpur entrance gate',
+      imageCaption: 'Head Office Gate • Station Road • Full View',
+      timings: '7:00 AM – 7:30 PM (Mon-Sat)',
+      phone: primaryPhone,
+      colorScheme: {
+        accent: 'text-amber-700',
+        border: 'border-amber-300',
+        bgBadge: 'bg-amber-100 text-amber-950 border-amber-300',
+        textBadge: 'text-amber-800',
+        ring: 'ring-2 ring-amber-500',
+        btnGrad: 'from-amber-600 to-orange-700 hover:from-amber-700 hover:to-orange-800',
+      },
+    },
+    {
+      id: 'library',
+      name: 'BFCI Library & Reading Hall',
+      shortName: 'Digital Library',
+      badge: 'Disciplined Self-Study Hall',
+      batchNotice: 'Silent Reading & High-Speed Wi-Fi Zone',
+      batchTiming: 'Daily 7:00 AM – 8:00 PM',
+      address: libraryAddress,
+      queryAddress: libraryAddress.includes('Lalitpur')
+        ? libraryAddress
+        : `${libraryAddress}, Lalitpur, Uttar Pradesh`,
+      image: '/images/gallery/bfci-digital-library-chandmari.jpg',
+      imageAlt: 'BFCI Digital Library Chandmari Lalitpur building',
+      imageCaption: 'Digital Library Campus • Full View',
+      timings: '7:00 AM – 8:00 PM (Daily)',
+      phone: '8726343417',
+      colorScheme: {
+        accent: 'text-blue-700',
+        border: 'border-blue-300',
+        bgBadge: 'bg-blue-100 text-blue-950 border-blue-300',
+        textBadge: 'text-blue-800',
+        ring: 'ring-2 ring-blue-600',
+        btnGrad: 'from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800',
+      },
+    },
+  ];
+
+  const currentBranch = branches.find((b) => b.id === selectedBranchId) || branches[0];
+
+  // Universal Directions URL: Omitting 'origin' makes Google Maps automatically use the user's Current Location!
+  const getDirectionsUrl = (queryAddr: string) => {
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(queryAddr)}`;
+  };
+
+  // Dynamic Google Maps embed URL for the currently selected branch
+  const activeEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
+    currentBranch.queryAddress
+  )}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+
   const whatsappUrl = `https://wa.me/91${primaryPhone}?text=${encodeURIComponent(
-    'Hello Bright Future Competition Institute! I would like directions or details regarding batch timings at Lalitpur branch.'
+    `Hello Bright Future Competition Institute! I would like directions to ${currentBranch.name} at Lalitpur.`
   )}`;
 
   return (
@@ -35,7 +166,7 @@ export default function BranchesMapSection({
           badge={
             <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold text-blue-900 bg-blue-100 uppercase tracking-wider">
               <MapPin className="w-3.5 h-3.5 text-blue-700" />
-              Visit Our Institute
+              Visit Our Institute Campuses
             </span>
           }
           title={
@@ -45,159 +176,147 @@ export default function BranchesMapSection({
           }
           subtitle={
             <p className="text-slate-600 text-xs sm:text-sm">
-              Est. 14 July 2002 • 24 Years Completed • 10,000+ Students&apos; Choice. Conveniently accessible across Lalitpur and Bundelkhand with daily public transport connectivity.
+              Est. 14 July 2002 • 24 Years Completed • 10,000+ Students&apos; Choice. Click on any branch or navigate directly from your current location!
             </p>
           }
         />
 
-        {/* Dual Branch Cards + Map */}
+        {/* Dual Column Layout: Branch Cards (5 cols) + Google Maps (7 cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* Branch Details Column (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             
-            {/* Branch 1: Head Office */}
-            <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
-              <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-200 shadow-inner flex items-center justify-center">
-                {/* Ambient Blurred Background */}
-                <Image
-                  src="/images/gallery/bfci-head-office-station-road.jpg"
-                  alt=""
-                  fill
-                  unoptimized={true}
-                  aria-hidden="true"
-                  className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
-                />
-                {/* 100% Full Uncropped HD View */}
-                <Image
-                  src="/images/gallery/bfci-head-office-station-road.jpg"
-                  alt="BFCI Head Office Station Road Lalitpur entrance gate"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  quality={100}
-                  unoptimized={true}
-                  className="object-contain p-1 hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute bottom-2 left-2 z-10 px-2.5 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs text-amber-300 text-[10px] font-black tracking-wide border border-white/10">
-                  Head Office Gate • Full View
-                </span>
-              </div>
-              
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase text-amber-700 tracking-wider">
-                    Head Office &amp; Main Campus
-                  </span>
-                </div>
-                <span className="px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black uppercase tracking-wider">
-                  Evening 3:30 PM Batch
-                </span>
-              </div>
+            {branches.map((branch) => {
+              const isSelected = branch.id === selectedBranchId;
+              const directionsLink = getDirectionsUrl(branch.queryAddress);
 
-              <h3 className="text-lg font-bold text-slate-900 mb-1.5">
-                Station Road Branch (Head Office)
-              </h3>
-              
-              <div className="mb-2.5 p-2 bg-amber-50 rounded-xl border border-amber-200/80 flex items-center justify-between text-xs">
-                <span className="font-extrabold text-amber-950 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-amber-600" />
-                  <span>New Batch: Evening 3:30 PM</span>
-                </span>
-                <span className="text-[10px] font-black uppercase px-2 py-0.5 bg-amber-500 text-white rounded">
-                  Open Now
-                </span>
-              </div>
+              return (
+                <div
+                  key={branch.id}
+                  onClick={() => setSelectedBranchId(branch.id)}
+                  className={`bg-white p-4 sm:p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden cursor-pointer ${
+                    isSelected
+                      ? `${branch.colorScheme.ring} border-transparent shadow-lg bg-slate-50/60`
+                      : 'border-slate-200 shadow-xs hover:shadow-md hover:border-slate-300'
+                  }`}
+                >
+                  {/* Selected Indicator Pill */}
+                  {isSelected && (
+                    <div className="absolute top-3 right-3 z-20 flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-900 text-white text-[10px] font-black uppercase tracking-wider shadow-sm animate-pulse">
+                      <LocateFixed className="w-3 h-3 text-amber-300" />
+                      <span>Map par Selected</span>
+                    </div>
+                  )}
 
-              <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                {headOfficeAddress}
-              </p>
-              <div className="space-y-1.5 pt-2 border-t border-slate-100 text-xs">
-                <div className="flex items-center gap-2 text-slate-700 font-medium">
-                  <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                  <span>Timings: 7:00 AM – 7:30 PM (Mon-Sat)</span>
-                </div>
-                <div className="flex items-center gap-2 text-slate-700 font-medium">
-                  <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                  <a href={`tel:${primaryPhone}`} className="hover:underline">
-                    Primary: +91 {primaryPhone}
-                  </a>
-                </div>
-              </div>
-            </div>
+                  {/* Branch Photo */}
+                  <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-200 shadow-inner flex items-center justify-center">
+                    <Image
+                      src={branch.image}
+                      alt=""
+                      fill
+                      unoptimized={true}
+                      aria-hidden="true"
+                      className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
+                    />
+                    <Image
+                      src={branch.image}
+                      alt={branch.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      quality={100}
+                      unoptimized={true}
+                      className="object-contain p-1 hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute bottom-2 left-2 z-10 px-2.5 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs text-amber-300 text-[10px] font-black tracking-wide border border-white/10">
+                      {branch.imageCaption}
+                    </span>
+                  </div>
 
-            {/* Branch 2: Market Branch (Richariya Market) */}
-            <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden">
-              <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full rounded-xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-200 shadow-inner flex items-center justify-center">
-                {/* Ambient Blurred Background */}
-                <Image
-                  src="/images/gallery/bfci-digital-library-chandmari.jpg"
-                  alt=""
-                  fill
-                  unoptimized={true}
-                  aria-hidden="true"
-                  className="object-cover blur-xl scale-125 opacity-30 pointer-events-none"
-                />
-                {/* 100% Full Uncropped HD View */}
-                <Image
-                  src="/images/gallery/bfci-digital-library-chandmari.jpg"
-                  alt="BFCI Market Branch Ghantaghar Lalitpur building"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  quality={100}
-                  unoptimized={true}
-                  className="object-contain p-1 hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute bottom-2 left-2 z-10 px-2.5 py-0.5 rounded-md bg-slate-950/80 backdrop-blur-xs text-amber-300 text-[10px] font-black tracking-wide border border-white/10">
-                  Market Branch • Full View
-                </span>
-              </div>
+                  {/* Header Row */}
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <div className="flex items-center gap-1.5">
+                      <span className={`w-2.5 h-2.5 rounded-full bg-blue-600 ${isSelected ? 'animate-ping' : ''}`} />
+                      <span className={`text-[10px] font-black uppercase tracking-wider ${branch.colorScheme.accent}`}>
+                        {branch.shortName}
+                      </span>
+                    </div>
+                    <span className={`px-2 py-0.5 rounded-md border text-[10px] font-black uppercase tracking-wider ${branch.colorScheme.bgBadge}`}>
+                      {branch.badge}
+                    </span>
+                  </div>
 
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase text-emerald-800 tracking-wider">
-                    Market Branch &amp; Library
-                  </span>
-                </div>
-                <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 text-[10px] font-black uppercase tracking-wider">
-                  Morning 7:00 AM Batch
-                </span>
-              </div>
+                  {/* Branch Title */}
+                  <h3 className="text-lg font-bold text-slate-900 mb-1.5 flex items-center justify-between">
+                    <span>{branch.name}</span>
+                  </h3>
 
-              <h3 className="text-lg font-bold text-slate-900 mb-1.5">
-                Market Branch (Richariya Market, Ghantaghar)
-              </h3>
+                  {/* Batch Notification */}
+                  <div className="mb-2.5 p-2 bg-slate-100 rounded-xl border border-slate-200/80 flex items-center justify-between text-xs">
+                    <span className="font-extrabold text-slate-900 flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-blue-700" />
+                      <span>{branch.batchNotice}</span>
+                    </span>
+                    <span className="text-[10px] font-black uppercase px-2 py-0.5 bg-blue-900 text-white rounded">
+                      Open
+                    </span>
+                  </div>
 
-              <div className="mb-2.5 p-2 bg-emerald-50 rounded-xl border border-emerald-200/80 flex items-center justify-between text-xs">
-                <span className="font-extrabold text-emerald-950 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>New Batch: Morning 7:00 AM</span>
-                </span>
-                <span className="text-[10px] font-black uppercase px-2 py-0.5 bg-emerald-600 text-white rounded">
-                  Open Now
-                </span>
-              </div>
+                  {/* Address */}
+                  <div className="flex items-start gap-2 mb-3 text-xs text-slate-700 leading-relaxed">
+                    <MapPin className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                    <p className="font-medium text-slate-800">{branch.address}</p>
+                  </div>
 
-              <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                {marketBranchAddress}
-              </p>
-              <div className="space-y-1.5 pt-2 border-t border-slate-100 text-xs">
-                <div className="flex items-center gap-2 text-slate-700 font-medium">
-                  <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                  <span>Timings: 7:00 AM – 7:00 PM (Mon-Sat)</span>
+                  {/* Timing & Phone Info */}
+                  <div className="space-y-1.5 pt-2 border-t border-slate-100 text-xs mb-3.5">
+                    <div className="flex items-center gap-2 text-slate-700 font-medium">
+                      <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span>Timings: {branch.timings}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-700 font-medium">
+                      <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                      <a href={`tel:${branch.phone}`} className="hover:underline font-bold text-blue-900">
+                        Helpdesk: +91 {branch.phone}
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* ACTION BUTTONS: Current Location Navigation + View on Map */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    {/* Button 1: Live Current Location GPS Navigation */}
+                    <a
+                      href={directionsLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-white font-bold text-xs uppercase tracking-wider bg-gradient-to-r ${branch.colorScheme.btnGrad} shadow-sm hover:shadow-md transition-all active:scale-95`}
+                      title="Apni live Current Location se Google Maps par rasta dekhein"
+                    >
+                      <Navigation className="w-3.5 h-3.5 fill-current animate-bounce" />
+                      <span>Current Location se Rasta</span>
+                    </a>
+
+                    {/* Button 2: Select on Map */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedBranchId(branch.id);
+                      }}
+                      className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider border transition-colors ${
+                        isSelected
+                          ? 'bg-blue-900 text-white border-blue-900'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'
+                      }`}
+                    >
+                      <MapPin className="w-3.5 h-3.5 text-red-500" />
+                      <span>{isSelected ? '✓ Map par Dikha Rha Hai' : 'Map par Dekhein'}</span>
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-slate-700 font-medium">
-                  <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                  <a href="tel:8726343417" className="hover:underline text-blue-900 font-bold">
-                    Helpline: +91 8726343417
-                  </a>
-                </div>
-                <div className="flex items-center gap-2 text-slate-500 text-[11px]">
-                  <span>Alternate: {alternatePhones}</span>
-                </div>
-              </div>
-            </div>
+              );
+            })}
 
             {/* WhatsApp Quick Link */}
             <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md">
@@ -207,7 +326,7 @@ export default function BranchesMapSection({
                 </div>
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider block text-emerald-100">Instant Support</span>
-                  <p className="text-xs font-bold">Ask for Location on WhatsApp</p>
+                  <p className="text-xs font-bold">Ask for Location / Help on WhatsApp</p>
                 </div>
               </div>
               <a
@@ -216,25 +335,106 @@ export default function BranchesMapSection({
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto text-center px-3.5 py-2.5 bg-white text-emerald-800 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-emerald-50 transition-colors shadow-xs shrink-0"
               >
-                Send Location
+                Send Location on WhatsApp
               </a>
             </div>
 
           </div>
 
-          {/* Google Maps Column (7 cols) */}
-          <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs h-[300px] sm:h-[380px] lg:h-full min-h-[300px] sm:min-h-[380px] relative">
-            <iframe
-              src={mapEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Bright Future Competition Institute Lalitpur Map Location"
-              className="w-full h-full min-h-[320px]"
-            />
+          {/* Google Maps Column (7 cols) - Interactive & Location Powered */}
+          <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md sticky top-20 flex flex-col">
+            
+            {/* Map Header Toolbar with Branch Switcher */}
+            <div className="p-3 sm:p-4 bg-slate-900 text-white border-b border-slate-800 space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                <div>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-amber-300">
+                    <Compass className="w-3.5 h-3.5 animate-spin" />
+                    Live Google Maps Navigation
+                  </span>
+                  <h3 className="text-sm sm:text-base font-black text-white">
+                    {currentBranch.name}
+                  </h3>
+                </div>
+
+                {/* Primary Action: Navigate from Current Location */}
+                <a
+                  href={getDirectionsUrl(currentBranch.queryAddress)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all active:scale-95"
+                >
+                  <Navigation className="w-4 h-4 fill-slate-950" />
+                  <span>Start Live GPS Directions</span>
+                </a>
+              </div>
+
+              {/* Branch Quick Switcher Tabs */}
+              <div className="grid grid-cols-3 gap-1.5 pt-1">
+                {branches.map((b) => (
+                  <button
+                    key={b.id}
+                    type="button"
+                    onClick={() => setSelectedBranchId(b.id)}
+                    className={`py-1.5 px-2 rounded-lg text-[11px] font-bold transition-all text-center truncate ${
+                      b.id === selectedBranchId
+                        ? 'bg-blue-600 text-white shadow-xs font-black'
+                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                    }`}
+                    title={b.name}
+                  >
+                    {b.shortName}
+                  </button>
+                ))}
+              </div>
+
+              {/* Pinpoint Address Bar */}
+              <div className="flex items-center gap-2 text-[11px] text-slate-300 bg-slate-950/60 px-3 py-1.5 rounded-lg border border-white/10">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="truncate">{currentBranch.address}</span>
+              </div>
+            </div>
+
+            {/* Embedded Google Map iframe */}
+            <div className="w-full h-[360px] sm:h-[440px] lg:h-[520px] relative bg-slate-100">
+              <iframe
+                key={currentBranch.id}
+                src={activeEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`${currentBranch.name} Google Map Location`}
+                className="w-full h-full"
+              />
+
+              {/* Floating Live GPS Direction Bar at bottom */}
+              <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-col sm:flex-row items-center justify-between gap-2 p-3 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg">
+                <div className="flex items-center gap-2 text-xs">
+                  <LocateFixed className="w-4 h-4 text-emerald-600 shrink-0 animate-pulse" />
+                  <div>
+                    <p className="font-bold text-slate-900 leading-tight">
+                      Navigate with Your Device&apos;s Current GPS
+                    </p>
+                    <p className="text-[11px] text-slate-500">
+                      Destination: {currentBranch.shortName}, Lalitpur
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={getDirectionsUrl(currentBranch.queryAddress)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto text-center px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white text-xs font-black uppercase tracking-wider rounded-lg shadow-sm transition-all flex items-center justify-center gap-1.5"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Open in Google Maps App</span>
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>

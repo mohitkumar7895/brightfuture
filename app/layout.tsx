@@ -164,6 +164,7 @@ export default async function RootLayout({
               instituteName={settings?.instituteName}
               headOfficeAddress={settings?.headOfficeAddress}
               marketBranchAddress={settings?.marketBranchAddress}
+              libraryAddress={(settings as any)?.libraryAddress}
               primaryPhone={settings?.primaryPhone}
               alternatePhones={settings?.alternatePhones}
               email={settings?.email}

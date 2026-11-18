@@ -38,6 +38,7 @@ const PRESET_COACHING_IMAGES = [
   { name: 'Students Batch', path: '/images/gallery/classroom-students-batch.jpg' },
   { name: 'Lecture Hall', path: '/images/gallery/classroom-lecture-hall.jpg' },
   { name: 'Head Office', path: '/images/gallery/bfci-head-office-station-road.jpg' },
+  { name: 'Market Branch (Richariya Market)', path: '/images/gallery/bfci-market-branch-mahaveerpura.jpg' },
   { name: 'Digital Library', path: '/images/gallery/bfci-digital-library-chandmari.jpg' },
   { name: 'Police Felicitation', path: '/images/gallery/toppers-police-felicitation.jpg' },
   { name: 'Topper Trophy 1', path: '/images/gallery/toppers-trophy-celebration-1.jpg' },

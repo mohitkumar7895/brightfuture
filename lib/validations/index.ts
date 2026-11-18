@@ -76,6 +76,7 @@ export const websiteSettingSchema = z.object({
   tagline: z.string().optional().nullable(),
   headOfficeAddress: z.string().min(5),
   marketBranchAddress: z.string().min(5),
+  libraryAddress: z.string().optional().nullable(),
   pinCode: z.string().min(6),
   primaryPhone: z.string().min(10),
   alternatePhones: z.string().optional().nullable(),

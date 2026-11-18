@@ -271,6 +271,7 @@ export default async function AboutPage() {
       <BranchesMapSection
         headOfficeAddress={settings?.headOfficeAddress}
         marketBranchAddress={settings?.marketBranchAddress}
+        libraryAddress={(settings as any)?.libraryAddress}
         primaryPhone={settings?.primaryPhone}
         alternatePhones={settings?.alternatePhones}
         email={settings?.email}

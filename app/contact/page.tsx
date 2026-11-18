@@ -33,8 +33,9 @@ export default async function ContactPage() {
   const primaryPhone = settings?.primaryPhone || '8726343417';
   const alternatePhones = settings?.alternatePhones || '9450067223, 9451935450';
   const email = settings?.email || 'aj2819147@gmail.com';
-  const headOffice = settings?.headOfficeAddress || 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.';
-  const marketBranch = settings?.marketBranchAddress || 'Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur. PIN: 284403';
+  const headOffice = settings?.headOfficeAddress || 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh.';
+  const marketBranch = settings?.marketBranchAddress || 'Richariya market Mahaveerpura, ghantaghar ke pass, Lalitpur.';
+  const libraryAddress = (settings as any)?.libraryAddress || 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.';
   const mapEmbedUrl = settings?.mapEmbedUrl || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14549.467891234!2d78.406981!3d24.688172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3979ea375d000001%3A0x6b8f1b6238b725b8!2sLalitpur%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000';
 
   const whatsappUrl = `https://wa.me/91${primaryPhone}?text=${encodeURIComponent(
@@ -72,10 +73,15 @@ export default async function ContactPage() {
             
             {/* Branch 1 */}
             <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-md space-y-3">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                <span className="text-xs font-black text-amber-700 uppercase tracking-wider">
-                  Head Office (Main Campus)
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+                  <span className="text-xs font-black text-amber-700 uppercase tracking-wider">
+                    Head Office (Main Campus)
+                  </span>
+                </div>
+                <span className="text-[10px] font-black uppercase text-amber-900 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded">
+                  Evening 3:30 PM Batch
                 </span>
               </div>
               <h3 className="text-xl font-bold text-slate-900">Station Road Branch</h3>
@@ -94,21 +100,79 @@ export default async function ContactPage() {
                   <span>Timings: 7:00 AM - 7:30 PM (Mon-Sat)</span>
                 </div>
               </div>
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(headOffice)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex items-center justify-center gap-1.5 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-700 text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-md transition-all active:scale-95"
+              >
+                <Navigation className="w-3.5 h-3.5 fill-current animate-bounce" />
+                <span>Current Location se Directions Lein</span>
+              </a>
             </div>
 
-            {/* Branch 2 */}
+            {/* Branch 2: Market Branch */}
             <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-md space-y-3">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
-                <span className="text-xs font-black text-blue-700 uppercase tracking-wider">
-                  Market Branch & Study Hall
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
+                  <span className="text-xs font-black text-emerald-800 uppercase tracking-wider">
+                    Market Branch
+                  </span>
+                </div>
+                <span className="text-[10px] font-black uppercase text-emerald-900 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded">
+                  Morning 7:00 AM Batch
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-slate-900">Mahaveerpura Branch</h3>
+              <h3 className="text-xl font-bold text-slate-900">Market Branch (Richariya Market)</h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {marketBranch}
               </p>
               <div className="pt-2 border-t border-slate-100 space-y-2 text-xs text-slate-700">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-slate-400 shrink-0" />
+                  <span>Timings: 7:00 AM – 7:00 PM (Mon-Sat)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-blue-700 shrink-0" />
+                  <a href="tel:8726343417" className="font-semibold text-slate-900 hover:underline">
+                    Counselor Helpline: +91 8726343417
+                  </a>
+                </div>
+              </div>
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(marketBranch)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex items-center justify-center gap-1.5 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-md transition-all active:scale-95"
+              >
+                <Navigation className="w-3.5 h-3.5 fill-current animate-bounce" />
+                <span>Current Location se Directions Lein</span>
+              </a>
+            </div>
+
+            {/* Branch 3: BFCI Digital Library */}
+            <div className="bg-white p-7 rounded-3xl border border-slate-200 shadow-md space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
+                  <span className="text-xs font-black text-blue-700 uppercase tracking-wider">
+                    Digital Library &amp; Study Hall
+                  </span>
+                </div>
+                <span className="text-[10px] font-black uppercase text-blue-900 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
+                  Self-Study Zone
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900">BFCI Library &amp; Reading Room</h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                {libraryAddress}
+              </p>
+              <div className="pt-2 border-t border-slate-100 space-y-2 text-xs text-slate-700">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-slate-400 shrink-0" />
+                  <span>Open Daily: 7:00 AM – 8:00 PM</span>
+                </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-blue-700 shrink-0" />
                   <a href="tel:8726343417" className="font-semibold text-slate-900 hover:underline">
@@ -126,6 +190,15 @@ export default async function ContactPage() {
                   </a>
                 </div>
               </div>
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(libraryAddress)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex items-center justify-center gap-1.5 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-md transition-all active:scale-95"
+              >
+                <Navigation className="w-3.5 h-3.5 fill-current animate-bounce" />
+                <span>Current Location se Directions Lein</span>
+              </a>
             </div>
 
             {/* Direct WhatsApp Callout */}
@@ -225,21 +298,46 @@ export default async function ContactPage() {
 
         {/* Full-width Map Card */}
         <div className="mt-12 bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-md">
-          <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="text-base sm:text-lg font-bold text-slate-900">Google Maps Location</h3>
-              <p className="text-xs text-slate-500">Easily find us behind Krishna Cinema, Station Road, Lalitpur</p>
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-blue-700">
+                <Navigation className="w-3.5 h-3.5 fill-current" />
+                Live GPS Routing
+              </span>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900">Google Maps Live Location &amp; Directions</h3>
+              <p className="text-xs text-slate-500">Apni device ki current GPS location se seedha institute branch ka rasta dekhein</p>
             </div>
-            <a
-              href="https://maps.google.com/?q=Station+Road+Lalitpur+Uttar+Pradesh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto text-center px-4 py-2 bg-blue-50 text-blue-900 text-xs font-bold rounded-xl border border-blue-200 hover:bg-blue-900 hover:text-white transition-colors"
-            >
-              Open in Google Maps App
-            </a>
+            <div className="flex flex-wrap items-center gap-2">
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(marketBranch)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
+              >
+                <Navigation className="w-3.5 h-3.5 fill-current" />
+                <span>Market Branch Rasta</span>
+              </a>
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(headOffice)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
+              >
+                <Navigation className="w-3.5 h-3.5 fill-current" />
+                <span>Head Office Rasta</span>
+              </a>
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(libraryAddress)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
+              >
+                <Navigation className="w-3.5 h-3.5 fill-current" />
+                <span>Library Rasta</span>
+              </a>
+            </div>
           </div>
-          <div className="w-full aspect-[21/9] min-h-[350px]">
+          <div className="w-full aspect-[21/9] min-h-[380px]">
             <iframe
               src={mapEmbedUrl}
               width="100%"

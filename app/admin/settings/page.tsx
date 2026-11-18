@@ -28,6 +28,7 @@ export default function AdminSettingsPage() {
   const [tagline, setTagline] = useState('');
   const [headOfficeAddress, setHeadOfficeAddress] = useState('');
   const [marketBranchAddress, setMarketBranchAddress] = useState('');
+  const [libraryAddress, setLibraryAddress] = useState('');
   const [pinCode, setPinCode] = useState('284403');
   const [primaryPhone, setPrimaryPhone] = useState('8726343417');
   const [alternatePhones, setAlternatePhones] = useState('9450067223, 9451935450');
@@ -57,6 +58,7 @@ export default function AdminSettingsPage() {
         setTagline(s.tagline || '');
         setHeadOfficeAddress(s.headOfficeAddress || '');
         setMarketBranchAddress(s.marketBranchAddress || '');
+        setLibraryAddress(s.libraryAddress || 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.');
         setPinCode(s.pinCode || '284403');
         setPrimaryPhone(s.primaryPhone || '9450067223');
         setAlternatePhones(s.alternatePhones || '9451935450, 8726343417');
@@ -116,6 +118,7 @@ export default function AdminSettingsPage() {
       tagline,
       headOfficeAddress,
       marketBranchAddress,
+      libraryAddress,
       pinCode,
       primaryPhone,
       alternatePhones,
@@ -231,6 +234,19 @@ export default function AdminSettingsPage() {
                 required
                 value={marketBranchAddress}
                 onChange={(e) => setMarketBranchAddress(e.target.value)}
+                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
+              />
+            </div>
+
+            <div className="sm:col-span-2">
+              <label className="block font-bold text-slate-700 mb-1">
+                Library Address (Shiv Mandir ke pass)
+              </label>
+              <textarea
+                rows={2}
+                value={libraryAddress}
+                onChange={(e) => setLibraryAddress(e.target.value)}
+                placeholder="Near Bright future competition institute, Shiv mandir ke pass, Lalitpur."
                 className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
               />
             </div>

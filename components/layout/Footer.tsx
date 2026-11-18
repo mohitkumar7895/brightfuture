@@ -9,13 +9,15 @@ import {
   ExternalLink, 
   ChevronRight,
   ShieldCheck,
-  Award
+  Award,
+  Navigation
 } from 'lucide-react';
 
 interface FooterProps {
   instituteName?: string;
   headOfficeAddress?: string;
   marketBranchAddress?: string;
+  libraryAddress?: string;
   primaryPhone?: string;
   alternatePhones?: string;
   email?: string;
@@ -28,8 +30,9 @@ interface FooterProps {
 
 export default function Footer({
   instituteName = 'Bright Future Competition Institute',
-  headOfficeAddress = 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.',
-  marketBranchAddress = 'Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur (PIN: 284403)',
+  headOfficeAddress = 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh.',
+  marketBranchAddress = 'Richariya market Mahaveerpura, ghantaghar ke pass, Lalitpur.',
+  libraryAddress = 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.',
   primaryPhone = '8726343417',
   alternatePhones = '9450067223, 9451935450',
   email = 'aj2819147@gmail.com',
@@ -161,6 +164,17 @@ export default function Footer({
               <p className="text-[11px] sm:text-xs text-slate-300 pl-4 sm:pl-5 leading-relaxed">
                 {headOfficeAddress}
               </p>
+              <div className="pl-4 sm:pl-5 pt-0.5">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(headOfficeAddress)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] text-amber-300 hover:text-amber-200 hover:underline font-semibold"
+                >
+                  <Navigation className="w-3 h-3 fill-current" />
+                  <span>Current Location se Rasta Dekhein</span>
+                </a>
+              </div>
             </div>
 
             {/* Market Branch */}
@@ -177,6 +191,44 @@ export default function Footer({
               <p className="text-[11px] sm:text-xs text-slate-300 pl-4 sm:pl-5 leading-relaxed">
                 {marketBranchAddress}
               </p>
+              <div className="pl-4 sm:pl-5 pt-0.5">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(marketBranchAddress)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] text-emerald-300 hover:text-emerald-200 hover:underline font-semibold"
+                >
+                  <Navigation className="w-3 h-3 fill-current" />
+                  <span>Current Location se Rasta Dekhein</span>
+                </a>
+              </div>
+            </div>
+
+            {/* BFCI Library */}
+            <div className="bg-[#0B1B3D] p-2.5 sm:p-3.5 rounded-xl border border-blue-900/60 space-y-1">
+              <div className="flex items-center justify-between gap-1">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-sky-400">
+                  <MapPin className="w-3.5 h-3.5 shrink-0" />
+                  <span>Library &amp; Study Room:</span>
+                </div>
+                <span className="text-[10px] font-black uppercase text-sky-300 bg-sky-500/20 px-2 py-0.5 rounded">
+                  Open Daily
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-300 pl-4 sm:pl-5 leading-relaxed">
+                {libraryAddress}
+              </p>
+              <div className="pl-4 sm:pl-5 pt-0.5">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(libraryAddress)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] text-sky-300 hover:text-sky-200 hover:underline font-semibold"
+                >
+                  <Navigation className="w-3 h-3 fill-current" />
+                  <span>Current Location se Rasta Dekhein</span>
+                </a>
+              </div>
             </div>
 
             <div className="flex items-center gap-2 text-[11px] sm:text-xs text-slate-400 pt-0.5">
