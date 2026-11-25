@@ -18,6 +18,12 @@ interface FooterProps {
   headOfficeAddress?: string;
   marketBranchAddress?: string;
   libraryAddress?: string;
+  headOfficeCoordinates?: string;
+  marketBranchCoordinates?: string;
+  libraryCoordinates?: string;
+  headOfficeMapUrl?: string;
+  marketBranchMapUrl?: string;
+  libraryMapUrl?: string;
   primaryPhone?: string;
   alternatePhones?: string;
   email?: string;
@@ -33,6 +39,12 @@ export default function Footer({
   headOfficeAddress = 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.',
   marketBranchAddress = 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.',
   libraryAddress = 'BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh.',
+  headOfficeCoordinates,
+  marketBranchCoordinates,
+  libraryCoordinates,
+  headOfficeMapUrl,
+  marketBranchMapUrl,
+  libraryMapUrl,
   primaryPhone = '8726343417',
   alternatePhones = '9450067223, 9451935450',
   email = 'aj2819147@gmail.com',
@@ -43,6 +55,14 @@ export default function Footer({
   telegramUrl = 'https://t.me/brightfuturelalitpur',
 }: FooterProps) {
   const currentYear = new Date().getFullYear();
+
+  const getNavUrl = (customCoords: string | undefined, defaultQuery: string) => {
+    const target = (customCoords || defaultQuery).trim();
+    if (target.startsWith('https://maps.app.goo.gl') || target.startsWith('https://goo.gl/maps')) {
+      return target;
+    }
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(target)}`;
+  };
 
   return (
     <footer className="bg-[#07132B] text-slate-300 pt-8 sm:pt-16 pb-20 sm:pb-8 border-t border-blue-950">
@@ -166,7 +186,7 @@ export default function Footer({
               </p>
               <div className="pl-4 sm:pl-5 pt-0.5">
                 <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh 284403')}`}
+                  href={getNavUrl(headOfficeCoordinates || headOfficeMapUrl, 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh 284403')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[10px] text-amber-300 hover:text-amber-200 hover:underline font-semibold"
@@ -193,7 +213,7 @@ export default function Footer({
               </p>
               <div className="pl-4 sm:pl-5 pt-0.5">
                 <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh 284403')}`}
+                  href={getNavUrl(marketBranchCoordinates || marketBranchMapUrl, 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh 284403')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[10px] text-emerald-300 hover:text-emerald-200 hover:underline font-semibold"
@@ -220,7 +240,7 @@ export default function Footer({
               </p>
               <div className="pl-4 sm:pl-5 pt-0.5">
                 <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('BFCI Digital Library, near Shiv Mandir, near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh 284403')}`}
+                  href={getNavUrl(libraryCoordinates || libraryMapUrl, 'BFCI Digital Library, near Shiv Mandir, near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh 284403')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[10px] text-sky-300 hover:text-sky-200 hover:underline font-semibold"

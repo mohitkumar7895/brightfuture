@@ -19,6 +19,12 @@ interface BranchesMapSectionProps {
   headOfficeAddress?: string;
   marketBranchAddress?: string;
   libraryAddress?: string;
+  headOfficeCoordinates?: string;
+  marketBranchCoordinates?: string;
+  libraryCoordinates?: string;
+  headOfficeMapUrl?: string;
+  marketBranchMapUrl?: string;
+  libraryMapUrl?: string;
   primaryPhone?: string;
   alternatePhones?: string;
   email?: string;
@@ -36,6 +42,7 @@ interface BranchData {
   batchTiming: string;
   address: string;
   queryAddress: string;
+  customLocation?: string;
   image: string;
   imageAlt: string;
   imageCaption: string;
@@ -55,6 +62,12 @@ export default function BranchesMapSection({
   headOfficeAddress = 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.',
   marketBranchAddress = 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.',
   libraryAddress = 'BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh.',
+  headOfficeCoordinates,
+  marketBranchCoordinates,
+  libraryCoordinates,
+  headOfficeMapUrl,
+  marketBranchMapUrl,
+  libraryMapUrl,
   primaryPhone = '8726343417',
   alternatePhones = '9450067223, 9451935450',
   email = 'aj2819147@gmail.com',
@@ -72,6 +85,7 @@ export default function BranchesMapSection({
       batchTiming: 'Morning 7:00 AM',
       address: marketBranchAddress,
       queryAddress: 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh 284403',
+      customLocation: marketBranchCoordinates || marketBranchMapUrl || undefined,
       image: '/images/gallery/bfci-market-branch-mahaveerpura.jpg',
       imageAlt: 'BFCI Market Branch Richariya Market Mahaveerpura Lalitpur entrance gate',
       imageCaption: 'Market Branch Gate • Richariya Market • Full View',
@@ -95,6 +109,7 @@ export default function BranchesMapSection({
       batchTiming: 'Evening 3:30 PM',
       address: headOfficeAddress,
       queryAddress: 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh 284403',
+      customLocation: headOfficeCoordinates || headOfficeMapUrl || undefined,
       image: '/images/gallery/bfci-head-office-station-road.jpg',
       imageAlt: 'BFCI Head Office Behind Coffee House Station Road Lalitpur entrance gate',
       imageCaption: 'Head Office Gate • Behind Coffee House • Station Road • Full View',
@@ -118,6 +133,7 @@ export default function BranchesMapSection({
       batchTiming: 'Daily 7:00 AM – 8:00 PM',
       address: libraryAddress,
       queryAddress: 'BFCI Digital Library, near Shiv Mandir, near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh 284403',
+      customLocation: libraryCoordinates || libraryMapUrl || undefined,
       image: '/images/gallery/bfci-digital-library-chandmari.jpg',
       imageAlt: 'BFCI Digital Library Chandmari near Shiv Mandir Lalitpur building',
       imageCaption: 'Digital Library Campus • Near Shiv Mandir • Full View',
@@ -137,14 +153,19 @@ export default function BranchesMapSection({
   const currentBranch = branches.find((b) => b.id === selectedBranchId) || branches[0];
 
   // Universal Directions URL: Omitting 'origin' makes Google Maps automatically use the user's Current Location!
-  const getDirectionsUrl = (queryAddr: string) => {
-    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(queryAddr)}`;
+  const getDirectionsUrl = (targetLocation: string) => {
+    const loc = (targetLocation || '').trim();
+    if (loc.startsWith('https://maps.app.goo.gl') || loc.startsWith('https://goo.gl/maps')) {
+      return loc;
+    }
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(loc)}`;
   };
 
   // Dynamic Google Maps embed URL for the currently selected branch
+  const activeLocation = currentBranch.customLocation || currentBranch.queryAddress;
   const activeEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
-    currentBranch.queryAddress
-  )}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+    activeLocation
+  )}&t=&z=17&ie=UTF8&iwloc=&output=embed`;
 
   const whatsappUrl = `https://wa.me/91${primaryPhone}?text=${encodeURIComponent(
     `Hello Bright Future Competition Institute! I would like directions to ${currentBranch.name} at Lalitpur.`
@@ -183,7 +204,7 @@ export default function BranchesMapSection({
             
             {branches.map((branch) => {
               const isSelected = branch.id === selectedBranchId;
-              const directionsLink = getDirectionsUrl(branch.queryAddress);
+              const directionsLink = getDirectionsUrl(branch.customLocation || branch.queryAddress);
 
               return (
                 <div
@@ -353,7 +374,7 @@ export default function BranchesMapSection({
 
                 {/* Primary Action: Navigate from Current Location */}
                 <a
-                  href={getDirectionsUrl(currentBranch.queryAddress)}
+                  href={getDirectionsUrl(currentBranch.customLocation || currentBranch.queryAddress)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all active:scale-95"
@@ -418,7 +439,7 @@ export default function BranchesMapSection({
                   </div>
                 </div>
                 <a
-                  href={getDirectionsUrl(currentBranch.queryAddress)}
+                  href={getDirectionsUrl(currentBranch.customLocation || currentBranch.queryAddress)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto text-center px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white text-xs font-black uppercase tracking-wider rounded-lg shadow-sm transition-all flex items-center justify-center gap-1.5"

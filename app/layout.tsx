@@ -165,6 +165,12 @@ export default async function RootLayout({
               headOfficeAddress={settings?.headOfficeAddress}
               marketBranchAddress={settings?.marketBranchAddress}
               libraryAddress={(settings as any)?.libraryAddress}
+              headOfficeCoordinates={(settings as any)?.headOfficeCoordinates}
+              marketBranchCoordinates={(settings as any)?.marketBranchCoordinates}
+              libraryCoordinates={(settings as any)?.libraryCoordinates}
+              headOfficeMapUrl={(settings as any)?.headOfficeMapUrl}
+              marketBranchMapUrl={(settings as any)?.marketBranchMapUrl}
+              libraryMapUrl={(settings as any)?.libraryMapUrl}
               primaryPhone={settings?.primaryPhone}
               alternatePhones={settings?.alternatePhones}
               email={settings?.email}

@@ -15,7 +15,11 @@ import {
   Map,
   Sparkles,
   ExternalLink,
-  Calendar
+  Calendar,
+  LocateFixed,
+  Navigation,
+  Compass,
+  Check
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -29,6 +33,10 @@ export default function AdminSettingsPage() {
   const [headOfficeAddress, setHeadOfficeAddress] = useState('');
   const [marketBranchAddress, setMarketBranchAddress] = useState('');
   const [libraryAddress, setLibraryAddress] = useState('');
+  const [headOfficeCoordinates, setHeadOfficeCoordinates] = useState('');
+  const [marketBranchCoordinates, setMarketBranchCoordinates] = useState('');
+  const [libraryCoordinates, setLibraryCoordinates] = useState('');
+  const [capturingBranch, setCapturingBranch] = useState<string | null>(null);
   const [pinCode, setPinCode] = useState('284403');
   const [primaryPhone, setPrimaryPhone] = useState('8726343417');
   const [alternatePhones, setAlternatePhones] = useState('9450067223, 9451935450');
@@ -58,7 +66,10 @@ export default function AdminSettingsPage() {
         setTagline(s.tagline || '');
         setHeadOfficeAddress(s.headOfficeAddress || '');
         setMarketBranchAddress(s.marketBranchAddress || '');
-        setLibraryAddress(s.libraryAddress || 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.');
+        setLibraryAddress(s.libraryAddress || 'BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh.');
+        setHeadOfficeCoordinates(s.headOfficeCoordinates || s.headOfficeMapUrl || '');
+        setMarketBranchCoordinates(s.marketBranchCoordinates || s.marketBranchMapUrl || '');
+        setLibraryCoordinates(s.libraryCoordinates || s.libraryMapUrl || '');
         setPinCode(s.pinCode || '284403');
         setPrimaryPhone(s.primaryPhone || '9450067223');
         setAlternatePhones(s.alternatePhones || '9451935450, 8726343417');
@@ -109,6 +120,43 @@ export default function AdminSettingsPage() {
     toast.success('Batch announcement updated');
   };
 
+  const captureCurrentLocation = (
+    branchKey: 'headOffice' | 'market' | 'library',
+    branchLabel: string
+  ) => {
+    if (typeof window === 'undefined' || !navigator.geolocation) {
+      toast.error('Aapke device/browser me GPS Geolocation support nahi hai.');
+      return;
+    }
+    setCapturingBranch(branchKey);
+    toast.info(`📍 ${branchLabel} ki live GPS location fetch ho rahi hai... Kripya location Allow karein.`);
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude.toFixed(6);
+        const lng = pos.coords.longitude.toFixed(6);
+        const coords = `${lat}, ${lng}`;
+        const accuracy = Math.round(pos.coords.accuracy);
+
+        if (branchKey === 'headOffice') setHeadOfficeCoordinates(coords);
+        if (branchKey === 'market') setMarketBranchCoordinates(coords);
+        if (branchKey === 'library') setLibraryCoordinates(coords);
+
+        toast.success(`✓ ${branchLabel} location capture ho gayi! (${coords}, Accuracy: ±${accuracy}m)`);
+        setCapturingBranch(null);
+      },
+      (err) => {
+        setCapturingBranch(null);
+        let msg = err.message;
+        if (err.code === 1) msg = 'Location permission block hai. Browser settings me location allow karein.';
+        else if (err.code === 2) msg = 'GPS signal nahi mila. Device ka GPS on karein.';
+        else if (err.code === 3) msg = 'Location fetch timeout ho gaya. Dubara try karein.';
+        toast.error(`GPS Error: ${msg}`);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+    );
+  };
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
@@ -119,6 +167,12 @@ export default function AdminSettingsPage() {
       headOfficeAddress,
       marketBranchAddress,
       libraryAddress,
+      headOfficeCoordinates,
+      marketBranchCoordinates,
+      libraryCoordinates,
+      headOfficeMapUrl: headOfficeCoordinates,
+      marketBranchMapUrl: marketBranchCoordinates,
+      libraryMapUrl: libraryCoordinates,
       pinCode,
       primaryPhone,
       alternatePhones,
@@ -205,50 +259,279 @@ export default function AdminSettingsPage() {
           </div>
         </div>
 
-        {/* Addresses & Branches */}
-        <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-4 text-xs font-medium">
-          <h2 className="text-base font-bold text-slate-900 pb-2 border-b border-slate-100">
-            Lalitpur Branch Addresses
-          </h2>
+        {/* Addresses & Branches with Live GPS Auto-Capture */}
+        <div className="bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs space-y-6 text-xs font-medium">
+          <div className="border-b border-slate-100 pb-3">
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-blue-600" />
+              <span>Lalitpur Branches &amp; Exact GPS Locations</span>
+            </h2>
+            <p className="text-slate-500 text-xs mt-1">
+              Admin khud branch par khade hokar <strong>&quot;📍 Use My Current Location&quot;</strong> dabakar exact GPS coordinates save kar sakte hain taaki students seedha sahi jagah pahuchein.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block font-bold text-slate-700 mb-1">
-                Head Office Address (Behind Coffee House, Station Road) *
-              </label>
-              <textarea
-                rows={2}
-                required
-                value={headOfficeAddress}
-                onChange={(e) => setHeadOfficeAddress(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
-              />
+          {/* Quick Guidance Box */}
+          <div className="p-3.5 rounded-2xl bg-blue-50 border border-blue-200 text-blue-900 space-y-1">
+            <div className="flex items-center gap-1.5 font-bold text-xs text-blue-950">
+              <Compass className="w-4 h-4 text-blue-700 animate-spin" />
+              <span>Admin GPS Feature Guide:</span>
+            </div>
+            <p className="text-[11px] text-blue-800 leading-relaxed">
+              Jab aap branch par hon, bas <strong>&quot;📍 Use My Current Location (Device GPS)&quot;</strong> par click karein. Browser aapke phone/laptop ke GPS se exact latitude aur longitude le lega. Fir neeche <strong>Save All Settings</strong> dabayein. Website par sabhi buttons usi exact spot par navigate karwayenge!
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {/* 1. Head Office */}
+            <div className="p-4 rounded-2xl bg-amber-50/40 border border-amber-200/80 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+                  <span>1. Head Office (Behind Coffee House, Station Road)</span>
+                </span>
+                <span className="text-[10px] font-black uppercase text-amber-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300">
+                  Evening 3:30 PM Batch
+                </span>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">
+                  Postal Address (Text) *
+                </label>
+                <textarea
+                  rows={2}
+                  required
+                  value={headOfficeAddress}
+                  onChange={(e) => setHeadOfficeAddress(e.target.value)}
+                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none"
+                  placeholder="Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh."
+                />
+              </div>
+
+              <div className="bg-white p-3 rounded-xl border border-amber-200 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <label className="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+                    <LocateFixed className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Exact GPS Coordinates / Google Maps Pin:</span>
+                  </label>
+                  {headOfficeCoordinates && (
+                    <span className="text-[11px] font-bold text-emerald-700 flex items-center gap-1">
+                      <Check className="w-3 h-3 text-emerald-600" />
+                      <span>GPS Active: {headOfficeCoordinates}</span>
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-2">
+                  <input
+                    type="text"
+                    value={headOfficeCoordinates}
+                    onChange={(e) => setHeadOfficeCoordinates(e.target.value)}
+                    placeholder="e.g. 24.688172, 78.406981 ya Google Maps share link"
+                    className="w-full sm:flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none font-mono"
+                  />
+                  <div className="flex items-center gap-1.5 w-full sm:w-auto">
+                    <button
+                      type="button"
+                      disabled={capturingBranch === 'headOffice'}
+                      onClick={() => captureCurrentLocation('headOffice', 'Head Office')}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold transition-all shadow-xs active:scale-95 disabled:opacity-50"
+                    >
+                      {capturingBranch === 'headOffice' ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>GPS Fetching...</span>
+                        </>
+                      ) : (
+                        <>
+                          <LocateFixed className="w-3.5 h-3.5 animate-pulse" />
+                          <span>📍 Use My Current Location</span>
+                        </>
+                      )}
+                    </button>
+                    {headOfficeCoordinates && (
+                      <a
+                        href={`https://www.google.com/maps?q=${encodeURIComponent(headOfficeCoordinates)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold border border-slate-300 inline-flex items-center gap-1"
+                        title="Google Maps par check karein"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Verify Pin</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <label className="block font-bold text-slate-700 mb-1">
-                Market Branch Address (Richariya Market, Mahaveerpura) *
-              </label>
-              <textarea
-                rows={2}
-                required
-                value={marketBranchAddress}
-                onChange={(e) => setMarketBranchAddress(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
-              />
+            {/* 2. Market Branch */}
+            <div className="p-4 rounded-2xl bg-emerald-50/40 border border-emerald-200/80 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
+                  <span>2. Market Branch (Richariya Market, Mahaveerpura)</span>
+                </span>
+                <span className="text-[10px] font-black uppercase text-emerald-900 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">
+                  Morning 7:00 AM Batch
+                </span>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">
+                  Postal Address (Text) *
+                </label>
+                <textarea
+                  rows={2}
+                  required
+                  value={marketBranchAddress}
+                  onChange={(e) => setMarketBranchAddress(e.target.value)}
+                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none"
+                  placeholder="Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh."
+                />
+              </div>
+
+              <div className="bg-white p-3 rounded-xl border border-emerald-200 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <label className="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+                    <LocateFixed className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Exact GPS Coordinates / Google Maps Pin:</span>
+                  </label>
+                  {marketBranchCoordinates && (
+                    <span className="text-[11px] font-bold text-emerald-700 flex items-center gap-1">
+                      <Check className="w-3 h-3 text-emerald-600" />
+                      <span>GPS Active: {marketBranchCoordinates}</span>
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-2">
+                  <input
+                    type="text"
+                    value={marketBranchCoordinates}
+                    onChange={(e) => setMarketBranchCoordinates(e.target.value)}
+                    placeholder="e.g. 24.688172, 78.406981 ya Google Maps share link"
+                    className="w-full sm:flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none font-mono"
+                  />
+                  <div className="flex items-center gap-1.5 w-full sm:w-auto">
+                    <button
+                      type="button"
+                      disabled={capturingBranch === 'market'}
+                      onClick={() => captureCurrentLocation('market', 'Market Branch')}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-all shadow-xs active:scale-95 disabled:opacity-50"
+                    >
+                      {capturingBranch === 'market' ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>GPS Fetching...</span>
+                        </>
+                      ) : (
+                        <>
+                          <LocateFixed className="w-3.5 h-3.5 animate-pulse" />
+                          <span>📍 Use My Current Location</span>
+                        </>
+                      )}
+                    </button>
+                    {marketBranchCoordinates && (
+                      <a
+                        href={`https://www.google.com/maps?q=${encodeURIComponent(marketBranchCoordinates)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold border border-slate-300 inline-flex items-center gap-1"
+                        title="Google Maps par check karein"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Verify Pin</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="sm:col-span-2">
-              <label className="block font-bold text-slate-700 mb-1">
-                Library Address (Shiv Mandir ke pass)
-              </label>
-              <textarea
-                rows={2}
-                value={libraryAddress}
-                onChange={(e) => setLibraryAddress(e.target.value)}
-                placeholder="Near Bright future competition institute, Shiv mandir ke pass, Lalitpur."
-                className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none"
-              />
+            {/* 3. BFCI Digital Library */}
+            <div className="p-4 rounded-2xl bg-blue-50/40 border border-blue-200/80 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
+                  <span>3. BFCI Digital Library &amp; Study Hall (Near Shiv Mandir)</span>
+                </span>
+                <span className="text-[10px] font-black uppercase text-blue-900 bg-blue-100 px-2 py-0.5 rounded border border-blue-300">
+                  Disciplined Study Zone
+                </span>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">
+                  Postal Address (Text)
+                </label>
+                <textarea
+                  rows={2}
+                  value={libraryAddress}
+                  onChange={(e) => setLibraryAddress(e.target.value)}
+                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none"
+                  placeholder="BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh."
+                />
+              </div>
+
+              <div className="bg-white p-3 rounded-xl border border-blue-200 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <label className="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+                    <LocateFixed className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Exact GPS Coordinates / Google Maps Pin:</span>
+                  </label>
+                  {libraryCoordinates && (
+                    <span className="text-[11px] font-bold text-blue-700 flex items-center gap-1">
+                      <Check className="w-3 h-3 text-blue-600" />
+                      <span>GPS Active: {libraryCoordinates}</span>
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-2">
+                  <input
+                    type="text"
+                    value={libraryCoordinates}
+                    onChange={(e) => setLibraryCoordinates(e.target.value)}
+                    placeholder="e.g. 24.688172, 78.406981 ya Google Maps share link"
+                    className="w-full sm:flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none font-mono"
+                  />
+                  <div className="flex items-center gap-1.5 w-full sm:w-auto">
+                    <button
+                      type="button"
+                      disabled={capturingBranch === 'library'}
+                      onClick={() => captureCurrentLocation('library', 'BFCI Digital Library')}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-all shadow-xs active:scale-95 disabled:opacity-50"
+                    >
+                      {capturingBranch === 'library' ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>GPS Fetching...</span>
+                        </>
+                      ) : (
+                        <>
+                          <LocateFixed className="w-3.5 h-3.5 animate-pulse" />
+                          <span>📍 Use My Current Location</span>
+                        </>
+                      )}
+                    </button>
+                    {libraryCoordinates && (
+                      <a
+                        href={`https://www.google.com/maps?q=${encodeURIComponent(libraryCoordinates)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold border border-slate-300 inline-flex items-center gap-1"
+                        title="Google Maps par check karein"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Verify Pin</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
