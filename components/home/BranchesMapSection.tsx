@@ -52,9 +52,9 @@ interface BranchData {
 }
 
 export default function BranchesMapSection({
-  headOfficeAddress = 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh.',
-  marketBranchAddress = 'Richariya market Mahaveerpura, ghantaghar ke pass, Lalitpur.',
-  libraryAddress = 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.',
+  headOfficeAddress = 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.',
+  marketBranchAddress = 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.',
+  libraryAddress = 'BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh.',
   primaryPhone = '8726343417',
   alternatePhones = '9450067223, 9451935450',
   email = 'aj2819147@gmail.com',
@@ -71,9 +71,7 @@ export default function BranchesMapSection({
       batchNotice: 'New Batch Start: Morning 7:00 AM',
       batchTiming: 'Morning 7:00 AM',
       address: marketBranchAddress,
-      queryAddress: marketBranchAddress.includes('Lalitpur') 
-        ? marketBranchAddress 
-        : `${marketBranchAddress}, Lalitpur, Uttar Pradesh`,
+      queryAddress: 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh 284403',
       image: '/images/gallery/bfci-market-branch-mahaveerpura.jpg',
       imageAlt: 'BFCI Market Branch Richariya Market Mahaveerpura Lalitpur entrance gate',
       imageCaption: 'Market Branch Gate • Richariya Market • Full View',
@@ -90,18 +88,16 @@ export default function BranchesMapSection({
     },
     {
       id: 'headOffice',
-      name: 'Station Road Branch (Head Office)',
+      name: 'Head Office (Station Road Branch)',
       shortName: 'Head Office',
       badge: 'Evening 3:30 PM Batch',
       batchNotice: 'New Batch Start: Evening 3:30 PM',
       batchTiming: 'Evening 3:30 PM',
       address: headOfficeAddress,
-      queryAddress: headOfficeAddress.includes('Lalitpur')
-        ? headOfficeAddress
-        : `${headOfficeAddress}, Lalitpur, Uttar Pradesh`,
+      queryAddress: 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh 284403',
       image: '/images/gallery/bfci-head-office-station-road.jpg',
-      imageAlt: 'BFCI Head Office Station Road Lalitpur entrance gate',
-      imageCaption: 'Head Office Gate • Station Road • Full View',
+      imageAlt: 'BFCI Head Office Behind Coffee House Station Road Lalitpur entrance gate',
+      imageCaption: 'Head Office Gate • Behind Coffee House • Station Road • Full View',
       timings: '7:00 AM – 7:30 PM (Mon-Sat)',
       phone: primaryPhone,
       colorScheme: {
@@ -115,18 +111,16 @@ export default function BranchesMapSection({
     },
     {
       id: 'library',
-      name: 'BFCI Library & Reading Hall',
-      shortName: 'Digital Library',
+      name: 'BFCI Digital Library & Study Hall',
+      shortName: 'BFCI Digital Library',
       badge: 'Disciplined Self-Study Hall',
-      batchNotice: 'Silent Reading & High-Speed Wi-Fi Zone',
+      batchNotice: 'Near Shiv Mandir, Near BFCI Coaching',
       batchTiming: 'Daily 7:00 AM – 8:00 PM',
       address: libraryAddress,
-      queryAddress: libraryAddress.includes('Lalitpur')
-        ? libraryAddress
-        : `${libraryAddress}, Lalitpur, Uttar Pradesh`,
+      queryAddress: 'BFCI Digital Library, near Shiv Mandir, near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh 284403',
       image: '/images/gallery/bfci-digital-library-chandmari.jpg',
-      imageAlt: 'BFCI Digital Library Chandmari Lalitpur building',
-      imageCaption: 'Digital Library Campus • Full View',
+      imageAlt: 'BFCI Digital Library Chandmari near Shiv Mandir Lalitpur building',
+      imageCaption: 'Digital Library Campus • Near Shiv Mandir • Full View',
       timings: '7:00 AM – 8:00 PM (Daily)',
       phone: '8726343417',
       colorScheme: {

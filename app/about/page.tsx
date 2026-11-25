@@ -105,7 +105,7 @@ export default async function AboutPage() {
                     'Bright Future Competition Institute was established on 14 July 2002 with a singular mission: to make high-quality competitive examination education accessible to every hardworking student in Lalitpur district. Over 24 completed years, we have become the trusted choice of 10,000+ students and produced hundreds of selections across UP Police, SSC, Railways, and UPSSSC.'}
                 </p>
                 <p>
-                  With two prime locations in Lalitpur — behind Krishna Cinema at Station Road (Evening Batch: 3:30 PM) and at Richariya Market near Ghantaghar (Morning Batch: 7:00 AM) — we provide state-of-the-art classroom facilities, a disciplined reference library, and individualized doubt-clearing sessions.
+                  With prime locations in Lalitpur — behind Coffee House at Station Road (Evening Batch: 3:30 PM), Richariya Market near Ghantaghar (Morning Batch: 7:00 AM), and our dedicated BFCI Digital Library near Shiv Mandir (Chandmari) — we provide state-of-the-art classroom facilities, a disciplined reference library, and individualized doubt-clearing sessions.
                 </p>
               </div>
 

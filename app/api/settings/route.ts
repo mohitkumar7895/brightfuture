@@ -11,8 +11,9 @@ export async function GET() {
       settings = await db.websiteSetting.create({
         data: {
           instituteName: 'Bright Future Competition Institute',
-          headOfficeAddress: 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.',
-          marketBranchAddress: 'Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur.',
+          headOfficeAddress: 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.',
+          marketBranchAddress: 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.',
+          libraryAddress: 'BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh.',
           pinCode: '284403',
           primaryPhone: '8726343417',
           alternatePhones: '9450067223, 9451935450',

@@ -98,7 +98,7 @@ export default async function RootLayout({
     email: settings?.email || 'aj2819147@gmail.com',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: settings?.headOfficeAddress || 'Behind Krishna Cinema, Station Road',
+      streetAddress: settings?.headOfficeAddress || 'Bright Future Competition Institute, Behind Coffee House, Station Road',
       addressLocality: 'Lalitpur',
       addressRegion: 'Uttar Pradesh',
       postalCode: settings?.pinCode || '284403',

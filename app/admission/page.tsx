@@ -240,7 +240,7 @@ export default async function AdmissionPage({
               </h3>
               
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Behind Krishna Cinema, Station Road, Lalitpur (UP). Timing: <strong className="text-white">7:00 AM – 7:30 PM</strong>.
+                Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur (UP). Timing: <strong className="text-white">7:00 AM – 7:30 PM</strong>.
               </p>
 
               <div className="pt-2 border-t border-slate-700/60 flex items-center justify-between text-xs text-slate-400">

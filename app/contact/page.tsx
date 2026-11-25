@@ -33,9 +33,9 @@ export default async function ContactPage() {
   const primaryPhone = settings?.primaryPhone || '8726343417';
   const alternatePhones = settings?.alternatePhones || '9450067223, 9451935450';
   const email = settings?.email || 'aj2819147@gmail.com';
-  const headOffice = settings?.headOfficeAddress || 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh.';
-  const marketBranch = settings?.marketBranchAddress || 'Richariya market Mahaveerpura, ghantaghar ke pass, Lalitpur.';
-  const libraryAddress = (settings as any)?.libraryAddress || 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.';
+  const headOffice = settings?.headOfficeAddress || 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.';
+  const marketBranch = settings?.marketBranchAddress || 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.';
+  const libraryAddress = (settings as any)?.libraryAddress || 'BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh.';
   const mapEmbedUrl = settings?.mapEmbedUrl || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14549.467891234!2d78.406981!3d24.688172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3979ea375d000001%3A0x6b8f1b6238b725b8!2sLalitpur%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000';
 
   const whatsappUrl = `https://wa.me/91${primaryPhone}?text=${encodeURIComponent(
@@ -101,7 +101,7 @@ export default async function ContactPage() {
                 </div>
               </div>
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(headOffice)}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh 284403')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 flex items-center justify-center gap-1.5 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-700 text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-md transition-all active:scale-95"
@@ -141,7 +141,7 @@ export default async function ContactPage() {
                 </div>
               </div>
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(marketBranch)}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh 284403')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 flex items-center justify-center gap-1.5 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-md transition-all active:scale-95"
@@ -191,7 +191,7 @@ export default async function ContactPage() {
                 </div>
               </div>
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(libraryAddress)}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('BFCI Digital Library, near Shiv Mandir, near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh 284403')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 flex items-center justify-center gap-1.5 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-md transition-all active:scale-95"
@@ -309,7 +309,7 @@ export default async function ContactPage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(marketBranch)}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh 284403')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
@@ -318,7 +318,7 @@ export default async function ContactPage() {
                 <span>Market Branch Rasta</span>
               </a>
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(headOffice)}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh 284403')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
@@ -327,7 +327,7 @@ export default async function ContactPage() {
                 <span>Head Office Rasta</span>
               </a>
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(libraryAddress)}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('BFCI Digital Library, near Shiv Mandir, near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh 284403')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center gap-1.5"

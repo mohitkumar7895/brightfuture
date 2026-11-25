@@ -352,7 +352,7 @@
     {
       "id": 2,
       "title": "Free All-Lalitpur Open Mock Test & Scholarship Assessment this Sunday",
-      "content": "<p>Bright Future Competition Institute invites all competitive exam aspirants across Lalitpur district to participate in the Mega Open Mock Test this Sunday at our Head Office (Behind Krishna Cinema, Station Road). Top 10 rankers will be awarded up to 100% tuition fee scholarships.</p>",
+      "content": "<p>Bright Future Competition Institute invites all competitive exam aspirants across Lalitpur district to participate in the Mega Open Mock Test this Sunday at our Head Office (Bright Future Competition Institute, Behind Coffee House, Station Road). Top 10 rankers will be awarded up to 100% tuition fee scholarships.</p>",
       "fileUrl": null,
       "category": "EXAM",
       "isPinned": 1,
@@ -449,7 +449,7 @@
     {
       "id": 2,
       "question": "Where are your institute branches located in Lalitpur?",
-      "answer": "We have two centrally located branches in Lalitpur: 1) Head Office: Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh; 2) Market Branch: Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur (PIN: 284403). Both branches are easily accessible by public transport.",
+      "answer": "We have two centrally located branches in Lalitpur: 1) Head Office: Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh; 2) Market Branch: Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur (PIN: 284403). Both branches are easily accessible by public transport.",
       "category": "GENERAL",
       "order": 2,
       "isPublished": 1,
@@ -599,8 +599,8 @@
     "id": 1,
     "instituteName": "Bright Future Competition Institute",
     "tagline": "Empowering Minds, Shaping Futures ÔÇô Lalitpur's Premier Coaching",
-    "headOfficeAddress": "Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh, India.",
-    "marketBranchAddress": "Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur.",
+    "headOfficeAddress": "Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.",
+    "marketBranchAddress": "Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.",
     "pinCode": "284403",
     "primaryPhone": "9450067223",
     "alternatePhones": "9451935450, 8726343417",
@@ -616,7 +616,8 @@
     "footerText": "Bright Future Competition Institute is LalitpurÔÇÖs most trusted coaching center for one-day competitive exams including UP Police, SSC, Railways, UPSSSC, and Banking. Empowering aspirants with proven techniques, expert faculty, and structured test series.",
     "announcementBarText": "Admissions Open for New Batches: UP Police Constable / SI, SSC CGL/CHSL & Railway NTPC! Visit Head Office or Call 9450067223.",
     "isAnnouncementBarActive": 1,
-    "updatedAt": "2026-11-05T11:10:13.000Z"
+    "updatedAt": "2026-11-05T11:10:13.000Z",
+    "libraryAddress": "BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh."
   },
   "homePageContent": {
     "id": 1,

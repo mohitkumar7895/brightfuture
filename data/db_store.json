@@ -485,7 +485,7 @@
     {
       "id": 2,
       "question": "Where are your institute branches located in Lalitpur?",
-      "answer": "We have two centrally located branches in Lalitpur: 1) Head Office: Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh; 2) Market Branch: Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur (PIN: 284403). Both branches are easily accessible by public transport.",
+      "answer": "We have two centrally located branches in Lalitpur: 1) Head Office: Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh; 2) Market Branch: Richariya Market, Mahaveerpura, Near Ghantaghar, Lalitpur (PIN: 284403). Both branches are easily accessible by public transport.",
       "category": "GENERAL",
       "order": 2,
       "isPublished": 1,
@@ -672,7 +672,7 @@
       "type": "IMAGE",
       "url": "/images/gallery/bfci-head-office-station-road.jpg",
       "thumbnailUrl": null,
-      "caption": "Main administrative counseling center & classrooms located behind Krishna Cinema, Station Road, Lalitpur.",
+      "caption": "Main administrative counseling center & classrooms located Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur.",
       "categoryId": 2,
       "category": {
         "id": 2,
@@ -852,8 +852,8 @@
     "id": 1,
     "instituteName": "Bright Future Competition Institute",
     "tagline": "Est. 14 July 2002 • 24 Years Completed • 10,000+ Students' Choice",
-    "headOfficeAddress": "Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh.",
-    "marketBranchAddress": "Richariya market Mahaveerpura, ghantaghar ke pass, Lalitpur.",
+    "headOfficeAddress": "Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.",
+    "marketBranchAddress": "Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.",
     "pinCode": "284403",
     "primaryPhone": "8726343417",
     "alternatePhones": "9450067223, 9451935450",
@@ -870,7 +870,7 @@
     "announcementBarText": "24 Years Completed (Est. 14 July 2002) • 10,000+ Students Choice | New Batches: Market Branch (Morning 7:00 AM) • Head Office (Evening 3:30 PM) | Call: 8726343417",
     "isAnnouncementBarActive": 1,
     "updatedAt": "2026-11-05T11:10:13.000Z",
-    "libraryAddress": "Near Bright future competition institute, Shiv mandir ke pass, Lalitpur."
+    "libraryAddress": "BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh."
   },
   "homePageContent": {
     "id": 1,

@@ -214,7 +214,7 @@ export default function AdminSettingsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block font-bold text-slate-700 mb-1">
-                Head Office Address (Behind Krishna Cinema, Station Road) *
+                Head Office Address (Behind Coffee House, Station Road) *
               </label>
               <textarea
                 rows={2}
@@ -554,7 +554,7 @@ export default function AdminSettingsPage() {
             </button>
             <button
               type="button"
-              onClick={() => handleMapUrlInput(headOfficeAddress || 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh')}
+              onClick={() => handleMapUrlInput(headOfficeAddress || 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh')}
               className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-lg text-xs transition-colors"
             >
               🏢 Auto-Generate from Head Office Address

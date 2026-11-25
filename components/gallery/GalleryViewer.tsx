@@ -292,7 +292,7 @@ export default function GalleryViewer({
           </h3>
 
           <p className="text-slate-300 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Visit our Head Office behind Krishna Cinema, Station Road or Market Branch at Richariya Market, Ghantaghar. Meet our mentors, view previous selection rosters, and collect free sample study material.
+            Visit our Head Office behind Coffee House (Station Road), Market Branch at Richariya Market (Ghantaghar), or BFCI Digital Library (near Shiv Mandir). Meet our mentors, view previous selection rosters, and collect free sample study material.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">

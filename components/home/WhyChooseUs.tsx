@@ -63,8 +63,8 @@ export default function WhyChooseUs({
     {
       icon: MapPin,
       badge: 'Convenient',
-      title: 'Dual Central Branches in Lalitpur',
-      description: 'Choose your preferred branch: Station Road Head Office (Behind Krishna Cinema) or Market Branch (Richariya Market, Ghantaghar).',
+      title: 'Centrally Located Branches in Lalitpur',
+      description: 'Choose your preferred branch: Station Road Head Office (Behind Coffee House), Market Branch (Richariya Market, Ghantaghar), or BFCI Digital Library (near Shiv Mandir).',
       link: '/contact',
       linkLabel: 'View branch directions',
     },

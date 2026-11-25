@@ -30,9 +30,9 @@ interface FooterProps {
 
 export default function Footer({
   instituteName = 'Bright Future Competition Institute',
-  headOfficeAddress = 'Behind Krishna Cinema, Station Road, Lalitpur, Uttar Pradesh.',
-  marketBranchAddress = 'Richariya market Mahaveerpura, ghantaghar ke pass, Lalitpur.',
-  libraryAddress = 'Near Bright future competition institute, Shiv mandir ke pass, Lalitpur.',
+  headOfficeAddress = 'Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh.',
+  marketBranchAddress = 'Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh.',
+  libraryAddress = 'BFCI Digital Library, Near Shiv Mandir, Near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh.',
   primaryPhone = '8726343417',
   alternatePhones = '9450067223, 9451935450',
   email = 'aj2819147@gmail.com',
@@ -166,7 +166,7 @@ export default function Footer({
               </p>
               <div className="pl-4 sm:pl-5 pt-0.5">
                 <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(headOfficeAddress)}`}
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Bright Future Competition Institute, Behind Coffee House, Station Road, Lalitpur, Uttar Pradesh 284403')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[10px] text-amber-300 hover:text-amber-200 hover:underline font-semibold"
@@ -193,7 +193,7 @@ export default function Footer({
               </p>
               <div className="pl-4 sm:pl-5 pt-0.5">
                 <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(marketBranchAddress)}`}
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Richariya Market, Mahaveerpura, Ghantaghar ke pass, Lalitpur, Uttar Pradesh 284403')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[10px] text-emerald-300 hover:text-emerald-200 hover:underline font-semibold"
@@ -220,7 +220,7 @@ export default function Footer({
               </p>
               <div className="pl-4 sm:pl-5 pt-0.5">
                 <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(libraryAddress)}`}
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('BFCI Digital Library, near Shiv Mandir, near BFCI Coaching, Chandmari, Lalitpur, Uttar Pradesh 284403')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[10px] text-sky-300 hover:text-sky-200 hover:underline font-semibold"
